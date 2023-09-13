@@ -1,0 +1,8 @@
+FPN    = Floating Point Numbers
+CTMP   = Character Type and Misc. Problems
+GIO    = General Input & Output
+
+BA     = Boolean Algebra
+IE     = If Else
+IEIE   = If Else If Else
+NIE    = Nested If Else
