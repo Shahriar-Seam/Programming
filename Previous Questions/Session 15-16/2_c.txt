@@ -1,0 +1,8 @@
+// 2_a_i
+e = m * ((acc * height) + (v * v / 2));
+
+// 2_a_ii
+d = pow(b, 2) - 4 * a * c;
+
+// 2_a_iii
+s = sqrt((a * a) + (b * b) - 2 * a * b);
