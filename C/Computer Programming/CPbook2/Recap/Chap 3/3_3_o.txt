@@ -1,0 +1,4 @@
+Something before closing the file
+Something else before closing the file
+
+Something totally different after closing and reopening the file
