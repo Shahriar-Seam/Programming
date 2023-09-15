@@ -17,7 +17,7 @@ int main()
     ch = fgetc(fp);
     printf("%c\n", ch);
 
-    fseek(fp, sizeof(char) * 3, SEEK_CUR);
+    fseek(fp, -1, SEEK_END);
     ch = fgetc(fp);
     printf("%c\n", ch);
 
