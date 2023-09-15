@@ -49,7 +49,7 @@ int main()
     fprintf(fp, "\t\t\tbreak;\n");
     fprintf(fp, "\t}\n");
 
-    fprintf(fp, "\n\n");
+    fprintf(fp, "\n");
 
     fprintf(fp, "\treturn 0;\n");
     fprintf(fp, "}");

@@ -7,5 +7,8 @@
   ],
   "cSpell.ignoreWords": [
     "makenum"
-  ]
+  ],
+  "files.associations": {
+    "3_7.C": "cpp"
+  }
 }
