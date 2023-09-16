@@ -2,9 +2,13 @@
 
 int main()
 {
-   int n;
+   char ch1, ch2;
 
-   printf("%d", '\n');
+   scanf("%c%c", &ch1, &ch2);
+
+   if (ch1 == ch2) {
+      printf("1");
+   }
 
    return 0;
 }
