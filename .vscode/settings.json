@@ -10,5 +10,6 @@
   ],
   "files.associations": {
     "3_7.C": "cpp"
-  }
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }
