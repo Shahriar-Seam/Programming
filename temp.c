@@ -1,30 +1,78 @@
 #include <stdio.h>
 
-int main()
-{
-    int highest, sum = 0;
-    int matrix[100][100];
-    int i, j;
+int main() {
+    int a[10][10], b[10][10], result[10][10];
+    int r1, c1, r2, c2, i, j, k, sum;
 
-    for (i = 0; i < 100; i++) {
-        for (j = 0; j < 100; j++) {
-            scanf("%d", &matrix[i][j]);
+    printf("Enter rows and columns of matrix A: ");
+    scanf("%d%d", &r1, &c1);
+
+    printf("Enter rows and columns of matrix B: ");
+    scanf("%d%d", &r2, &c2);
+
+    // Check if matrices can be multiplied
+    while (c1 != r2) {
+        printf("Error\n");
+        printf("Enter rows and columns of matrix A: ");
+        scanf("%d%d", &r1, &c1);
+
+        printf("Enter rows and columns of matrix B: ");
+        scanf("%d%d", &r2, &c2);
+    }
+
+    // Take input
+    printf("Enter elements for matrix A:\n");
+    for (i = 0; i < r1; i++) {
+        for (j = 0; j < c1; j++) {
+            scanf("%d", &a[i][j]);
         }
     }
 
-    for (i = 0; i < 100; i++) {
-        highest = matrix[i][0];
+    printf("Enter elements for matrix B:\n");
+    for (i = 0; i < r2; i++) {
+        for (j = 0; j < c2; j++) {
+            scanf("%d", &b[i][j]);
+        }
+    }
 
-        for (j = 0; j < 100; j++) {
-            if (matrix[i][j] > highest) {
-                highest = matrix[i][j];
+    // Print the matrixes
+    printf("Matrix A:\n");
+    for (i = 0; i < r1; i++) {
+        for (j = 0; j < c1; j++) {
+            printf("%d\t", a[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    printf("Matrix B:\n");
+    for (i = 0; i < r2; i++) {
+        for (j = 0; j < c2; j++) {
+            printf("%d\t", b[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    // Perform matrix multiplication
+    for (i = 0; i < r1; i++) {
+        for (j = 0; j < c2; j++) {
+            sum = 0;
+            for (k = 0; k < c1; k++) {
+                sum = sum a[i][k] * b[k][j];
             }
+            result[i][j] = sum;
         }
-
-        sum = sum + highest;
     }
 
-    printf("Sum = %d\n", sum);
+    // Print the result matrix
+    printf("\nResult matrix:\n");
+    for (i = 0; i < r1; i++) {
+        for (j = 0; j < c2; j++) {
+            printf("%d ", result[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }

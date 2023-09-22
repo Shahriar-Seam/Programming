@@ -1,30 +1,32 @@
-#include <stdio.h>
+#include "stdio.h"
 
+int inputandchecker(int input)
+{
+    printf("please input your desired nunber= ");
+    scanf("%d", &input);
+    if (input == 0)
+    {
+        printf("it is just zero");
+        return 1;
+    }
+    else if (input < 0)
+    {
+        printf("input is less than zero, invalid input");
+        return 0;
+    }
+}
+// printf("");
+// scanf("%",&);
 int main()
 {
-    int highest, sum = 0;
-    int matrix[100][100];
-    int i, j;
+    int input = 0, c;
 
-    for (i = 0; i < 100; i++) {
-        for (j = 0; j < 100; j++) {
-            scanf("%d", &matrix[i][j]);
-        }
+    c = inputandchecker(input);
+    if (c)
+        printf("\n%d", input);
+    else
+    {
+        printf("\nProgram terminated");
+        return 0;
     }
-
-    for (i = 0; i < 100; i++) {
-        highest = matrix[i][0];
-
-        for (j = 0; j < 100; j++) {
-            if (matrix[i][j] > highest) {
-                highest = matrix[i][j];
-            }
-        }
-
-        sum = sum + highest;
-    }
-
-    printf("Sum = %d\n", sum);
-
-    return 0;
 }

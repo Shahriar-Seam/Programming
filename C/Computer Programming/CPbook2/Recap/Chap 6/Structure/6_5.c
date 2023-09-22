@@ -2,8 +2,8 @@
 #include <string.h>
 
 struct nametype {
-    char first[20];
-    char last[20];
+    char first[40];
+    char last[40];
 };
 
 struct student {
@@ -18,7 +18,6 @@ int main()
     scanf("%d", &one.id);
     getchar();
     gets(one.name.first);
-    fflush(stdin);
     gets(one.name.last);
 
     printf("ID: %d\n", one.id);
