@@ -2,21 +2,29 @@
 
 int main()
 {
-    int n, k, a, i, count = 0;
+    int n, k, i, count = 0;
 
     scanf("%d %d", &n, &k);
 
-    if (n >= k && 1 <= k && 1 <= n && k <= 50 && n <= 50) {
-        for (i = 0; i < n; i++) {
-            scanf("%d", &a);
+    int arr[n];
 
-            if (a > k) {
-                count++;
-            }
-        }
-
-        printf("%d", count);
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
     }
+
+    k = k - 1;
+
+    for (i = 0; i < n; i++)
+    {
+
+        if (arr[i] >= arr[k] && arr[i] > 0)
+        {
+            count++;
+        }
+    }
+    
+    printf("%d\n", count);
 
     return 0;
 }
