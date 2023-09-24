@@ -2,14 +2,14 @@
 
 int main()
 {
-    int i = 5;
+    char str[] = "1102546";
+    char str2[10];
 
-    for (i = 20; i < 50; i++) {
-        printf("%p\n", &i);
-        break;
+    for (int i = 0, j = 0; i < 8; i++, j++) {
+        str2[j] = str[i] - '0' + 96;
     }
 
-    printf("\n%p", &i);
+    puts(str2);
 
     return 0;
 }
