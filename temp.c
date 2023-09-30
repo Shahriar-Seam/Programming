@@ -1,56 +1,40 @@
-#include <stdio.h>
+#include "stdio.h"
 #include <ctype.h>
+#include <string.h>
+//codeforces 443A
+int main() {
+  char input[2000];
+  int storage[2000],ascii=0, i, l = 0, count = 0;
+  scanf("%s", &input);
+  l = strlen(input);
 
-#define true printf("TRUE\n")
-#define false printf("FALSE\n")
-
-int main()
-{
-    char ch;
-    int a, b, c, d, e, f;
-
-    ch = getchar();
-
-    a = isalnum(ch);
-    b = isdigit(ch);
-    c = isprint(ch);
-    d = isalpha(ch);
-    e = isupper(ch);
-
-    if (a != 0) {
-        true;
+  /*
+    for (i = 0; i < 128; i++) {
+    storage[i] = 0; // make everything zero in storge[]
+    // printf("%d ",storage[i]); // init with garbage value
+  }
+  for (i = 0; i < 128; i++) {
+    if ((input[i] >= 65 && input[i] <= 90)) {
+      storage[i]++;
+      printf("%d ",storage[i]);
+    }
+  }
+*/
+  for (i = 0; i < 128; i++) {
+    ascii = toascii(input[i]);
+    if (ascii >= 65 && ascii <= 90) {
+        storage[ascii] = 1;
     }
     else {
-        false;
+    storage[ascii] = 0;
     }
-    
-    if (b != 0) {
-        true;
+  }
+  for (i = 0; i < 128; i++) {
+    if (storage[i] == 1) {
+      count++;
     }
-    else {
-        false;
-    }
+  }
+  printf("%d", count);
 
-    if (c != 0) {
-        true;
-    }
-    else {
-        false;
-    }
-
-    if (d != 0) {
-        true;
-    }
-    else {
-        false;
-    }
-
-    if (e != 0) {
-        true;
-    }
-    else {
-        false;
-    }
-
-    return 0;
+  return 0;
 }
