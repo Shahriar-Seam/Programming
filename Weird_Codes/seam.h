@@ -44,7 +44,7 @@ int intlen(int n)
 // Function to calculate sum of all the digits of an integer number
 int dig_sum_int(int n)
 {
-    int i, r, sum = 0, len = length_of_int(n);
+    int i, r, sum = 0, len = intlen(n);
 
     for (i = 0; i < len; i++) {
         r = n % 10;

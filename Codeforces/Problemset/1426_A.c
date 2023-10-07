@@ -14,7 +14,7 @@ int main()
             printf("1\n");
         }
         else {
-            printf("%0.0lf\n", floor((double) (n - 3) / x) + 2);
+            printf("%d\n", ((n - 3) / x) + 2);
         }
     }
 
