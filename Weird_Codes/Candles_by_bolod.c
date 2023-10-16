@@ -25,20 +25,21 @@ void swap(int *n)
 
 int main()
 {
+    int size = 10001;
     int i, j, count = 0;
-    int arr[101] = {0};
+    int arr[size];
 
-    for (i = 1; i < 101; i++) {
+    for (i = 1; i < size; i++) {
         arr[i] = 1;
     }
 
-    for (i = 2; i < 101; i++) {
-        for (j = i; j < 101; j += i) {
+    for (i = 2; i < size; i++) {
+        for (j = i; j < size; j += i) {
             swap(&arr[j]);
         }
     }
 
-    for (i = 1; i < 101; i++) {
+    for (i = 1; i < size; i++) {
         if (arr[i] != 0) {
             count++;
         }
