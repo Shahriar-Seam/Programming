@@ -1,46 +1,22 @@
 #include <stdio.h>
 
-int main()
-{
-    int n, a, b, c, count = 0;
-    int i, j, k;
-    
+int main() {
+    int x, y, a, b, c, n, z, ans = 0, r;
+
     scanf("%d %d %d %d", &n, &a, &b, &c);
 
-    if (a > b) {
-        int temp = b;
-        b = a;
-        a = temp;
-    }
-    if (b > c) {
-        int temp = b;
-        b = c;
-        c = temp;
-    }
-    
-    if (a > b) {
-        int temp = b;
-        b = a;
-        a = temp;
+    for (x = 0; x * a <= n; x++) {
+        for (y = 0; x * a + y * b <= n; y++) {
+            r = n - x * a - y * b;
+
+            if (r % c == 0) {
+                z = r / c;
+                ans = (ans > (x + y + z)) ? ans : (x + y + z);
+            }
+        }
     }
 
-    if (n % a == 0) {
-        count += n / a;
-        n = 0;
-    }
-    else {
-        k = n / c;
-        n = n - (n / c) * c;
-
-        j = n / b;
-        n = n - (n / b) * b;
-
-        i = n / a;
-
-        count += i + j + k;
-    }
-
-    printf("%d", count);
+    printf("%d\n", ans);
 
     return 0;
 }
