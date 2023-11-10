@@ -3,13 +3,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void solve();
+
 int main()
 {
-    char line[] = "1 -2 10000 -50 20 7 445";
+    int t;
+
+    scanf("%d", &t);
+    getchar();
+
+    while (t--) {
+        solve();
+    }
+}
+
+void solve()
+{
+    char line[1002];
     char *p, *e;
     long input;
     int count = 0;
     p = line;
+
+    gets(line);
 
     for (p = line; ; p = e) {
         input = strtol(p, &e, 10);
@@ -20,6 +36,4 @@ int main()
     }
 
     printf("%d\n", count);
-
-    return 0;
 }
