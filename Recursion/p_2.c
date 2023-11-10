@@ -6,9 +6,12 @@
 
 void recurse(int *arr, int i, int n)
 {
-    if (i > n / 2) {
+    if ((n % 2 == 1) && i > n / 2) {
         return;
     }
+    else if ((n % 2 == 0) && i >= n/2) {
+        return;
+    } 
 
     printf("%d %d\n", arr[i], arr[n - i - 1]);
 
