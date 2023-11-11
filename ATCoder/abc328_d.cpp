@@ -5,16 +5,11 @@ using namespace std;
 int main()
 {
     string s;
-    string *f;
 
     cin >> s;
 
-    f = s.find("ABC");
-
-    while (f != s.npos) {
-        s.erase(f, 3);
-
-        f = s.find("ABC");
+    while (s.find("ABC") != s.npos) {
+        s.erase(s.find("ABC"), 3);
     }
 
     cout << s;
