@@ -1,3 +1,6 @@
+// Write a recursive solution to find the
+// second maximum number from a given set of integers.
+
 #include <stdio.h>
 #include <limits.h>
 
