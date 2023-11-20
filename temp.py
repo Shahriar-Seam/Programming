@@ -1,3 +1,9 @@
-import pyautogui as p
+import pyttsx3
 
-p.click(855, 1055)
+mohi = pyttsx3.init()
+
+voices = mohi.getProperty('voices')
+mohi.setProperty('voice', voices[1].id)
+
+mohi.say("Kaziii")
+mohi.runAndWait()
