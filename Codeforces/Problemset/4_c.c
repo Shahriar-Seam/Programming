@@ -1,37 +1,32 @@
 #include <stdio.h>
 #include <string.h>
 
-int is_present(char **str1, char *str2, int l)
-{
-    int i;
-
-    for (i = 0; i < l; i++) {
-        if (strcmp(str2, str1[i] == 0)) {
-            return 1;
-        }
-    }
-
-    return 0;
-}
-
 int main()
 {
-    int t, i, j, c;
-    
-    scanf("%d", &t);
-    getchar();
+    int n, counter[100005], count = 0, i, j, f;
+    char str[100005][35], s[35];
 
-    char str1[t][34];
-    char str2[34];
+    scanf("%d", &n);
 
-    for (i = 0, j = 0; i < t; i++) {
-        gets(str2);
+    for (i = 0; i < n; i++) {
+        scanf(" %s", s);
 
-        if (!is_present(str1, str2, i + 1)) {
-            strcpy(str1[j++], str2);
+        f = 0;
+
+        for (j = 0; j < count; j++) {
+            if (strcmp(s, str[j]) == 0) {
+                f = 1;
+                break;
+            }
+        }
+
+        if (f == 1) {
+            printf("%s%d\n", s, ++counter[j]);
         }
         else {
-            strcat(str2, )
+            printf("OK\n");
+            strcpy(str[count++], s);
+            counter[count] = 0;
         }
     }
 
