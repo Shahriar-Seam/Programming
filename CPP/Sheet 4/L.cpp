@@ -21,7 +21,7 @@ int main()
             s.pop_back();
         }
         else if (qq == "front") {
-            cout << s[0] << "\n";
+            cout << *s.begin() << "\n";
         }
         else if (qq == "back") {
             cout << s.back() << "\n";
