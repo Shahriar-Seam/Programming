@@ -1,26 +1,14 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
 int main()
 {
-    int n = 3, i;
-    char str[5][4];
-    
-    while (n--) {
-        for (i = 0; i < 5; i++) {
-            scanf(" %s", str[i]);
-        }
-    }
+    int durjay = 230234;
+    char turjo[10];
 
-    n = 3;
-    
-    while (n--) {
-        for (i = 0; i < 5; i++) {
-            printf(" %s", str[i]);
-        }
+    itoa(durjay, turjo, 10);
 
-        puts("");
-    }
+    puts(turjo);
 
     return 0;
 }
