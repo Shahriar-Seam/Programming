@@ -7,11 +7,11 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    string s;
+    int a, b;
 
-    cin >> s;
+    cin >> a >> b;
 
-    cout << s;
+    cout << 1LL * a * b << endl;
 
     return 0;
 }
