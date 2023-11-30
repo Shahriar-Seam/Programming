@@ -1,62 +1,38 @@
-#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
-void findArray(int n, int matrix[100][100]) {
-    int a[n]; // Array 'a' to store the solution
+using namespace std;
 
-    // Initialize 'a' with all zeros
-    for (int i = 0; i < n; i++) {
-        a[i] = 0;
-    }
-
-    // Try to find a solution for each pair of rows
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            // Find the common bits between the two rows
-            int commonBits = matrix[i][j];
-
-            // Update the corresponding elements in the array 'a'
-            a[i] |= commonBits;
-            a[j] |= commonBits;
-        }
-    }
-
-    // Check if the obtained array 'a' satisfies the conditions
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && matrix[i][j] != (a[i] | a[j])) {
-                printf("NO\n");
-                return;
-            }
-        }
-    }
-
-    // Print the result
-    printf("YES\n");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", a[i]);
-    }
-    printf("\n");
-}
-
-int main() {
+int main()
+{
     int t;
-    scanf("%d", &t);
+    cin >> t;
 
-    while (t--) {
+    while (t--)
+    {
         int n;
-        scanf("%d", &n);
-
-        int matrix[100][100];
-
-        // Read the matrix values
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                scanf("%d", &matrix[i][j]);
-            }
+        cin >> n;
+        vector<int> array(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin >> array[i];
         }
 
-        // Find and print the array for each test case
-        findArray(n, matrix);
+        long long sum_remaining = 0;
+        vector<pair<long long, int>> dp(n + 1, make_pair(0, 1));
+        dp[n] = make_pair(0, 1);
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            long long total = dp[i + 1].first;
+            int count = dp[i + 1].second;
+            dp[i] = make_pair(total + array[i], count);
+            dp[i] = max(dp[i], make_pair(total + sum_remaining + array[i], count + 1));
+            sum_remaining += array[i];
+        }
+
+        cout << dp[0].first << endl;
     }
 
     return 0;
