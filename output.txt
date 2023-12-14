@@ -1,1 +1,3 @@
-326
+turjo = 4	sadik = 6
+turjo = 5	sadik = 6
+turjo = 6	sadik = 6
