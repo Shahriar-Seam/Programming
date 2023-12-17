@@ -15,13 +15,17 @@ int func(int *c)
 
 int main()
 {
-    int a, b = 100;
+    int a, b = 100, count = 0;
+    int *p = &count;
 
     a = printf("I am seam\n");
 
     while (a--) {
         printf("%d %d\n", func(&b), b);
+        count++;
     }
+
+    printf("count = %d", *p);
 
     return 0;
 }
