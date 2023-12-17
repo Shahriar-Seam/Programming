@@ -7,10 +7,10 @@ int main()
 
     gets(s);
 
-    printf("%s\n", strcat(s, " bla"));
+    printf("%s\n", strcat(s, "bla"));
     printf("%d\n", strcmp("seam", "SEAM"));
-    printf("%s\n", strcpy(s, "Durjay pocha"));
-    printf("%s\n", strstr(s, "p"));
+    printf("%s\n", strcpy(s, "Durjay pocha sjd"));
+    printf("%s\n", strstr(s, "po"));
 
     return 0;
 }

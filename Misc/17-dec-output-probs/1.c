@@ -15,7 +15,7 @@ int func(int *c)
 
 int main()
 {
-    int a, b = 100, count = 0;
+    int a, b = 45, count = 0;
     int *p = &count;
 
     a = printf("I am seam\n");
