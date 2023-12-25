@@ -1,11 +1,9 @@
+4
+4
+4 3 2 5
 5
-5
-aaaaa
-1
-z
-5
-ababa
-14
-bcdaaaabcdaaaa
-20
-abcdefghijklmnopqrst
+6 1 10 7 10
+6
+6 6 6 6 6 6
+3
+100 100 0
