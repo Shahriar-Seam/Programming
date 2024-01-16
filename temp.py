@@ -1,3 +1,4 @@
-a, b, c = map(int, input().split())
+Bangladesh = ["Dhaka", "Chittagong", "Khulna"]
 
-print(a + b + c)
+for x in Bangladesh:
+    print(Bangladesh.index(x) + 1, " ", x)
