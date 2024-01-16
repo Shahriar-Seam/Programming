@@ -4,37 +4,44 @@ using namespace std;
 
 void solve()
 {
-    int n, m, i, j = 0, temp, d = 0;
-    vector <int> a, b;
+    int n, m, i;
+    long long sum = 0, temp;
+    deque <long long> dq1, dq2;
 
     cin >> n >> m;
 
     for (i = 0; i < n; i++) {
         cin >> temp;
 
-        a.push_back(temp);
+        dq1.push_back(temp);
     }
-    
     for (i = 0; i < m; i++) {
         cin >> temp;
 
-        b.push_back(temp);
+        dq2.push_back(temp);
     }
 
-    sort(a.begin(), a.end());
-    sort(b.begin(), b.end(), greater<int>());
+    sort(dq1.begin(), dq1.end());
+    sort(dq2.begin(), dq2.end());
 
-    for (i = 0; i < n; i++) {
-        if (abs(b[i] - a[i]) > abs(b[m - j - 1] - a[i])) {
-            d += abs(b[i] - a[i]);
+    while (!dq1.empty()) {
+        if (abs(dq2.back() - dq1.front()) > abs(dq1.back() - dq2.front())) {
+            sum += abs(dq2.back() - dq1.front());
+
+            dq2.pop_back();
+
+            dq1.pop_front();
         }
         else {
-            d += abs(b[m - j - 1] - a[i]);
-            j++;
+            sum += abs(dq1.back() - dq2.front());
+
+            dq1.pop_back();
+
+            dq2.pop_front();
         }
     }
 
-    cout << d << "\n";
+    cout << sum << "\n";
 }
 
 int main()
