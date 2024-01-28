@@ -18,29 +18,18 @@ Node *create_node(int item, Node *next)
     return new_node;
 }
 
-Node *prepend(Node *head, int item)
+int count(Node *head)
 {
-    Node *new_node = create_node(item, head);
-
-    return new_node;
-}
-
-Node *append(Node *head, int item)
-{
-    Node *new_node = create_node(item, NULL);
     Node *current_node = head;
+    int cnt = 0;
 
-    if (current_node == NULL) {
-        return new_node;
-    }
+    while (current_node != NULL) {
+        cnt++;
 
-    while (current_node->next != NULL) {
         current_node = current_node->next;
     }
 
-    current_node->next = new_node;
-
-    return head;
+    return cnt;
 }
 
 void print_linked_list(Node *head)
@@ -49,7 +38,7 @@ void print_linked_list(Node *head)
     int i = 1;
 
     while (current_node != NULL) {
-        printf("Item % d = %d\n", i++, current_node->data);
+        printf("Item %d = %d\n", i++, current_node->data);
 
         current_node = current_node->next;
     }
@@ -57,15 +46,21 @@ void print_linked_list(Node *head)
 
 int main()
 {
-    Node *head;
+    Node *head, *current_node, *new_node;
+    int i;
 
-    head = create_node(50, NULL);
+    head = current_node = create_node(0, NULL);
 
-    head = prepend(head, 20);
+    for (i = 1; i <= 5; i++) {
+        new_node = create_node(i * 10, NULL);
 
-    head = append(head, 10);
+        current_node->next = new_node;
+        current_node = new_node;
+    }
 
     print_linked_list(head);
+
+    printf("Total nodes = %d\n", count(head));
 
     return 0;
 }
