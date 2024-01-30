@@ -1,20 +1,330 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Md. Shahriar Kabir - Portfolio</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <style>
+    .socialsLogo {
+      width: 50px;
+      cursor: pointer;
+    }
+
+    .viewGithubLogo {
+      width: 20px;
+    }
+
+    .viewContainer {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    body {
+      font-family: serif;
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+
 <body>
-    <table border="1">
-        <tr>
-            <td colspan="2">&nbsp;&nbsp;&nbsp;</td>
-            <td colspan="4">&nbsp;&nbsp;&nbsp;</td>
-        </tr>
-        <tr>
-            <td colspan="2">&nbsp;&nbsp;&nbsp;</td>
-            <td colspan="2">&nbsp;&nbsp;&nbsp;</td>
-            <td colspan="2">&nbsp;&nbsp;&nbsp;</td>
-        </tr>
-        <tr>
-            <td colspan="3">&nbsp;&nbsp;&nbsp;</td>
-            <td colspan="3">&nbsp;&nbsp;&nbsp;</td>
-        </tr>
-    </table>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Md. Shahriar Kabir</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#projects">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="text-white text-center py-5" style="background: #61c674 !important">
+    <div class="container">
+      <h1 class="display-4">MERN Stack Developer & Competitive Programmer</h1>
+      <p class="lead">Showcasing my projects and skills</p>
+      <div class="socialsContainer">
+        <a href="https://www.linkedin.com/in/shahriar-kabir-2234941b3/">
+          <img class="socialsLogo" src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" />
+        </a>
+        <a href="https://github.com/shahriarKabir44">
+          <img class="socialsLogo" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h2>About Me</h2>
+          <p>
+            👋 Hi there! I'm Md.Shahriar Kabir, a dynamic and driven developer
+            with a passion for crafting exceptional web and mobile
+            applications. I'm on a relentless journey to push the boundaries
+            of what's possible in the digital world.
+            <br />
+            <br />
+            💡 About Me:
+            <br />
+            🖥️ Experienced Node.js and React.js Developer: I've honed my
+            skills during my internship and beyond, gaining hands-on
+            experience in building responsive, scalable, and user-friendly web
+            applications. My technical toolkit includes cutting-edge
+            technologies and best practices to deliver top-notch solutions.
+            <br />
+            📱 Mobile App Enthusiast: I'm captivated by the world of mobile
+            app development, always eager to explore new frontiers in Android
+            using React native. Crafting seamless, feature-rich mobile
+            experiences is where I thrive.
+            <br />
+            🏆 Competitive Programming Enthusiast: Beyond my development work,
+            I'm an avid participant in competitive programming contests. I
+            thrive on solving complex algorithmic puzzles and continually
+            improving my problem-solving abilities.
+            <br />
+
+            🔍 What's Next: I'm constantly seeking new opportunities to grow
+            as a developer and expand my skill set. If you're interested in
+            building something amazing together, or if you'd like to chat
+            about competitive programming, feel free to connect with me! Let's
+            code, learn, and excel together.
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <h2>Skills</h2>
+          <ul>
+            <li>MongoDB</li>
+            <li>React</li>
+            <li>Node.js</li>
+            <li>Express.js</li>
+            <li>Competitive Programming</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>MySQL</li>
+            <li>Python</li>
+            <li>C#</li>
+            <li>ASP.NET core</li>
+            <li>Angularjs</li>
+            <li>Git</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="bg-light py-5">
+    <div class="container">
+      <h2 class="text-center">Projects</h2>
+      <div class="row">
+        <!-- Add your project cards here -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="flex">
+                <h3 class="card-title"><i>KU_Oj</i></h3>
+
+                <a href="https://github.com/shahriarKabir44/ku_oj">
+                  <img class="viewGithubLogo" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+                </a>
+              </div>
+
+              <p>A Competitive Programming Platform</p>
+
+              <p class="card-text">
+                Developed a platform like CodeForces where users can solve
+                competitive programming problems, host contests, chat during
+                contests. Users can submit their code in different languages
+                like Python, C++ and Java and the system runs those files and
+                sets the verdict.
+              </p>
+              <ul>
+                <li>
+                  Designed a method to run files of different programming
+                  languages using Node.js
+                </li>
+                <li>Used Redis for data caching.</li>
+                <li>
+                  Used a self developed migration tool for database
+                  migrations.
+                </li>
+              </ul>
+              <p>
+                Technologies: React, Express.js, MySQL, Redis, WebSocket,
+                Nodejs
+              </p>
+              <div class="viewContainer">
+                <a href="#" class="btn btn-link">View Project</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="flex">
+                <h3 class="card-title"><i>migratify</i></h3>
+                <a href="https://github.com/shahriarKabir44/migratify">
+                  <img class="viewGithubLogo" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+                </a>
+              </div>
+              <p>A CLI Tool For Database Migrations</p>
+              <p class="card-text">
+                Developed a command-line interface (CLI) tool using Node.js
+                and MySQL for database migrations. It allows users to create
+                migration files, programmatically manage schema changes, and
+                version control database updates and Generate migration files
+                from an existing database. Used Graph Algorithms to create
+                migration files from an existing database
+              </p>
+              <ul>
+                <li>
+                  Designed a method to run files of different programming
+                  languages using Node.js
+                </li>
+                <li>Used Redis for data caching.</li>
+                <li>
+                  Used a self developed migration tool for database
+                  migrations.
+                </li>
+              </ul>
+              <p>Technologies: Node.js, MySQL</p>
+              <div class="viewContainer">
+                <a href="https://www.npmjs.com/package/migratify" class="btn btn-link">View Project</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="flex">
+                <h3 class="card-title"><i>Find Home</i></h3>
+                <a href="https://github.com/shahriarKabir44/findHome">
+                  <img class="viewGithubLogo" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+                </a>
+              </div>
+              <p>A property selling platform</p>
+              <p class="card-text">
+                Users can search and purchase properties. Admins can create
+                and approve companies or restrict them. Integrated machine
+                learning to predict whether a person is eligible for loan or
+                not
+              </p>
+              <ul>
+                <li>
+                  Designed separated dashboards for admins and companies.
+                </li>
+                <li>Used SVM Classifier</li>
+                <li>
+                  Created a separated python server to host the ML model.
+                </li>
+                <li>
+                  Used a self developed migration tool for database
+                  migrations.
+                </li>
+              </ul>
+              <p>
+                Technologies: Node.js, MySQL, Angularjs, Bootstrap, Python,
+                SKLearn
+              </p>
+              <div class="viewContainer"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="flex">
+                <h3 class="card-title"><i>My Zone</i></h3>
+                <a href="https://github.com/shahriarKabir44/findHome">
+                  <img class="viewGithubLogo" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+                </a>
+              </div>
+              <p>A Social Networking Platform</p>
+              <p class="card-text">
+                Developed a full-stack social networking platform. Users can
+                create and view posts, send messages, manage friend requests,
+                and discover others based on interests and common friends.
+              </p>
+              <ul>
+                <li>Implemented real-time messaging using WebSocket.</li>
+                <li>
+                  Developed a method to find friends of friends from a single
+                  SQL query.
+                </li>
+              </ul>
+              <p>
+                Technologies: Node.js, MySQL, Angularjs, Bootstrap, Python,
+                SKLearn
+              </p>
+              <div class="viewContainer"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="flex">
+                <h3 class="card-title"><i>TripSafe</i></h3>
+                <a href="https://github.com/shahriarKabir44/TripSafe">
+                  <img class="viewGithubLogo" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+                </a>
+              </div>
+              <p>A Bus Servce management system</p>
+              <p class="card-text">
+                A bus service management system that can be used to both
+                manage resources, employees, activities and book tickets.
+                Also, informs a user about the accident hazards while
+                purchasing tickets. Admins can manage resources and schedule,
+                view the number of people boarding and unboarding in every bus
+                stop. Issue an accident record.
+              </p>
+              <ul>
+                <li>
+                  Find available bus list to reach destination in a single SQL
+                  query.
+                </li>
+
+                <li>Learned repository pattern in ASP.NET</li>
+              </ul>
+              <p>Technologies: ASP.NET, AngularJs, Bootstrap, MySQL</p>
+              <div class="viewContainer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="bg-dark text-white text-center py-3">
+    <div class="container">&copy; 2023 Md. Shahriar Kabir</div>
+  </footer>
+
+  <!-- Bootstrap and JavaScript Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Add your custom JavaScript here if needed -->
 </body>
+
 </html>
