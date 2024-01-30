@@ -1,4 +1,5 @@
 #include "hash.h"
+#include <conio.h>
 
 int main()
 {
@@ -24,5 +25,9 @@ int main()
     puts(encrypted_str1);
     puts(encrypted_str2);
 
+    getch();
+
     return 0;
 }
+
+// gcc -o check_password check_password.c -lssl -lcrypto -lws2_32 && sha256_example.exe
