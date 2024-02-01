@@ -1,28 +1,29 @@
-#include "hash.h"
+#include <stdio.h>
+#include <math.h>
+
+void solve()
+{
+    int a, b, sum_or = 0;
+
+    scanf("%d %d", &a, &b);
+
+    if ((int) ceil(log2((double) a)) != (int) ceil(log2((double) b))) {
+        sum_or = 1 << (int) ceil(log2((double) b));
+
+        printf("%d\n", sum_or - 1);
+    }
+    else {
+        puts("NO");
+    }
+}
 
 int main()
 {
-    char str[100], str2[100], *encrypted_str1, *encrypted_str2;
+    int t;
 
-    puts("Enter password: ");
-    gets(str);
+    scanf("%d", &t);
 
-    puts("Enter password again: ");
-    gets(str2);
-
-    encrypted_str1 = encrypt(str);
-    encrypted_str2 = encrypt(str2);
-
-    if (strcmp(encrypted_str1, encrypted_str2) == 0) {
-        puts("You may enter");
+    while (t--) {
+        solve();
     }
-    else {
-        puts("Ja vag");
-    }
-
-    puts("\nHashes:");
-    puts(encrypted_str1);
-    puts(encrypted_str2);
-
-    return 0;
 }
