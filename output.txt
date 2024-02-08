@@ -1,6 +1,6 @@
-YES
-NO
-YES
-YES
-NO
-NO
+aaaaab
+aaaaab
+aaaaab
+aaaaab
+aaa
+aaa
