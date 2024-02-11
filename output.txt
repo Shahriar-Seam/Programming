@@ -1,6 +1,6 @@
-aaaaab
-aaaaab
-aaaaab
-aaaaab
-aaa
-aaa
+Enter number of vertices: 
+    1 2 3 
+----------
+1 | 0 5 2 
+2 | 5 0 6 
+3 | 2 6 0 
