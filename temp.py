@@ -1,4 +1,5 @@
-Bangladesh = ["Dhaka", "Chittagong", "Khulna"]
+s = int(input())
 
-for x in Bangladesh:
-    print(Bangladesh.index(x) + 1, " ", x)
+n = int(bin(s).replace("0b", ""))
+
+print(n)
