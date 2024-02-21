@@ -28,19 +28,28 @@ int main()
             cout << 1 << " " << n << "\n";
         }
         else {
+            min_val = 1;
+            max_val = n;
             for (l = 0, r = n - 1; l < r; ) {
-                max_val = *max_element(v.begin() + l, v.begin() + r + 1);
-                min_val = *min_element(v.begin() + l, v.begin() + r + 1);
-
                 if (max_val != v[l] && min_val != v[l] && max_val != v[r] && min_val != v[r]) {
                     break;
                 }
 
-                if (max_val == v[l] || min_val == v[l]) {
+                if (max_val == v[l]) {
                     l++;
+                    max_val--;
                 }
-                if (max_val == v[r] || min_val == v[r]) {
+                else if (min_val == v[l]) {
+                    l++;
+                    min_val++;
+                }
+                else if (max_val == v[r]) {
                     r--;
+                    max_val--;
+                }
+                else if (min_val == v[r]) {
+                    r--;
+                    min_val++;
                 }
             }
 
