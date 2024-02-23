@@ -1,6 +1,7 @@
-5
-xxxxx
-xxxxx
-xoxxx
-xxxxx
-xxxxx
+3
+baba
+ba
+aa
+aaa
+aba
+ab
