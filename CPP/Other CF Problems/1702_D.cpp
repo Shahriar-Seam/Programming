@@ -5,24 +5,41 @@ using namespace std;
 void solve()
 {
     string s;
-    int p, sum = 0, i;
+    int p, sum = 0, i, f = 0;
+    map <char, int> m;
 
     cin >> s >> p;
 
-    for (i = s.size() - 1; i >= 0; i--) {
-        sum += s[i] - 'a';
+    for (i = 0; i < s.size(); i++) {
+        m[s[i]]++;
+        sum += s[i] - 'a' + 1;
     }
 
-    sort(s.begin(), s.end());
+    for (auto it = m.rbegin(); it != m.rend(); it++) {
+        while ((*it).second > 0) {
+            if (sum > p) {
+                sum -= (*it).first - 'a' + 1;
+                (*it).second--;
+            }
+            else {
+                f = 1;
+                break;
+            }
+        }
 
-    
-    for (i = s.size() - 1; sum > p; i--) {
-        sum -= s[i] - 'a';
+        if (f == 1) {
+            break;
+        }
     }
 
-    s = s.substr(0, max(0, i));
+    for (i = 0; i < s.size(); i++) {
+        if (m[s[i]] > 0) {
+            cout << s[i];
+            m[s[i]]--;
+        }
+    }
 
-    cout << s << "\n";
+    cout << "\n";
 }
 
 int main()
