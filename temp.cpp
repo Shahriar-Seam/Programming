@@ -2,14 +2,41 @@
 
 using namespace std;
 
-int bla(int a)
+void solve()
 {
-    return 5 * a;
-}
+    vector <string> strs;
+    int i = 0, j = 0, min_size = 1000, f;
+    string s;
+    char c;
 
-int bla(int a, int b)
-{
-    return b * 2;
+    strs.push_back("flower");
+    strs.push_back("flow");
+    strs.push_back("flight");
+
+    for (i = 0; i < strs.size(); i++) {
+        min_size = min(min_size, (int) strs[i].size());
+    }
+
+    for (i = 0; i < min_size; i++) {
+        c = strs[0][i];
+        f = 1;
+
+        cout << c << endl;
+
+        for (j = 0; j < strs.size(); j++) {
+            if (c != strs[j][i]) {
+                f = 0;
+
+                break;
+            }
+        }
+
+        if (f == 1) {
+            s.push_back(c);
+        }
+    }
+
+    cout << s;
 }
 
 int main()
@@ -17,7 +44,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    cout << bla(5) << " " << bla(5, 2);
+    solve();
 
     return 0;
 }
