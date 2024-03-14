@@ -1,7 +1,4 @@
-YES
-NO
-YES
-NO
-NO
-NO
-NO
+1
+4
+4
+67108864
