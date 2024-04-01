@@ -1,3 +1,1 @@
-Size of double: 8
-Size of long double: 16
-PI == 1.32895e-312
+176
