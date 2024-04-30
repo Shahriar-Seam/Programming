@@ -5,9 +5,5 @@
  
 Anonymous_HF ()
 {
-    printf("Welcome\n");
-
-    printf("Ibnul Abrar Shahriar Seam\n");
-
-    printf("230201");
+    printf("%d\n", 8 & 7);
 }

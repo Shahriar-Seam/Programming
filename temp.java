@@ -1,17 +1,44 @@
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class temp {
-    public static void main (String[] args) {
-        Scanner input = new Scanner(System.in);
+public class temp extends JFrame implements ActionListener {
+    JFrame frame1 = null;
+    JButton button1 = null;
+    JPanel panel = null;
 
-        System.out.println("Enter a string: ");
-        String s = input.nextLine();
+    public temp() {
+        frame1 = new JFrame();
+        frame1.setVisible(true);
+        frame1.setSize(400, 200);
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        int length = s.length();
-        int i = 0;
+        button1 = new JButton("Click Me !!!");
+        panel = new JPanel();
 
-        for (i = 0; i < length / 2; i++) {
-            
+        panel.add(button1);
+//        button1.setSize(50,50); // useless line
+        // button1.setPreferredSize(new Dimension(100,50));
+        button1.addActionListener(this);
+//        frame1.add(button1, BorderLayout.CENTER);
+        // frame1.setLayout(new BorderLayout(20,20));
+
+        // Container contentPane = frame1.getContentPane(); // ?????
+        // contentPane.add(button1, BorderLayout.CENTER);
+
+        frame1.getContentPane().add(panel);
+    }
+
+
+    public static void main(String[] args) {
+        new temp();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == button1) {
+            JOptionPane.showMessageDialog(null, "Thank You");
         }
     }
 }
