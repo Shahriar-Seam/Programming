@@ -1,38 +1,35 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <limits.h>
 
-using namespace std;
-
-int phi(int n)
+int max(int a, int b)
 {
-    int ret = n, i;
+  return a > b ? a : b;
+}
 
-    for (i = 2; i * i <= n; i++) {
-        if (n % i == 0) {
-            while (n % i == 0) {
-                n /= i;
-            }
+int __max(int count, ...)
+{
+    int i, max_value = INT_MIN;
+    va_list ptr;
 
-            ret -= ret / i;
-        }
+    va_start(ptr, count);
+
+    for (i = 0; i < count; i++) {
+        max_value = max(max_value, va_arg(ptr, int));
     }
 
-    if (n > 1) {
-        ret -= ret / n;
-    }
+    va_end(ptr);
 
-    return ret;
+    return max_value;
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    int a, b, c, d;
 
-    int n;
+    scanf("%d %d %d %d", &a, &b, &c, &d);
 
-    cin >> n;
-
-    cout << phi(n);
+    printf("%d\n", __max(5, -1, a, b, c, d));
 
     return 0;
 }
