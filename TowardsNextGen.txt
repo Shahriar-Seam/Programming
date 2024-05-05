@@ -1,0 +1,5 @@
+If - else:
+    https://acm.timus.ru/problem.aspx?space=1&num=1785
+    
+Loop:
+    https://acm.timus.ru/problem.aspx?space=1&num=1787
