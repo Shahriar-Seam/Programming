@@ -1,6 +1,7 @@
 import math
+from bisect import bisect_left
 
-max_size = 32000
+max_size = 1000000
 marked = [True] * max_size
 primes = []
 
@@ -20,24 +21,21 @@ def sieve():
     for i in range(3, max_size, 2):
         if (marked[i] == True):
             primes.append(i)
-
-def is_pandigital(n, d):
-    return ('0' not in str(n)) and (len(set(str(n))) == d) and (max(str(n)) == str(d))
-
+            
 sieve()
 
-def is_prime(n):    
-    for i in primes:
-        if n % i == 0:
-            return False
-        if i * i > n:
+def check(n, index):
+    while (index >= 0):
+        if math.sqrt((n - primes[index]) // 2).is_integer():
             return True
-        
-    return True
 
-for i in range(987654321, 100000000, -1):
-    if is_pandigital(i, 9):
-        if is_prime(i):
+        index -= 1
+
+    return False
+
+for i in range(3, 100, 2):
+    index = bisect_left(primes, i)
+    
+    if (primes[index] != i):
+        if (check(i, index - 1)) == False:
             print(i)
-            
-            break

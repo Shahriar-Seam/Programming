@@ -2,7 +2,7 @@
 
 int main()
 {
-    unsigned long double x = 1e1000;
+    double x = 1e10;
 
     printf("%lf\n", x);
 
