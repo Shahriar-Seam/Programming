@@ -1,1 +1,4 @@
-0
+abcabca
+aaaaaa
+aaaaaa
+ababa
