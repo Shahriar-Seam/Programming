@@ -1,17 +1,12 @@
-/**
- *    author:  Anonymous_HF
- *    created: 08/05/2024 17:36:19
-**/
-
 #include <stdio.h>
 #include <stdlib.h>
 
-int __min(int a, int b)
+int _min(int a, int b)
 {
   return a < b ? a : b;
 }
 
-int __max(int a, int b)
+int _max(int a, int b)
 {
   return a > b ? a : b;
 }
@@ -37,13 +32,13 @@ void solve()
     }
 
     for (i = 0; i < 26; i++) {
-        min = __min(small[i], capital[i]);
-        max = __max(small[i], capital[i]);
+        min = _min(small[i], capital[i]);
+        max = _max(small[i], capital[i]);
 
         burles += min;
 
         if (k > 0) {
-            temp = __min(k, (max - min) / 2);
+            temp = _min(k, (max - min) / 2);
 
             burles += temp;
 
