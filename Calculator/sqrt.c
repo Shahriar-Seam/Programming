@@ -3,7 +3,7 @@
 double sqrt(double n)
 {
     double l = 0, r = n, root = n / 2;
-    double precision = 0.000005;
+    double precision = 0.0000005;
 
     while (l < r) {
         root = (l + r) / 2;
@@ -24,11 +24,11 @@ double sqrt(double n)
 
 int main()
 {
-    double n;
+    double n = 0;
 
-    scanf("%lf", &n);
+    // scanf("%lf", &n);
 
-    printf("%.4lf\n", sqrt(n));
+    printf("%.5lf\n", sqrt(n));
 
     return 0;
 }
