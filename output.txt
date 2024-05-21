@@ -1,3 +1,0 @@
-Format the equation in the form ax^2 + bx + c = 0
-x1 = -0.0444444 + 1.12458i
-x2 = -0.0444444 - 1.12458i
