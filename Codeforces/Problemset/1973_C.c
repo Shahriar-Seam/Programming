@@ -4,72 +4,91 @@
 **/
 
 #include <stdio.h>
+#include <stdlib.h>
+
+int compare(const void *a, const void *b)
+{
+    return * (int *) a - * (int *) b;
+}
 
 void solve()
 {
-    int n, i, j, count1 = 0, count2 = 0, f = 0;
+    int n, i, j, n_index;
 
     scanf("%d", &n);
 
-    int arr[n];
-    int arr2[n];
-    int arr3[n];
-    int sum1[n];
-    int sum2[n];
+    int arr[n + 1];
+    int qrr[n];
+    int indices[n + 1];
+    int odd[n / 2];
+    int even[n / 2];
+
+    for (i = 0; i < n; i++) {
+        qrr[i] = 0;
+    }
 
     for (i = 0; i < n; i++) {
         scanf("%d", arr + i);
+
+        indices[arr[i]] = i;
     }
 
-    for (i = 0, j = 1; i < n; i += 2) {
-        arr2[i] = j++;
+    for (i = 0; i < n; i++) {
+        if (arr[i] == n) {
+            n_index = i;
 
-        sum1[i] = arr[i] + arr2[i];
-    }
-
-    for (i = 1, j = n; i < n; i += 2) {
-        arr2[i] = j--;
-        
-        sum1[i] = arr[i] + arr2[i];
-    }
-
-    // ulta
-    for (i = n - 1, j = 1; i >= 0; i -= 2) {
-        arr3[i] = j++;
-        
-        sum2[i] = arr[i] + arr3[i];
-    }
-
-    for (i = n - 2, j = n; i >= 0; i -= 2) {
-        arr3[i] = j--;
-        
-        sum2[i] = arr[i] + arr3[i];
-    }
-
-    for (i = 1; i < n - 1; i++) {
-        if ((sum1[i - 1] < sum1[i]) && (sum1[i] > sum1[i + 1])) {
-            count1++;
+            break;
         }
     }
 
-    for (i = 1; i < n - 1; i++) {
-        if ((sum2[i - 1] < sum2[i]) && (sum2[i] > sum2[i + 1])) {
-            count2++;
+    if (n_index % 2 == 1) {
+        for (i = 1, j = 0; i < n; i += 2) {
+            odd[j++] = arr[i];
         }
-    }
 
-    if (count1 > count2) {
-        for (i = 0; i < n; i++) {
-            printf("%d ", arr2[i]);
+        qsort(odd, n / 2, sizeof(int), compare);
+
+        for (i = 0; i < n / 2; i++) {
+            qrr[indices[odd[i]]] = n - i;
+        }
+
+        for (i = 0, j = 0; i < n; i += 2) {
+            even[j++] = arr[i];
+        }
+
+        qsort(even, n / 2, sizeof(int), compare);
+
+        for (i = 0; i < n / 2; i++) {
+            qrr[indices[even[i]]] = n / 2 - i;
         }
     }
     else {
-        for (i = 0; i < n; i++) {
-            printf("%d ", arr3[i]);
+        for (i = 0, j = 0; i < n; i += 2) {
+            even[j++] = arr[i];
+        }
+
+        qsort(even, n / 2, sizeof(int), compare);
+
+        for (i = 0; i < n / 2; i++) {
+            qrr[indices[even[i]]] = n - i;
+        }
+
+        for (i = 1, j = 0; i < n; i += 2) {
+            odd[j++] = arr[i];
+        }
+
+        qsort(odd, n / 2, sizeof(int), compare);
+
+        for (i = 0; i < n / 2; i++) {
+            qrr[indices[odd[i]]] = n / 2 - i;
         }
     }
 
-    puts("");
+    for (i = 0; i < n; i++) {
+        printf("%d ", qrr[i]);
+    }
+
+    printf("\n");
 }
 
 int main()
