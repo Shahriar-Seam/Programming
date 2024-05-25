@@ -1,20 +1,10 @@
 #include <stdio.h>
-#include <time.h>
 
 int main()
 {
-    time_t start = time(NULL);
-    int s = 0, i;
-
-    // Main program
-
-    for (i = 0; i < 1000000000; i++) {
-        s += i;
-    }
-
-    time_t end = time(NULL);
-
-    printf("%0.4f\n", difftime(end, start));
+    int nums[] = {1, 3, 1, 7};
+    int q = [1, 3, 2, 4];
+    int x = 1;
 
     return 0;
 }
