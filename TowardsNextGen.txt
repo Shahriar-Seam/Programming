@@ -5,6 +5,7 @@ Loop:
     https://acm.timus.ru/problem.aspx?space=1&num=1787
     https://codeforces.com/problemset/problem/1104/A
     https://codeforces.com/contest/276/problem/A
+    https://codeforces.com/contest/1859/problem/A
 
 String:
     medium:
