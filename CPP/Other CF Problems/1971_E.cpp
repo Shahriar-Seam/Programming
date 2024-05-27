@@ -5,7 +5,7 @@ using namespace std;
 void solve()
 {
     int n, k, q, d, i, pos, mins;
-
+    
     cin >> n >> k >> q;
 
     int signs[k + 1];
