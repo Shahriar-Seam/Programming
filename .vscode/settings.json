@@ -109,7 +109,8 @@
     "windows.h": "c",
     "_mingw.h": "c",
     "windef.h": "c",
-    "winuser.h": "c"
+    "winuser.h": "c",
+    "limits.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\gcc.exe"
