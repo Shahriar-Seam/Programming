@@ -1,16 +1,33 @@
 #include <stdio.h>
 
-int gcd(int a, int b)
+int c = 0;
+
+int fun(int n)
 {
-    return b == 0 ? a : gcd(b, a % b);
+    int x = 1, k;
+
+    c++;
+
+    if (n == 1) {
+        return x;
+    }
+    
+    for (k = 1; k < n; k++) {
+        x = x + fun(k) * fun(n - k) + fun(n - k);
+    }
+
+    return x;
 }
 
 int main()
 {
-    int nums[] = {1, 3, 1, 7};
-    int x = 1;
+    int n, x;
 
-    printf("%d\n", gcd(-4, 2));
+    scanf("%d", &n);
+
+    x = fun(n);
+
+    printf("%d %d\n", x, c);
 
     return 0;
 }
