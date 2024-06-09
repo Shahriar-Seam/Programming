@@ -2,49 +2,23 @@
 
 using namespace std;
 
-void solve()
-{
-    int n, k, q, d, i, pos, mins;
-
-    cin >> n >> k >> q;
-
-    int signs[k + 1];
-    int minutes[k + 1];
-
-    signs[0] = minutes[0] = 0;
-
-    for (i = 1; i <= k; i++) {
-        cin >> signs[i];
-    }
-
-    for (i = 1; i <= k; i++) {
-        cin >> minutes[i];
-    }
-
-    while (q--) {
-        cin >> d;
-
-        pos = lower_bound(signs + 1, signs + k + 1, d) - signs - 1;
-
-        mins = minutes[pos] + (d - signs[pos]) * 1.0 * (minutes[pos + 1] - minutes[pos]) / (signs[pos + 1] - signs[pos]);
-
-        cout << mins << " ";
-    }
-
-    cout << "\n";
-}
-
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int t;
+    int arr[] = {5, 6, 7, 8, 9};
+    int i, j;
+    set <int> s;
 
-    cin >> t;
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 5; j++) {
+            s.insert((arr[i] + arr[j]) % 10);
+        }
+    }
 
-    while (t--) {
-        solve();
+    for (auto it : s) {
+        cout << it << " ";
     }
 
     return 0;
