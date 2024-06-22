@@ -1,2 +1,1 @@
-#neet#code#love#you
-['neet', 'code', 'love', 'you']
+170
