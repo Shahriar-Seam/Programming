@@ -4,24 +4,40 @@ using namespace std;
 
 void solve()
 {
-    int n, i, k, temp;
-    set <int> s;
+    int t, i, j, n, temp, elements = 0;
+    vector <set <int> > v;
+    set <int> s, universal_set, big_set;
 
-    cin >> n;
+    cin >> t;
 
-    for (i = 0; i < n; i++) {
-        cin >> k;
+    for (i = 0; i < t; i++) {
+        cin >> n;
 
-        while (k--) {
+        s.clear();
+
+        for (j = 0; j < n; j++) {
             cin >> temp;
 
             s.insert(temp);
         }
+
+        v.push_back(s);
+        universal_set.insert(begin(s), end(s));
     }
 
-    n == 1 ? cout << "0\n" : cout << s.size() - 1 << "\n";
+    for (auto it_i : universal_set) {
+        big_set.clear();
 
-    s.clear();
+        for (auto it_j : v) {
+            if (it_j.find(it_i) == end(it_j)) {
+                big_set.insert(begin(it_j), end(it_j));
+            }
+        }
+
+        elements = max(elements, (int) big_set.size());
+    }
+
+    cout << elements << "\n";
 }
 
 int main()
