@@ -1,0 +1,3 @@
+rimes) {
+        cout << it << "\n";
+    }
