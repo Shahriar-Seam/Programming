@@ -4,11 +4,11 @@ using namespace std;
 
 void solve()
 {
-    int n, k, i;
+    long long n, k, i, sum = 0;
 
     cin >> n >> k;
 
-    vector <int> prefix(k), v;
+    vector <long long> prefix(k), v;
 
     for (auto &it : prefix) {
         cin >> it;
@@ -18,11 +18,21 @@ void solve()
         v.push_back(prefix[i] - prefix[i - 1]);
     }
 
-    v.push_back(prefix[i]);
+    if (k == 1) {
+        cout << "YES\n";
 
-    reverse(begin(v), end(v));
+        return;
+    }
+
+    for (i = k; i < n; i++) {
+        sum += v.back();
+
+        v.push_back(v.back());
+    }
+
+    v.push_back(prefix[0] - sum);
     
-    cout << (is_sorted(begin(v), end(v)) ? "YES\n" : "NO\n");
+    cout << (is_sorted(begin(v), end(v), greater <long long>()) ? "YES\n" : "NO\n");
 }
 
 int main()
