@@ -1,33 +1,14 @@
 #include <stdio.h>
-
-int c = 0;
-
-int fun(int n)
-{
-    int x = 1, k;
-
-    c++;
-
-    if (n == 1) {
-        return x;
-    }
-    
-    for (k = 1; k < n; k++) {
-        x = x + fun(k) * fun(n - k) + fun(n - k);
-    }
-
-    return x;
-}
+#include <stdlib.h>
+#include <string.h>
 
 int main()
 {
-    int n, x;
+    char *cmd;
 
-    scanf("%d", &n);
+    strcpy(cmd, "ls");
 
-    x = fun(n);
-
-    printf("%d %d\n", x, c);
+    system(cmd);
 
     return 0;
 }
