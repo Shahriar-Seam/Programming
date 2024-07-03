@@ -1,11 +1,1 @@
-10
-push_back 5
-pop_front
-pop_front
-push_back 10
-push_front -15
-pop_back
-push_back -10
-push_back 20
-pop_front
-pop_front
+magazine
