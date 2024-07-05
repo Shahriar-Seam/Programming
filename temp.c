@@ -8,7 +8,9 @@ int main()
 
     strcpy(cmd, "ls");
 
-    system(cmd);
+    cmd # "l";
+    
+    printf("%s", cmd);
 
     return 0;
 }
