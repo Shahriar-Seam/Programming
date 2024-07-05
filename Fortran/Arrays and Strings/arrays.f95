@@ -9,5 +9,11 @@ program arrays
 
     real :: array4(0:9)
     real :: array5(-5:5)
+
+    print *, array1
+    print *, array2
+    print *, array3
+    print *, array4
+    print *, array5
     
 end program arrays
