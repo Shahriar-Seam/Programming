@@ -25,84 +25,103 @@ class Deque {
 private:
     node *head, *tail;
 
-    bool empty() {
-        return head == NULL;
-    }
-
 public:
     Deque() {
-        head = tail = NULL;
+        head = NULL;
+        tail = NULL;
     }
 
-    // Front
-    void push_front(int data) {
-        if (this->empty()) {
-            head = tail = create_node(data, NULL, NULL);
-        }
-        else {
-            head = create_node(data, NULL, head);
-
-            if (head->next != NULL) {
-                head->next->prev = head;
-            }
-        }
-    }
-
-    void pop_front() {
-        if (this->empty()) {
-            cout << "Empty\n";
-        }
-        else {
-            int data = head->data;
-            node *old_head = head;
-
-            head = head->next;
-            if (!this->empty()) {
-                head->prev = NULL;
-            }
-            else {
-                tail = NULL;
-            }
-
-            free(old_head);
-
-            cout << data << "\n";
-        }
-    }
-
-    // Back
     void push_back(int data) {
-        if (this->empty()) {
+        if (head == NULL) {
             head = tail = create_node(data, NULL, NULL);
         }
         else {
             tail = create_node(data, tail, NULL);
 
-            if (tail->prev != NULL) {
-                tail->prev->next = tail;
-            }
+            tail->prev->next = tail;
+        }
+    }
+
+    void push_front(int data) {
+        if (head == NULL) {
+            head = tail = create_node(data, NULL, NULL);
+        }
+        else {
+            head = create_node(data, NULL, head);
+
+            head->next->prev = head;
         }
     }
 
     void pop_back() {
-        if (this->empty()) {
+        if (head == NULL) {
             cout << "Empty\n";
         }
         else {
-            int data = tail->data;
-            node *old_tail = tail;
+            node *old_tail;
+            if (tail == head) {
+                old_tail = tail;
 
-            tail = tail->prev;
-            if (!this->empty()) {
-                tail->next = NULL;
+                tail = head = NULL;
             }
             else {
-                head = NULL;
+                old_tail = tail;
+
+                tail = tail->prev;
+
+                tail->next = NULL;
             }
 
-            free(old_tail);
+            cout << old_tail->data << "\n";
 
-            cout << data << "\n";
+            free(old_tail);
+        }
+    }
+
+    void pop_front() {
+        if (head == NULL) {
+            cout << "Empty\n";
+        }
+        else {
+            node *old_head;
+
+            if (head == tail) {
+                old_head = head;
+
+                head = tail = NULL;
+            }
+            else {
+                old_head = head;
+
+                head = head->next;
+                head->prev = NULL;
+            }
+
+            cout << old_head->data << "\n";
+
+            free(old_head);
+        }
+    }
+
+    void show() {
+        node *current_node = head;
+
+        cout << "h to t:\n";
+
+        while (current_node != NULL) {
+            cout << current_node->data << " ";
+
+            current_node = current_node->next;
+        }
+
+        cout << "\nt to h:\n";
+
+        current_node = tail;
+
+        while (current_node != NULL) {
+            cout << current_node->data << " ";
+
+            current_node = current_node->prev;
         }
     }
 };
@@ -141,5 +160,3 @@ int main()
 
     return 0;
 }
-
-// segmentation fault
