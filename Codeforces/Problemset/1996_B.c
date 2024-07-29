@@ -20,7 +20,7 @@ void solve()
     for (i = 0; i < n; i += k) {
         for (j = 0; j < n; j += k) {
             putchar(grid[i][j]);
-        }
+        }1991
 
         puts("");
     }
