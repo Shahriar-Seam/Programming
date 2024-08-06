@@ -20,7 +20,7 @@ int main()
         }
 
         if (i == 1) {
-            system("sudo pacman -Syu yt-dlp");
+            system("pip install yt-dlp");
 
             puts("\nPlease restart shell. Then rerun the program.");
 
@@ -29,7 +29,7 @@ int main()
     }
     
     puts("Enter url:\n");
-    gets(url);
+    fgets(url, 200, stdin);
 
     strcat(cmd, url);
     strcat(cmd, " -f b -g");
