@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <conio.h>
+//#include <conio.h>
 
 int main()
 {
@@ -190,7 +190,7 @@ int main()
 
 
     printf("\nPress any key to exit.\n");
-    getch();
+    //getch();
 
     return 0;
 }
