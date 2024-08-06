@@ -1,1 +1,5 @@
-0 1 2 3 4 
+   -    \                                                                                                                            -                                                                                                                         Found an existing package already installed. Trying to upgrade the installed package...
+No available upgrade found.
+No newer package versions are available from the configured sources.
+
+Please restart shell. Then rerun the program.
