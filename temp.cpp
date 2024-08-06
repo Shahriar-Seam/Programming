@@ -7,22 +7,19 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    vector <int> colors = {0, 1, 0, 1, 0};
+    int i;
+    vector <int> v;
+    queue <int> q;
 
-    for (int i = 0; i < k; i++) {
-        colors.push_back(colors[i]);
+    for (i = 0; i < 5; i++) {
+        v.push_back(i);
     }
 
-    int n = colors.size();
-    int cnt = 0;
+    sort(v.begin(), v.end());
 
-    for (int i = 1; i < n - 1; i++) {
-        if (colors[i - 1] == colors[i + 1] && colors[i] != colors[i - 1]) {
-            cnt++;
-        }
+    for (auto it : v) {
+        cout << it << " ";
     }
-
-    cout << cnt;
 
     return 0;
 }
