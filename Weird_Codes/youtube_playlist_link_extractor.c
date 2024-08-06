@@ -20,7 +20,7 @@ int main()
         }
 
         if (i == 1) {
-            system("winget install yt-dlp");
+            system("sudo pacman -Syu yt-dlp");
 
             puts("\nPlease restart shell. Then rerun the program.");
 
