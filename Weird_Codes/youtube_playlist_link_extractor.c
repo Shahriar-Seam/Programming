@@ -43,7 +43,7 @@ int main()
 
     printf("\n\n---The End---\n");
 
-    freopen("CON", "w", stdout);
+    // freopen("CON", "w", stdout);
 
     puts("\nExtraction complete\n");
 
