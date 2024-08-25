@@ -1,24 +1,30 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
 
-using namespace std;
-
-int main()
+void solve()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    int n;
 
-    int i;
-    vector <int> v;
-    queue <int> q;
+    cin >> n;
 
-    for (i = 0; i < 5; i++) {
-        v.push_back(i);
+    vector <int> v(n);
+    
+    for (auto &it : v) {
+        cin >> it;
     }
 
     sort(v.begin(), v.end());
 
-    for (auto it : v) {
-        cout << it << " ";
+    cout << v[n / 2] << "\n";
+}
+
+int main()
+{
+    int t;
+
+    scanf("%d", &t);
+
+    while (t--) {
+        solve();
     }
 
     return 0;
