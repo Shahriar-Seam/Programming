@@ -1,3 +1,5 @@
+// Graph all possible paths
+
 #include <stdio.h>
 
 // Adjacency matrix to represent the graph
