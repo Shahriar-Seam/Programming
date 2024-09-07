@@ -1,66 +1,204 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
-void clean_dump(char *dump, char *filename)
+typedef struct pair pair;
+
+struct pair {
+    int two;
+    int five;
+};
+
+pair make_pair(int two, int five)
 {
-    char temp_dump[500], temp_file[500];
-    int i, j, len = strlen(filename);
+    pair p;
 
-    for (i = 0, j = 0; dump[i] != '\0'; i++) {
-        if (dump[i] == '\"') {
-            i++;
+    p.two = two;
+    p.five = five;
 
-            while (dump[i] != '\0' && dump[i] != '\"') {
-                temp_dump[j++] = dump[i++];
-            }
-
-            break;
-        }
-    }
-
-    temp_dump[j] = '\0';
-
-    strcpy(temp_file, filename);
-
-    for (i = len - 1; i >= 0; i--) {
-        if (temp_file[i] == '\\') {
-            break;
-        }
-        else {
-            temp_file[i] = '\0';
-        }
-    }
-
-    strcat(temp_file, temp_dump);
-
-    strcpy(dump, temp_file);
+    return p;
 }
 
-int main(int argc, char *argv[])
+pair two_five(int n)
 {
-    char s[500];
-    char filename[500], dumpfile[500];
+    int temp = n;
+    pair p = make_pair(0, 0);
 
-    strcpy(filename, argv[1]);
+    while (n > 0 && n % 2 == 0) {
+        n /= 2;
+        p.two++;
+    }
+    
+    n = temp;
 
-    FILE *fp = fopen(filename, "r");
+    while (n > 0 && n % 5 == 0) {
+        n /= 5;
+        p.five++;
+    }
 
-    while (fgets(s, 500, fp) != NULL) {
-        printf("%s", s);
+    return p;
+}
 
-        if (strstr(s, "$dumpfile") != NULL) {
-            strcpy(dumpfile, s);
+pair p_sum(pair p1, pair p2)
+{
+    pair p;
 
-            break;
+    p.two = p1.two + p2.two;
+    p.five = p1.five + p2.five;
+
+    return p;
+}
+
+int _min(int a, int b)
+{
+    return a < b ? a : b;
+}
+
+pair min(pair p1, pair p2)
+{
+    if (p1.two <= p2.two && p1.five <= p2.five) {
+        return p1;
+    }
+    else if (p2.two <= p1.two && p2.five <= p1.five) {
+        return p2;
+    }
+    else if (_min(p1.two, p1.five) <= _min(p2.two, p2.five)) {
+        return p1;
+    }
+    else {
+        return p2;
+    }
+}
+
+int equal(pair p1, pair p2)
+{
+    return p1.two == p2.two && p1.five == p2.five;
+}
+
+void swap(char *a, char *b)
+{
+    *a ^= *b ^= *a ^= *b;
+}
+
+void reverse(char *s, int len)
+{
+    int i = 0;
+
+    for (i = 0; i < len / 2; i++) {
+        swap(s + i, s + len - i - 1);
+    }
+}
+
+int main()
+{
+    int n, i, j, k;
+    int min_2, min_5, zero = 0, zero_i, zero_j;
+    char c, s[10000];
+
+    scanf("%d", &n);
+
+    int arr[n][n];
+    pair p[n][n], prev[n][n];
+    int min_10[n][n];
+
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &arr[i][j]);
+
+            if (arr[i][j] == 0) {
+                zero = 1;
+
+                zero_i = i;
+                zero_j = j;
+            }
         }
     }
 
-    printf("\n\ndump = %s\n", dumpfile);
+    if (zero) {
+        printf("1\n");
 
-    clean_dump(dumpfile, filename);
+        for (i = 0; i < zero_i; i++) {
+            printf("D");
+        }
+        for (j = 0; j < n - 1; j++) {
+            printf("R");
+        }
+        for (i; i < n - 1; i++) {
+            printf("D");
+        }
 
-    printf("\n\ndump = %s\n", dumpfile);
+        printf("\n");
+
+        return 0;
+    }
+
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            p[i][j].two = 0;
+            p[i][j].five = 0;
+        }
+    }
+
+    p[0][0] = two_five(arr[0][0]);
+    prev[0][0] = make_pair(0, 0);
+
+    for (i = 1; i < n; i++) {
+        p[i][0] = p_sum(p[i - 1][0], two_five(arr[i][0]));
+
+        prev[i][0] = make_pair(i - 1, 0);
+    }
+
+    for (j = 1; j < n; j++) {
+        p[0][j] = p_sum(p[0][j - 1], two_five(arr[0][j]));
+
+        prev[0][j] = make_pair(0, j - 1);
+    }
+
+    for (i = 1; i < n; i++) {
+        for (j = 1; j < n; j++) {
+            pair m = min(p[i - 1][j], p[i][j - 1]);
+            
+            if (equal(m, p[i - 1][j])) {
+                prev[i][j] = make_pair(i - 1, j);
+            }
+            else {
+                prev[i][j] = make_pair(i, j - 1);
+            }
+
+            p[i][j] = p_sum(m, two_five(arr[i][j]));
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            min_10[i][j] = _min(p[i][j].two, p[i][j].five);
+        }
+    }
+
+    i = n - 1;
+    j = n - 1;
+    k = 0;
+
+    while (i != 0 || j != 0) {
+        int temp_i, temp_j;
+
+        temp_i = prev[i][j].two;
+        temp_j = prev[i][j].five;
+
+        if (temp_i < i) {
+            s[k++] = 'D';
+        }
+        else {
+            s[k++] = 'R';
+        }
+
+        i = temp_i;
+        j = temp_j;
+    }
+
+    s[k] = '\0';
+
+    reverse(s, k);
+
+    printf("%d\n%s\n", min_10[n - 1][n - 1], s);
 
     return 0;
 }
