@@ -20,7 +20,7 @@ int main()
         }
 
         if (i == 1) {
-            system("pip install yt-dlp");
+            system("winget install yt-dlp");
 
             puts("\nPlease restart shell. Then rerun the program.");
 
