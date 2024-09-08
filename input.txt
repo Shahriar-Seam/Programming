@@ -1,5 +1,3 @@
-5 3
-4 2 1 10 5
-apple
-orange
-mango
+aaacaaa
+aca
+aa
