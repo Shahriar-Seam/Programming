@@ -1,10 +1,8 @@
-    
-
 n, x, y = map(int, input().split())
 
-n += 1
-
 l, r = 0, 2 << 60
+
+n -= 1
 
 def possible(m):
     return (m // x) + (m // y) >= n
@@ -17,4 +15,4 @@ for _ in range(100) or l <= r:
     else:
         l = m
     
-print(r)
+print(r + min(x, y))

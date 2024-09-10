@@ -2,11 +2,17 @@
 
 using namespace std;
 
-int n, x, y;
+long long n;
 
 bool possible(long long m)
 {
-    return (m / x) + (m / y) >= n;
+    long long cnt = 0, i;
+
+    for (i = 1; i <= n; i++) {
+        cnt += min(n, m / i);
+    }
+
+    return cnt >= (n * n + 1) / 2;
 }
 
 int main()
@@ -14,26 +20,22 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int i;
+    cin >> n;
 
-    cin >> n >> x >> y;
+    long long l = 1, r = n * n, m, i;
 
-    n--;
-
-    long long l = 0, r = 10 * n + 5, m;
-
-    for (i = 0; i < 100; i++) {
+    for (i = 0; i < 60; i++) {
         m = l + (r - l) / 2;
 
         if (possible(m)) {
             r = m;
         }
         else {
-            l = m;
+            l = m + 1;
         }
     }
 
-    cout << r + min(x, y) << "\n";
+    cout << r << "\n";
 
     return 0;
 }
