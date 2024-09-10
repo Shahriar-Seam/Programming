@@ -9,7 +9,7 @@ int bin_search(vector <int> &v, int key)
     while (l <= r) {
         m = l + (r - l) / 2;
 
-        if (v[m] <= key) {
+        if (v[m] < key) {
             index = m;
 
             l = m + 1;
@@ -19,7 +19,7 @@ int bin_search(vector <int> &v, int key)
         }
     }
 
-    return index + 1;
+    return v[index] == key ? index + 1 : index + 2;
 }
 
 int main()
