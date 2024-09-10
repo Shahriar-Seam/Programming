@@ -4,22 +4,20 @@ using namespace std;
 
 int bin_search(vector <int> &v, int key)
 {
-    int l = 0, r = v.size() - 1, m, index = -1;
+    int l = -1, r = v.size(), m;
 
-    while (l <= r) {
+    while (r - l > 1) {
         m = l + (r - l) / 2;
 
         if (v[m] < key) {
-            index = m;
-
-            l = m + 1;
+            l = m;
         }
         else {
-            r = m - 1;
+            r = m;
         }
     }
 
-    return v[index] == key ? index + 1 : index + 2;
+    return r + 1;
 }
 
 int main()
