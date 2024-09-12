@@ -7,7 +7,7 @@ vector <int> v;
 
 bool possible(int m)
 {
-    if (m >= t.size() - p.size()) {
+    if (m > t.size() - p.size()) {
         return false;
     }
 
@@ -24,7 +24,7 @@ bool possible(int m)
                 j++;
             }
 
-            if (j == t.size()) {
+            if (j == p.size()) {
                 return true;
             }
         }
@@ -48,7 +48,7 @@ int main()
         cin >> it;
     }
 
-    for (i = 0; i < 20; i++) {
+    for (i = 0; i < 18; i++) {
         m = (l + r) / 2;
 
         if (possible(m)) {
