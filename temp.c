@@ -1,29 +1,26 @@
 #include <stdio.h>
 
-#define print(n) printf("%d\n", ((n)))
+int len(int n)
+{
+    int l = 0;
+
+    while (n > 0) {
+        l++;
+        n /= 10;
+    }
+
+    return l;
+}
 
 int main()
 {
-    int a, b, c;
+    int n, next, l;
 
-    scanf("%d %d %d", &a, &b, &c);
+    scanf("%d", &n);
 
-    if (a > b) {
-        if (b > c) {
-            print(c);
-        }
-        else {
-            print(b);
-        }
-    }
-    else {
-        if (a > c) {
-            print(c);
-        }
-        else {
-            print(a);
-        }
-    }
+    next = n + 1;
+
+    l = len(next);
 
     return 0;
 }
