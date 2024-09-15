@@ -4,30 +4,50 @@ using namespace std;
 
 void solve()
 {
-    int n, m, q, d;
-    int ans;
+    int n, m, queries;
 
-    cin >> n >> m >> q;
+    cin >> n >> m >> queries;
 
-    vector <int> v(m);
+    vector <int> b(m), q(queries);
 
-    for (auto &it : v) {
+    for (auto &it : b) {
         cin >> it;
     }
 
-    cin >> d;
-
-    if (d >= v[0] && d <= v[1]) {
-        ans = min(abs((v[0] + v[1]) / 2 - v[0]), abs((v[0] + v[1]) / 2 - v[1]));
-    }
-    else if (d < v[0]) {
-        ans = min(abs(d - v[0]), abs(d - (n - v[1] + d)));
-    }
-    else {
-        ans = min(abs(d - v[1]), abs(d - (v[0] + n - d)));
+    for (auto &it : q) {
+        cin >> it;
     }
 
-    cout << ans << "\n";
+    if (m == 1) {
+        for (auto k : q) {
+            if (b[0] > k) {
+                cout << b[0] - 1 << "\n";
+            }
+            else {
+                cout << n - b[0] << "\n";
+            }
+        }
+
+        return;
+    }
+
+    sort(b.begin(), b.end());
+
+    for (auto k : q) {
+        if (k > b[m - 1]) {
+            cout << n - b[m - 1] << "\n";
+        }
+        else if (k < b[0]) {
+            cout << b[0] - 1 << "\n";
+        }
+        else {
+            auto pos = upper_bound(b.begin(), b.end(), k);
+            int t2 = *pos;
+            int t1 = *--pos;
+
+            cout << (t2 - t1) / 2 << "\n";
+        }
+    }
 }
 
 int main()
