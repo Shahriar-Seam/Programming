@@ -1,36 +1,29 @@
 #include <stdio.h>
-#include <math.h>
+
+long long int g_fibonacci_array[100] = {};
+
+long long int fibonacci(int i)
+{
+    if (i < 2)
+    {
+        return i;
+    }
+
+    if (g_fibonacci_array[i] > 0)
+    {
+        return g_fibonacci_array[i];
+    }
+
+    g_fibonacci_array[i] = fibonacci(i - 1) + fibonacci(i - 2);
+
+    return g_fibonacci_array[i];
+}
 
 int main()
 {
-    double a = 0, b = 0, c = 0;
-    double d, x1, x2, re, im;
-    int i = 0;
-
-    scanf("%lf %lf %lf", &a, &b, &c);
-
-    d = b * b - 4 * a * c;
-
-    if (d < 0) {
-        re = (-b) / (2 * a);
-        im = sqrt(-d) / (2 * a);
-
-        if (im < 0) {
-            im *= -1;
-        }
-
-        printf("x1 = %g + %gi\nx2 = %g - %gi\n", re, im, re, im);
-    }
-    else if (d > 0) {
-        x1 = (-b + sqrt(d)) / (2 * a);
-        x2 = (-b - sqrt(d)) / (2 * a);
-
-        printf("x1 = %g\nx2 = %g\n", x1, x2);
-    }
-    else {
-        x1 = x2 = (-b) / (2 * a);
-
-        printf("x = %g\n", x1);
+    for (int i = 0; i < 50; i++)
+    {
+        printf("%lld\n", fibonacci(i));
     }
 
     return 0;
