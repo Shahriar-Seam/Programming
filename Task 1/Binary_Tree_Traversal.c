@@ -14,13 +14,16 @@ typedef struct TreeNode {
 // Returns: A pointer to the newly created TreeNode
 TreeNode *create_tree_node(int id) {
     TreeNode *newNode = (TreeNode *)malloc(sizeof(TreeNode)); // Allocate memory for a new node
+    
     if (newNode == NULL) { // Check if memory allocation was successful
         fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE); // Exit if allocation failed
+        exit(1); // Exit if allocation failed
     }
+
     newNode->id = id; // Set the node's ID
     newNode->left = NULL; // Initialize left child as NULL
     newNode->right = NULL; // Initialize right child as NULL
+
     return newNode; // Return the pointer to the new node
 }
 
@@ -41,14 +44,17 @@ void add_tree_node(int childId, int parentId, TreeNode *parentNode) {
         // Add the new node as a left or right child
         if (parentNode->left == NULL) {
             parentNode->left = newNode; // Add as left child
-        } else if (parentNode->right == NULL) {
+        }
+        else if (parentNode->right == NULL) {
             parentNode->right = newNode; // Add as right child
-        } else {
+        }
+        else {
             printf("Error: Parent node already has two children\n"); // Error if both children are occupied
 
             return;
         }
-    } else {
+    }
+    else {
         // Recursively attempt to add the new node to the left and right subtrees
         add_tree_node(childId, parentId, parentNode->left);
         add_tree_node(childId, parentId, parentNode->right);
@@ -83,9 +89,11 @@ int main() {
     // Read child-parent pairs until "0 0" is input
     while (1) {
         scanf("%d %d", &childId, &parentId);
+        
         if (childId == 0 && parentId == 0) { // Break the loop if "0 0" is input
             break;
         }
+
         add_tree_node(childId, parentId, rootNode); // Add the child node to the tree
     }
 

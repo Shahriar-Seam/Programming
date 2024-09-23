@@ -8,18 +8,19 @@ long long int g_fib[10005] = {}; // Initialized to 0
 // - i: The index of the Fibonacci number to compute
 // Returns: The nth Fibonacci number
 long long int fibonacci(int i) {
-    // Base case: return i for Fibonacci(0) and Fibonacci(1)
+    // Base case: return 0 and 1 for Fibonacci(0) and Fibonacci(1)
     if (i < 2) {
         return i;
     }
 
     // Check if the Fibonacci number has already been computed
     if (g_fib[i] > 0) {
-        return g_fib[i]; // Return the cached value
+        return g_fib[i]; // Return the memoized value
     }
 
     // Compute the Fibonacci number recursively and store it in the global array
     g_fib[i] = fibonacci(i - 1) + fibonacci(i - 2);
+    
     return g_fib[i]; // Return the computed Fibonacci number
 }
 
