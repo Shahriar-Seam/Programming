@@ -1,8 +1,10 @@
-import string
+import pyautogui
+import time
 
-s = string.ascii_lowercase * 26
+time.sleep(3)
 
-for _ in range(int(input())):
-    n, k = map(int, input().split())
+for _ in range(50):
+    pyautogui.typewrite("bleh")
+    pyautogui.press('Enter')
     
-    print(s[:n * k])
+    time.sleep(0.001)
