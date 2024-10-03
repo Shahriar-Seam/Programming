@@ -13,23 +13,25 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, i, x, y;
-    ordered_set o_set;
+    int n, m, num, i;
+    char l;
+    ordered_set s;
 
-    cin >> n;
+    cin >> n >> m;
 
-    vector <int> levels(n, 0);
+    for (i = 0; i < m; i++) {
+        cin >> l >> num;
 
-    for (i = 0; i < n; i++) {
-        cin >> x >> y;
-
-        levels[o_set.order_of_key({x, i})]++;
-
-        o_set.insert({x, i});
+        if (l == 'L') {
+            cout << num + s.order_of_key({num, i}) << "\n";
+        }
+        else {
+            s.insert({num, i});
+        }
     }
 
-    for (i = 0; i < n; i++) {
-        cout << levels[i] << "\n";
+    for (auto it : s) {
+        cout << it.first << " " << it.second << "\n";
     }
 
     return 0;
