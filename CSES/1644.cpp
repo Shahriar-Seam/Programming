@@ -8,13 +8,13 @@ int main()
     cin.tie(NULL);
 
     long long n, a, b, max_sum = LONG_LONG_MIN;
-    int i, j;
+    int i;
 
     cin >> n >> a >> b;
 
     vector <long long> v(n), prefix(n + 1, 0);
     multiset <long long> ms;
-
+ 
     for (auto &it : v) {
         cin >> it;
     }
