@@ -30,7 +30,7 @@ int main()
             mp[v[r]] = r;
         }
 
-        length = max(length, r - l);
+        length = max(length, r - l + 1);
     }
 
     cout << length << "\n";
