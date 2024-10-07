@@ -10,7 +10,7 @@ int main()
     int n, k, l, r, length = 0;
     map <int, int> mp;
 
-    cin >> n >> k;
+    cin >> n;
 
     vector <int> v(n);
 
