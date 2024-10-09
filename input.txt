@@ -1,2 +1,6 @@
-saippuakauppias
-pp
+1
+E
+AB
+CE
+DB
+EC

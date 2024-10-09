@@ -5,7 +5,7 @@ using namespace std;
 void solve()
 {
     long long n, x, i;
-    set <long long> s;
+    map <long long, int> mp;
 
     cin >> n >> x;
 
@@ -15,30 +15,17 @@ void solve()
         cin >> it;
     }
 
-    sort(v.begin(), v.end());
-
     for (i = 0; i < n; i++) {
-        if (s.find(v[i]) == s.end()) {
-            s.insert(v[i]);
-        }
-        else {
-            v[i] += x;
-            
-            while (s.find(v[i]) != s.end()) {
-                v[i] += x;
-            }
-
-            s.insert(v[i]);
-        }
+        mp[v[i]]++;
     }
 
-    i = 0;
-    for (auto it : s) {
-        if (it != i) {
+    for (i = 0; i < n; i++) {
+        if (mp[i] == 0) {
             break;
         }
-        else {
-            i++;
+        else if (mp[i] > 1) {
+            mp[i + x] += mp[i] - 1;
+            mp[i] = 1;
         }
     }
 
