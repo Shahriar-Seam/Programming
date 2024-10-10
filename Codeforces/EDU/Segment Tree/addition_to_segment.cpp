@@ -110,13 +110,9 @@ int main()
 
     cin >> n >> m;
 
-    vector <int> v(n), zeros(n + 1, 0);
+    vector <int> v(n + 1, 0);
 
-    for (auto &it : v) {
-        cin >> it;
-    }
-
-    st.build(zeros);
+    st.build(v);
 
     while (m--) {
         int op;
@@ -124,19 +120,19 @@ int main()
         cin >> op;
 
         if (op == 1) {
-            long long a, b, u;
+            long long l, r, v;
 
-            cin >> a >> b >> u;
+            cin >> l >> r >> v;
 
-            st.set(a - 1, u);
-            st.set(b, -u);
+            st.set(l, v);
+            st.set(r, -v);
         }
         else {
-            int k;
+            int i;
 
-            cin >> k;
+            cin >> i;
 
-            cout << v[k - 1] + st.calculate(0, k) << "\n";
+            cout << st.calculate(0, i + 1) << "\n";
         }
     }
 

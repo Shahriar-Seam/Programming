@@ -3,14 +3,14 @@
 using namespace std;
 
 // Change it
-typedef long long item;
+typedef int item;
 
 struct segment_tree {
     int size;
     vector <item> values;
 
     // Change it
-    item NEUTRAL_ELEMENT = 0LL;
+    item NEUTRAL_ELEMENT = 0;
 
     // Change it
     item merge(item a, item b) {
@@ -18,7 +18,7 @@ struct segment_tree {
     }
 
     // Change it
-    item single(long long v) {
+    item single(int v) {
         return v;
     }
 
@@ -55,9 +55,9 @@ struct segment_tree {
         build(a, 0, 0, size);
     }
 
-    void set(int i, long long v, int x, int lx, int rx) {
+    void set(int i, int v, int x, int lx, int rx) {
         if (rx - lx == 1) {
-            values[x] += single(v); // Update if necessary
+            values[x] = single(v); // Update if necessary
 
             return;
         }
@@ -74,7 +74,7 @@ struct segment_tree {
         values[x] = merge(values[2 * x + 1], values[2 * x + 2]); // Update if necessary
     }
 
-    void set(int i, long long v) {
+    void set(int i, int v) {
         set(i, v, 0, 0, size);
     }
 
@@ -98,46 +98,77 @@ struct segment_tree {
     item calculate(int l, int r) {
         return calculate(l, r, 0, 0, size);
     }
+
+    void show() {
+        for (auto it : values) {
+            cout << it << " ";
+        }
+    }
 };
+
+vector <int> calc(vector <int> &v)
+{
+    int n = v.size() / 2, i;
+    vector <int> a(2 * n, 0), ind(n, -1), counter(n, 0);
+    segment_tree st;
+
+    st.build(a);
+
+    for (i = 0; i < 2 * n; i++) {
+        if (ind[v[i] - 1] != -1) {
+            counter[v[i] - 1] = st.calculate(ind[v[i] - 1] + 1, i + 1);
+
+            st.set(ind[v[i] - 1], 0);
+        }
+        else {
+            ind[v[i] - 1] = i;
+
+            st.set(i, 1);
+        }
+    }
+
+    return counter;
+}
+
+vector <int> combine(vector <int> &a, vector <int> &b)
+{
+    int i, n = a.size();
+    vector <int> c(n);
+
+    for (i = 0; i < n; i++) {
+        c[i] = a[i] + b[i];
+    }
+
+    return c;
+}
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, m;
+    int n, i;
     segment_tree st;
 
-    cin >> n >> m;
+    cin >> n;
 
-    vector <int> v(n), zeros(n + 1, 0);
+    vector <int> v(2 * n), temp, counter;
 
     for (auto &it : v) {
         cin >> it;
     }
+    
+    temp = v;
 
-    st.build(zeros);
+    reverse(v.begin(), v.end());
 
-    while (m--) {
-        int op;
+    temp = calc(temp);
+    v = calc(v);
 
-        cin >> op;
+    counter = combine(temp, v);
 
-        if (op == 1) {
-            long long a, b, u;
-
-            cin >> a >> b >> u;
-
-            st.set(a - 1, u);
-            st.set(b, -u);
-        }
-        else {
-            int k;
-
-            cin >> k;
-
-            cout << v[k - 1] + st.calculate(0, k) << "\n";
-        }
+    for (auto it : counter) {
+        cout << it << " ";
     }
 
     return 0;

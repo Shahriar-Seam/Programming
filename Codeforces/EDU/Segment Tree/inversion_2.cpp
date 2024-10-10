@@ -3,14 +3,14 @@
 using namespace std;
 
 // Change it
-typedef long long item;
+typedef int item;
 
 struct segment_tree {
     int size;
     vector <item> values;
 
     // Change it
-    item NEUTRAL_ELEMENT = 0LL;
+    item NEUTRAL_ELEMENT = 0;
 
     // Change it
     item merge(item a, item b) {
@@ -18,7 +18,7 @@ struct segment_tree {
     }
 
     // Change it
-    item single(long long v) {
+    item single(int v) {
         return v;
     }
 
@@ -55,9 +55,9 @@ struct segment_tree {
         build(a, 0, 0, size);
     }
 
-    void set(int i, long long v, int x, int lx, int rx) {
+    void set(int i, int v, int x, int lx, int rx) {
         if (rx - lx == 1) {
-            values[x] += single(v); // Update if necessary
+            values[x] = single(v); // Update if necessary
 
             return;
         }
@@ -74,7 +74,7 @@ struct segment_tree {
         values[x] = merge(values[2 * x + 1], values[2 * x + 2]); // Update if necessary
     }
 
-    void set(int i, long long v) {
+    void set(int i, int v) {
         set(i, v, 0, 0, size);
     }
 
@@ -98,6 +98,27 @@ struct segment_tree {
     item calculate(int l, int r) {
         return calculate(l, r, 0, 0, size);
     }
+
+    int find(int k, int x, int lx, int rx) {
+        if (rx - lx == 1) {
+            return rx;
+        }
+
+        int mid = lx + (rx - lx) / 2;
+
+        int sum_right = values[2 * x + 2];
+
+        if (k < sum_right) {
+            return find(k, 2 * x + 2, mid, rx);
+        }
+        else {
+            return find(k - sum_right, 2 * x + 1, lx, mid);
+        }
+    }
+
+    int find(int k) {
+        return find(k, 0, 0, size); 
+    }
 };
 
 int main()
@@ -105,39 +126,27 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, m;
+    int n, i;
     segment_tree st;
 
-    cin >> n >> m;
+    cin >> n;
 
-    vector <int> v(n), zeros(n + 1, 0);
+    vector <int> v(n), a(n, 1), p(n);
 
     for (auto &it : v) {
         cin >> it;
     }
 
-    st.build(zeros);
+    st.build(a);
 
-    while (m--) {
-        int op;
+    for (i = n - 1; i >= 0; i--) {
+        p[i] = st.find(v[i]);
 
-        cin >> op;
+        st.set(p[i] - 1, 0);
+    }
 
-        if (op == 1) {
-            long long a, b, u;
-
-            cin >> a >> b >> u;
-
-            st.set(a - 1, u);
-            st.set(b, -u);
-        }
-        else {
-            int k;
-
-            cin >> k;
-
-            cout << v[k - 1] + st.calculate(0, k) << "\n";
-        }
+    for (auto it : p) {
+        cout << it << " ";
     }
 
     return 0;

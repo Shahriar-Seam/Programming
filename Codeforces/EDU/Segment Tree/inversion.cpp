@@ -3,14 +3,14 @@
 using namespace std;
 
 // Change it
-typedef long long item;
+typedef int item;
 
 struct segment_tree {
     int size;
     vector <item> values;
 
     // Change it
-    item NEUTRAL_ELEMENT = 0LL;
+    item NEUTRAL_ELEMENT = 0;
 
     // Change it
     item merge(item a, item b) {
@@ -18,7 +18,7 @@ struct segment_tree {
     }
 
     // Change it
-    item single(long long v) {
+    item single(int v) {
         return v;
     }
 
@@ -29,7 +29,7 @@ struct segment_tree {
             size *= 2;
         }
 
-        values.resize(size * 2);
+        values.resize(size * 2, NEUTRAL_ELEMENT);
     }
 
     void build(vector <int> &a, int x, int lx, int rx) {
@@ -55,9 +55,9 @@ struct segment_tree {
         build(a, 0, 0, size);
     }
 
-    void set(int i, long long v, int x, int lx, int rx) {
+    void set(int i, int v, int x, int lx, int rx) {
         if (rx - lx == 1) {
-            values[x] += single(v); // Update if necessary
+            values[x] = single(v); // Update if necessary
 
             return;
         }
@@ -74,7 +74,7 @@ struct segment_tree {
         values[x] = merge(values[2 * x + 1], values[2 * x + 2]); // Update if necessary
     }
 
-    void set(int i, long long v) {
+    void set(int i, int v) {
         set(i, v, 0, 0, size);
     }
 
@@ -105,39 +105,19 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, m;
+    int n, temp, i;
     segment_tree st;
 
-    cin >> n >> m;
+    cin >> n;
 
-    vector <int> v(n), zeros(n + 1, 0);
+    st.init(n);
 
-    for (auto &it : v) {
-        cin >> it;
-    }
+    for (i = 0; i < n; i++) {
+        cin >> temp;
 
-    st.build(zeros);
+        cout << st.calculate(temp, n) << " ";
 
-    while (m--) {
-        int op;
-
-        cin >> op;
-
-        if (op == 1) {
-            long long a, b, u;
-
-            cin >> a >> b >> u;
-
-            st.set(a - 1, u);
-            st.set(b, -u);
-        }
-        else {
-            int k;
-
-            cin >> k;
-
-            cout << v[k - 1] + st.calculate(0, k) << "\n";
-        }
+        st.set(temp - 1, 1);
     }
 
     return 0;

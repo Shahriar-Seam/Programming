@@ -1,5 +1,3 @@
-[generic] Extracting URL: 9999
-[generic] Extracting URL: 1
 
 
 ---The End---
