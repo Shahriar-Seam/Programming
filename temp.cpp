@@ -1,32 +1,38 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    int t, i = 1;
-    char s[50], *p;
-
-    scanf("%d ", &t);
-
-    while (1) {
-        p = gets(s);
-
-        if (p == NULL) {
-            return 0;
+    int n;
+    cin >> n;
+    while (n--)
+    {
+        int p, sum = 0;
+        cin >> p;
+        int A[p + 1];
+        for (int i = 1; i <= p + 1; i++)
+        {
+            cin >> A[i];
+            if (A[i] < 2 * A[p + 1])
+            {
+                int temp = A[i];
+                A[i] = A[p + 1];
+                A[p + 1] = temp;
+                break;
+                for (int j = 0; j <= p; j++)
+                {
+                    sum += A[i];
+                }
+            }
+            else if (A[i] > 2 * A[p + 1])
+            {
+                for (int j = 0; j <= p; j++)
+                {
+                    sum += A[i];
+                }
+            }
+            cout << sum << "\n";
         }
-
-        if (strcmp(s, "") == 0) {
-            // End of a test case
-            i++;
-
-            continue;
-        }
-
-        printf("test %d: %s\n", i, s);
     }
 
     return 0;
