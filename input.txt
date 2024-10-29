@@ -1,1 +1,4 @@
+<<<<<<< Updated upstream
   Is     it a banana ?
+=======
+>>>>>>> Stashed changes
