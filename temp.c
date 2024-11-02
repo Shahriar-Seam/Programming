@@ -1,32 +1,22 @@
 #include <stdio.h>
+#include <math.h>
 
 int main()
 {
-    int i, j, k, t, n = 13;
-
-    int arr[20] = {50, 45, 60, 70, 56, 67, 78, 12, 34, 122, 233, 344, 566};
-
-    for (i = 0; i < n - 1; i++) {
-        k = i;
-
-        for (j = i + 1; j < n; j++) {
-            if ((i + 1) % 2 != 1 && arr[j] < arr[k]) {
-                k = j;
-            }
-
-            if ((i + 1) % 2 == 1 && arr[j] > arr[k]) {
-                k = j;
-            }
-        }
-
-        t = arr[i];
-
-        arr[i] = arr[k];
-
-        arr[k] = t;
-    }
-
-    for (i = 0; i < 10; i++) {
-        printf("%d ", arr[i]);
-    }
+    int a, b, c;
+    // printf("Enter the 3 Number:");
+    scanf("%d %d %d", &a, &b, &c);
+    
+    int i = pow(a, 2), j = pow(b, 2), k = pow(c, 2);
+    
+    if (i == j + k)
+        printf("The 3 Number can make a Right angled triangle");
+    else if (j == k + i)
+        printf("The 3 Number can make a Right angled triangle");
+    else if (k == j + i)
+        printf("The 3 Number can make a Right angled triangle");
+    else
+        printf("The 3 Number can not make a Right angled triangle");
+    
+    return 0;
 }
