@@ -103,7 +103,7 @@ int main()
     printf("\n");
 
     for (i = 1; i <= n; i++) {
-        printf("%lld ", b_pref[i]);
+        printf("%lld ", index_pref[i]);
     }
 
     printf("\n");
