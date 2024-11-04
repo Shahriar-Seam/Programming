@@ -1,32 +1,70 @@
-#include <stdio.h>
-
+#include<stdio.h>
+#include<stdlib.h>
 int main()
 {
-    int i, j, k, t, n = 13;
-
-    int arr[20] = {50, 45, 60, 70, 56, 67, 78, 12, 34, 122, 233, 344, 566};
-
-    for (i = 0; i < n - 1; i++) {
-        k = i;
-
-        for (j = i + 1; j < n; j++) {
-            if ((i + 1) % 2 != 1 && arr[j] < arr[k]) {
-                k = j;
-            }
-
-            if ((i + 1) % 2 == 1 && arr[j] > arr[k]) {
-                k = j;
+    int n;
+    scanf("%d",&n);
+    while(n--)
+    {
+        int p;
+        scanf("%d",&p);
+        int ar[p];
+        for(int i=0;i<p;i++)
+        {
+            scanf("%d",&ar[i]);
+        }
+        int f=1;
+        for(int i=1;i<p;i++)
+        {
+            if(abs(ar[i]-ar[i-1])!=5 && abs(ar[i]-ar[i-1]!=7))
+            {
+                f=0;
+                break;
             }
         }
-
-        t = arr[i];
-
-        arr[i] = arr[k];
-
-        arr[k] = t;
+        if(f==1)
+        {
+            printf("YES\n");
+        }
+        else{
+            printf("NO\n");
+        }
     }
-
-    for (i = 0; i < 10; i++) {
-        printf("%d ", arr[i]);
-    }
+    return 0;
 }
+
+// #include <stdio.h>
+// #include <stdlib.h>
+// int main()
+// {
+//     int n;
+//     scanf("%d", &n);
+//     while (n--)
+//     {
+//         int p;
+//         scanf("%d", &p);
+//         int ar[p];
+//         for (int i = 0; i < p; i++)
+//         {
+//             scanf("%d", &ar[i]);
+//         }
+//         int f = 1;
+//         for (int i = 1; i < p; i++)
+//         {
+//             if (abs(ar[i] - ar[i - 1]) != 5 && abs(ar[i] - ar[i - 1] )!= 7)
+//             {
+//                 f = 0;
+//                 break;
+//             }
+//         }
+//         if (f == 1)
+//         {
+//             printf("YES\n");
+//         }
+//         else
+//         {
+//             printf("NO\n");
+//         }
+//     }
+//     return 0;
+// }
