@@ -53,11 +53,11 @@ bool isPrime(ull n)
 }
 
 ull pollard_rho(ull n) {
-    auto f = [n](ull x) {
-        return modmul(x, x, n) + 2;
-    };
-
     ull x = 0, y = 0, t = 30, prd = 2, i = 1, q;
+
+    auto f = [&](ull x) {
+        return modmul(x, x, n) + i;
+    };
 
     while (t++ % 40 || __gcd(prd, n) == 1) {
         if (x == y) {
