@@ -2,72 +2,93 @@
 
 using namespace std;
 
-#define sz (long long) 1e8 + 5
-vector <bool> marked(sz, true);
-vector <long long> primes;
+typedef unsigned long long ull;
+typedef long long ll;
 
-void sieve()
+ull modmul(ull a, ull b, ull M)
 {
-    long long i, j;
+    ll ret = a * b - M * ull(1.L / M * a * b);
 
-    for (i = 3; i * i < sz; i += 2) {
-        if (marked[i]) {
-            for (j = i * i; j < sz; j += 2 * i) {
-                marked[j] = false;
-            }
-        }
-    }
-
-    primes.push_back(2);
-
-    for (i = 3; i < sz; i += 2) {
-        if (marked[i]) {
-            primes.push_back(i);
-        }
-    }
+    return ret + M * (ret < 0) - M * (ret >= (ll) M);
 }
 
-
-map <long long, long long> get_factors(long long n)
+ull modpow(ull b, ull e, ull mod)
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    ull ans = 1;
 
-    long long i, j = 0;
-    map <long long, long long> factors;
-    
-    while (j < primes.size() && primes[j] * primes[j] <= n) {
-        while (n % primes[j] == 0) {
-            factors[primes[j]]++;
-
-            n /= primes[j];
+    for (; e; b = modmul(b, b, mod), e /= 2) {
+        if (e & 1) {
+            ans = modmul(ans, b, mod);
         }
-
-        j++;
     }
 
-    if (n > 1) {
-        factors[n]++;
-    }
-
-    return factors;
+    return ans;
 }
 
-long long binary_exponentiation(long long b, long long p)
+// Miller Rabin
+bool isPrime(ull n)
 {
-    long long result = 1;
-
-    while (p > 0) {
-        if (p & 1) {
-            result = result * b;
-        }
-
-        b = b * b;
-
-        p >>= 1;
+    if (n < 2 || n % 6 % 4 != 1) {
+        return (n | 1) == 3;
     }
 
-    return result;
+    ull A[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
+    ull s = __builtin_ctzll(n - 1);
+    ull d = n >> s;
+
+    for (ull a : A) {
+        ull p = modpow(a % n, d, n);
+        ull i = s;
+
+        while (p != 1 && p != n - 1 && a % n && i--) {
+            p = modmul(p, p, n);
+        }
+
+        if (p != n - 1 && i != s) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+ull pollard_rho(ull n) {
+    auto f = [n](ull x) {
+        return modmul(x, x, n) + 2;
+    };
+
+    ull x = 0, y = 0, t = 30, prd = 2, i = 1, q;
+
+    while (t++ % 40 || __gcd(prd, n) == 1) {
+        if (x == y) {
+            x = ++i;
+            y = f(x);
+        }
+        if ((q = modmul(prd, max(x, y) - min(x, y), n))) {
+            prd = q;
+        }
+
+        x = f(x), y = f(f(y));
+    }
+
+    return __gcd(prd, n);
+}
+
+vector <ull> factor(ull n) {
+    if (n == 1) {
+        return {};
+    }
+    if (isPrime(n)) {
+        return {n};
+    }
+
+    ull x = pollard_rho(n);
+
+    auto l = factor(x), r = factor(n / x);
+
+    l.insert(l.end(), begin(r), end(r));
+
+    return l;
 }
 
 void solve()
@@ -77,13 +98,18 @@ void solve()
 
     cin >> n;
 
-    map <long long, long long> factors = get_factors(n);
+    vector <ull> factors = factor(n);
+    map <ull, ull> facts;
 
     for (auto it : factors) {
+        facts[it]++;
+    }
+
+    for (auto it : facts) {
         temp = 1;
 
         while (it.second > 0) {
-            temp += binary_exponentiation(it.first, it.second);
+            temp += modpow(it.first, it.second, 1e18);
 
             it.second--;
         }
@@ -100,8 +126,6 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    sieve();
 
     int t;
 
