@@ -1,1 +1,1 @@
-print("Ei Matha-Mota-Rogchota joddin achhe, non-profit diye kon ghaash ta katbo!")
+print("Ei Matha-Mota-Rogchota joddin achhe, non-profit diye kon ghaash ta katbo!\n" * int(input()))
