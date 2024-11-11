@@ -127,10 +127,10 @@ void solve()
         cin >> v[i];
     }
 
-    if (count(v.begin(), v.end(), 1) == n) {
+    if (count(v.begin(), v.end(), v[1]) == n) {
         for (i = 1; i <= n; i++) {
             cout << v[i];
-
+ 
             if (i != n) {
                 cout << " ";
             }
@@ -138,32 +138,33 @@ void solve()
                 cout << "\n";
             }
         }
-
+ 
         return;
     }
 
     for (i = 1; i <= n; i++) {
-        f_or[i + 1] = f_or[i] | v[i];
+        f_or[i] = f_or[i - 1] | v[i];
     }
 
     for (i = n; i > 0; i--) {
-        l_or[i - 1] = l_or[i] | v[i];
+        l_or[i] = l_or[i + 1] | v[i];
     }
 
     st.build(v);
 
-    for (i = 1; i < (n + 1) / 2; i++) {
-        cout << f_or[n + 1] << " ";
-    }
+    for (i = 1; i <= n; i++) {
+        int begin = n - i + 1;
+        int end = i;
 
-    for (i, j = n / 2 + 1; i <= n; i++, j--) {
-        cout << ((f_or[j] | l_or[n + 1 - j]) & st.calculate(j, n + 1 - j + 1));
+        if (begin > end) {
+            cout << f_or[n];
 
-        if (i != n) {
-            cout << " ";
+            cout << (i == n ? "\n" : " ");
         }
         else {
-            cout << "\n";
+            cout << ((f_or[begin - 1] | l_or[end + 1]) & st.calculate(begin, end + 1));
+
+            cout << (i == n ? "\n" : " ");
         }
     }
 }
