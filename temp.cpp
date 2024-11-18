@@ -4,12 +4,22 @@ using namespace std;
 
 int main()
 {
-    // ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
-    for (int i = 0; i < 100000; i++) {
-        cout << i << "\n";
+    int n;
+
+    cin >> n;
+
+    vector <int> v(n);
+
+    for (auto &it : v) {
+        cin >> it;
     }
+
+    sort(v.begin(), v.end());
+
+    
 
     return 0;
 }
