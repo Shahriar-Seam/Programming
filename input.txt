@@ -1,6 +1,3 @@
-5
-dcabaac
-a
-youknowwho
-codeforces
-aba
+2
+3
+6
