@@ -71,11 +71,12 @@ void dfs(vector <vector <int> > &adj_list, vector <int> &values, vector <bool> &
 
 void solve()
 {
-    int n, i, u, v, f = 1;
+    int n, i, u, v, f = 1, root = 1;
     int tu, tv;
 
     cin >> n;
 
+    vector <pair <int, int> > edges;
     vector <int> parent(n + 1, 0);
     vector <vector <int> > adj_list(n + 1, vector <int> ());
     vector <bool> visited(n + 1, false);
@@ -88,19 +89,35 @@ void solve()
     }
 
     for (i = 1; i < n; i++) {
-        cin >> tu >> tv;
+        cin >> u >> v;
 
-        u = min(tu, tv);
-        v = max(tu, tv);
+        edges.push_back({min(u, v), max(u, v)});
 
-        parent[v] = u;
         adj_list[u].push_back(v);
+        adj_list[v].push_back(u);
     }
 
-    values[1] = 1;
-    visited[1] = true;
+    for (i = 1; i <= n; i++) {
+        sort(adj_list[i].begin(), adj_list[i].end());
+    }
 
-    dfs(adj_list, values, visited, parent, 1);
+    parent[1] = 0;
+
+    for (i = 2; i <= n; i++) {
+        auto nodes = adj_list[i];
+
+        for (auto it : nodes) {
+            if (parent[it] != i) {
+                parent[i] = it;
+
+                break;
+            }
+        }
+    }
+
+    values[root] = 1;
+
+    dfs(adj_list, values, visited, parent, root);
 
     for (i = 1; i <= n; i++) {
         if (values[i] == -1) {
