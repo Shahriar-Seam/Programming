@@ -1,42 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
+using namespace std::chrono;
 
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    int t;
-    cin >> t;
+auto start = high_resolution_clock::now();
+#define int long long
 
-    while (t--)
-    {
-        int n;
-        cin >> n;
-        int arr[n];
-        for (int i = 0; i < n; i++)
-        {
-            cin >> arr[i];
+bool marked[1000001];
+vector<int> primes;
+
+void sieve(int n) {
+    memset(marked, false, n+1);
+    marked[1] = true;
+    for (int i = 3; i*i <= n; i += 2) {
+        if (!marked[i]) {
+            for (int j = i*i; j <= n; j += i*2)
+                marked[j] = true;
         }
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = i; j < n; j++)
-            {
-                int Max = arr[i];
-                for (int k = i; k <= j; k++)
-                {
-                    if (arr[k] > Max)
-                        Max = arr[k];
-                }
-                if (i == n - 1)
-                {
-                    cout << Max;
-                }
-                else
-                {
-                    cout << Max << " ";
-                }
-            }
-        }
-        cout << "\n";
     }
+
+    primes.push_back(2);
+
+    for (int i = 3; i <= n; i += 2) {
+        if (!marked[i])
+            primes.push_back(i);
+    }
+}
+
+int32_t main() {
+    int a, b; cin >> a >> b;
+    int n = sqrt(b);
+    sieve(n);
+    vector<int> rangePrimes;
+    int segments = ceil(sqrt(b-a+1));
+    int low = a, high = a + segments - 1;
+    for (int i = 0; i < segments; ++i) {
+        int range = high - low + 1;
+        memset(marked, false, range);
+        for (auto j : primes) {
+            for (int k = max(j*j, (low+j-1)/j * j); k <= high; k += j)
+                marked[k-low] = true;
+        }
+        
+        if (low == 1)
+            marked[0] = true;
+        for (int j = 0; j < range; ++j) {
+            if (!marked[j])
+                rangePrimes.push_back(j+low);
+        }
+        low = high + 1;
+        high = min(b, high + segments);
+    }
+    
+    cout << "Total Primes: " << rangePrimes.size();
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds> (stop - start);
+    cout << "\nTime Taken: " << duration.count() << " milliseconds.";
 }
