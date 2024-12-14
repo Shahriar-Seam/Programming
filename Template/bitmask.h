@@ -2,14 +2,6 @@
 
 using namespace std;
 
-/**
- * Author:  Ibnul Abrar Shahriar Seam
- * Date: 2024-11-06
- * License: CC0
- * Description: Sum of all subsets
- * Time: O(n * 2 ^ n)
-**/
-
 void bitmask(int *arr, int n)
 {
     int i, mask, sum = 0;

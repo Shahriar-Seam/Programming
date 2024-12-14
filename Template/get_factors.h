@@ -12,9 +12,6 @@ using namespace std;
 
 vector <int> get_factors(int n)
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
     int i, j = 0;
     vector <int> factors;
     

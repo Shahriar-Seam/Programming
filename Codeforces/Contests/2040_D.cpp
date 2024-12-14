@@ -4,7 +4,7 @@ using namespace std;
 
 #define sz int(1e6)
 vector <bool> marked(sz, true);
-set <int> available;
+int x;
 
 void sieve()
 {
@@ -27,66 +27,56 @@ void sieve()
 
 int calculate(int p_val)
 {
-    set <int> :: iterator it;
     int f = 0;
 
-    it = available.begin();
-
-    while (it != available.end()) {
-        if (!marked[abs(*it - p_val)]) {
+    for (x; ; x++) {
+        if ((abs(x - p_val) > 0) && !marked[abs(x - p_val)]) {
             f = 1;
 
             break;
         }
-
-        it++;
     }
 
     if (f == 0) {
         return -1;
     }
     else {
-        int temp = *it;
-
-        available.erase(it);
-
+        int temp = x;
+        
+        x++;
+        
         return temp;
     }
 }
 
-void dfs(vector <vector <int> > &adj_list, vector <int> &values, vector <bool> &visited, vector <int> &parent, int node)
+void dfs(vector <vector <int> > &adj_list, vector <int> &values, vector <bool> &visited, int parent, int node)
 {
     visited[node] = true;
 
     if (node != 1) {
-        values[node] = calculate(values[parent[node]]);
+        values[node] = calculate(values[parent]);
     }
 
     for (auto it : adj_list[node]) {
         if (!visited[it]) {
-            dfs(adj_list, values, visited, parent, it);
+            dfs(adj_list, values, visited, node, it);
         }
     }
 }
 
 void solve()
 {
-    int n, i, u, v, f = 1, root = 1;
+    int n, i, u, v, f = 1, root = 1, parent = 0;
     int tu, tv;
 
     cin >> n;
 
     vector <pair <int, int> > edges;
-    vector <int> parent(n + 1, 0);
     vector <vector <int> > adj_list(n + 1, vector <int> ());
     vector <bool> visited(n + 1, false);
     vector <int> values(n + 1, 0);
 
-    available.clear();
-
-    for (i = 2; i <= 2 * n; i++) {
-        available.insert(i);
-    }
+    x = 1;
 
     for (i = 1; i < n; i++) {
         cin >> u >> v;
@@ -99,20 +89,6 @@ void solve()
 
     for (i = 1; i <= n; i++) {
         sort(adj_list[i].begin(), adj_list[i].end());
-    }
-
-    parent[1] = 0;
-
-    for (i = 2; i <= n; i++) {
-        auto nodes = adj_list[i];
-
-        for (auto it : nodes) {
-            if (parent[it] != i) {
-                parent[i] = it;
-
-                break;
-            }
-        }
     }
 
     values[root] = 1;
