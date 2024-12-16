@@ -1,7 +1,5 @@
-Enter url:
-
-
-Extracting urls to urls.txt file...
-
-It might be a lengthy process depending on playlist size.
-
+1
+4
+0
+0
+5
