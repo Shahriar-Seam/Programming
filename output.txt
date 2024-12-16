@@ -1,5 +1,7 @@
-2
-2
-5
-4
-5
+Enter url:
+
+
+Extracting urls to urls.txt file...
+
+It might be a lengthy process depending on playlist size.
+
