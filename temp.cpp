@@ -1,35 +1,52 @@
 #include <iostream>
 #include <vector>
-#include <set>
 #include <algorithm>
+#include <set>
+
 using namespace std;
 
-int find_mex(const vector<int>& arr, int k) {
-    set<int> s(arr.begin(), arr.end());
-    int mex = 0;
-    while (k > 0) {
-        if (s.find(mex) == s.end()) {
-            k--;
-        }
-        mex++;
-    }
-    while (s.find(mex) != s.end()) {
-        mex++;
-    }
-    return mex;
+int mex(const set<int>& s) {
+    int m = 0;
+    while (s.count(m)) ++m;
+    return m;
 }
 
-int main() {
+void solve() {
     int t;
     cin >> t;
     while (t--) {
-        int n, k;
-        cin >> n >> k;
-        vector<int> arr(n);
-        for (int i = 0; i < n; i++) {
-            cin >> arr[i];
+        int n, x, y;
+        cin >> n >> x >> y;
+        vector<int> a(n, -1);
+        vector<set<int>> friends(n);
+
+        for (int i = 0; i < n; ++i) {
+            friends[i].insert((i - 1 + n) % n);
+            friends[i].insert((i + 1) % n);
         }
-        cout << find_mex(arr, k) << endl;
+        friends[x - 1].insert(y - 1);
+        friends[y - 1].insert(x - 1);
+
+        for (int i = 0; i < n; ++i) {
+            set<int> f_values;
+            for (int f : friends[i]) {
+                if (a[f] != -1) {
+                    f_values.insert(a[f]);
+                }
+            }
+            a[i] = mex(f_values);
+        }
+
+        for (int i = 0; i < n; ++i) {
+            cout << a[i] << " ";
+        }
+        cout << endl;
     }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    solve();
     return 0;
 }
