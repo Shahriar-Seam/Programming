@@ -37,34 +37,21 @@ int mex(int a, int b)
 
 void solve()
 {
-    int n, x, y, i;
+    int n, x, y, i, j;
 
     cin >> n >> x >> y;
 
-    vector <int> v(n + 2, -1);
+    vector <int> v(n);
 
-    for (i = 1; i <= n; i++) {
-        v[i] = (i % 2);
+    for (i = 0; i < n; i++) {
+        v[(x - 1 + i) % n] = i % 2;
     }
 
-    if (n % 2 == 1) {
-        v[n] = 0;
-        v[n - 1] = -1;
+    if ((n & 1) || !((y - x) & 1)) {
+        v[x - 1] = 2;
     }
 
-    v[0] = v[n];
-    v[n + 1] = v[1];
-
-    v[x] = mex(v[x - 1], v[x + 1], max(0, v[y]));
-    v[y] = mex(v[y - 1], v[y + 1], v[x]);
-
-    for (i = 1; i <= n; i++) {
-        if (v[i] == -1) {
-            v[i] = mex(v[i - 1], v[i + 1]);
-        }
-    }
-
-    for (i = 1; i <= n; i++) {
+    for (i = 0; i < n; i++) {
         cout << v[i] << " ";
     }
 
