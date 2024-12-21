@@ -1,11 +1,9 @@
-from itertools import permutations
+import itertools
 
-n = 3
+characters = ['s', 'p', '.']
+length = 3
 
-s = 'sp.' * n
+permutations = itertools.product(characters, repeat=length)
 
-p = sorted(list(set(list(permutations(s, n)))))
-
-for i in p:
-    print(3)
-    print(''.join(i))
+for perm in permutations:
+    print(''.join(perm))
