@@ -14,17 +14,11 @@ int main()
     cout << t << "\n";
 
     for (int i = 0; i < t; i++) {
-        int n = rand() % 10;
-        int k = rand() % 20;
-        string s;
+        int l = rand() % 1000;
+        int r = l + rand() % 1000;
+        int g = rand() % 1000;
 
-        cout << n << " " << k << "\n";
-
-        for (int j = 0; j < n; j++) {
-            s += '0' + (rand() % 2);
-        }
-
-        cout << s << "\n";
+        cout << l << " " << r << " " << g << "\n";
     }
 
     return 0;
