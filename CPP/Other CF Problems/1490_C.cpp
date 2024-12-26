@@ -2,35 +2,56 @@
 
 using namespace std;
 
-int main()
+#define int long long
+
+bool is_cube(int n)
 {
-    long long t, x, c, i, f, arr[10001];
+    int l = 1, r = 1e4, m, temp;
+
+    while (l <= r) {
+        m = (l + r) / 2;
+
+        if (m * m * m <= n) {
+            temp = m * m * m;
+
+            l = m + 1;
+        }
+        else {
+            r = m - 1;
+        }
+    }
+
+    return temp == n;
+}
+
+void solve()
+{
+    int n, i;
+
+    cin >> n;
+
+    for (i = 1; i <= 1e4; i++) {
+        if (is_cube(n - i * i * i)) {
+            cout << "YES\n";
+
+            return;
+        }
+    }
+
+    cout << "NO\n";
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int t;
 
     cin >> t;
 
-    for (i = 10000; i > 0; i--) {
-        arr[i] = i * i * i;
-    }
-
     while (t--) {
-        cin >> x;
-
-        f = 0;
-        c = ceil(cbrt(x));
-
-        if (x == 1000000000000) {
-            cout << "NO\n";
-            continue;
-        }
-
-        for (i = 1; i <= c; i++) {
-            if (find(arr + 1, arr + 10001, x - (i * i * i)) != arr + 10001) {
-                f = 1;
-                break;
-            }
-        }
-
-        f ? cout << "YES\n" : cout << "NO\n";
+        solve();
     }
 
     return 0;
