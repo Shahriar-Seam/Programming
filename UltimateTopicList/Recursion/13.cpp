@@ -2,21 +2,19 @@
 
 using namespace std;
 
-int f;
-
-void is_possible(long long n, long long N)
+int is_possible(long long n)
 {
-    if (n > N) {
-        return;
+    if (n == 1) {
+        return 1;
     }
-    if (n == N) {
-        f = 1;
-
-        return;
+    else if ((n % 10) != 0) {
+        return 0;
+    }
+    else if (n % 20 == 0) {
+        return is_possible(n / 10) + is_possible(n / 20);
     }
 
-    is_possible(n * 10, N);
-    is_possible(n * 20, N);
+    return is_possible(n / 10);
 }
 
 int main()
@@ -24,21 +22,15 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int t, n;
+    long long t, n;
 
     cin >> t;
 
     while (t--) {
         cin >> n;
 
-        f = 0;
-
-        is_possible(1, n);
-
-        cout << (f ? "YES\n" : "NO\n");
+        cout << (is_possible(n) ? "YES\n" : "NO\n");
     }
 
     return 0;
 }
-
-// doesn't work
