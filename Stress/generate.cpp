@@ -9,16 +9,20 @@ int main()
 
     srand(time(0));
 
-    int t = rand() % 10;
+    int t = 200;
 
     cout << t << "\n";
 
     for (int i = 0; i < t; i++) {
-        int l = rand() % 1000;
-        int r = l + rand() % 1000;
-        int g = rand() % 1000;
+        int n = 50;
 
-        cout << l << " " << r << " " << g << "\n";
+        cout << n << "\n";
+
+        for (int j = 0; j < n; j++) {
+            cout << pow(-1, rand() % 2) * (rand() % 1001) << " ";
+        }
+
+        cout << "\n";
     }
 
     return 0;
