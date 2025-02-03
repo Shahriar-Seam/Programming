@@ -2,66 +2,59 @@
 
 using namespace std;
 
-int max_size = 1000005;
-vector <long long> primes;
-map <long long, long long> factors;
-
-void sieve()
+int v_gcd(vector <int> &v)
 {
-    int i, j;
-    vector <bool> marked(max_size, true);
+    int i, g = 0;
 
-    for (i = 3; i * i < max_size; i += 2) {
-        if (marked[i] == true) {
-            for (j = i * i; j < max_size; j += i + i) {
-                marked[j] = false;
-            }
-        }
+    for (i = 0; i < v.size(); i++) {
+        g = __gcd(g, v[i]);
     }
 
-    primes.push_back(2);
-
-    for (i = 3; i < max_size; i += 2) {
-        if (marked[i] == true) {
-            primes.push_back(i);
-        }
-    }
+    return g;
 }
 
-void count_factors(long long n)
+void solve()
 {
-    int i;
+    int n, i, j, g = 0, cost = INT_MAX;
 
-    for (i = 0; i < primes.size() && 1LL * primes[i] * primes[i] <= n; i++) {
-        if (n % primes[i] == 0) {
-            while (n % primes[i] == 0) {
-                factors[primes[i]]++;
+    cin >> n;
 
-                n /= primes[i];
+    vector <int> v(n), v_temp;
+    set <int> s;
+
+    for (auto &it : v) {
+        cin >> it;
+    }
+
+    g = v_gcd(v);
+
+    if (g == 1) {
+        cout << 0 << "\n";
+
+        return;
+    }
+
+    for (i = n - 1; i >= 0; i--) {
+        v_temp = v;
+
+        v_temp[i] = __gcd(v_temp[i], i + 1);
+
+        g = v_gcd(v_temp);
+
+        if (g == 1) {
+            cost = min(cost, n - i);
+        }
+
+        for (j = n - 1; j >= 0; j--) {
+            if (__gcd(__gcd(v_temp[j], j + 1), g) == 1) {
+                break;
             }
         }
+
+        cost = min(cost, n - j + n - i);
     }
 
-    if (n > 1) {
-        factors[n]++;
-    }
-}
-
-long long binary_exponentiation(long long b, long long p)
-{
-    long long result = 1;
-
-    while (p > 0) {
-        if (p & 1) {
-            result = result * b;
-        }
-
-        b = b * b;
-
-        p >>= 1;
-    }
-
-    return result;
+    cout << cost << "\n";
 }
 
 int main()
@@ -69,39 +62,13 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    sieve();
+    int t;
 
-    long long n, mask, i, div1, div2, min_div = LONG_LONG_MAX;
-    long long len;
-    pair <long long, long long> p;
+    cin >> t;
 
-    cin >> n;
-
-    count_factors(n);
-
-    vector <pair <long long, long long> > v(begin(factors), end(factors));
-
-    len = v.size();
-
-    for (mask = 0; mask <= (1 << len); mask++) {
-        div1 = div2 = 1;
-
-        for (i = 0; i < len; i++) {
-            if (mask & (1 << i)) {
-                div1 *= binary_exponentiation(v[i].first, v[i].second);
-            }
-            else {
-                div2 *= binary_exponentiation(v[i].first, v[i].second);
-            }
-        }
-
-        if (max(div1, div2) < min_div) {
-            min_div = max(div1, div2);
-            p = make_pair(div1, div2);
-        }
+    while (t--) {
+        solve();
     }
-
-    cout << p.first << " " << p.second;
 
     return 0;
 }

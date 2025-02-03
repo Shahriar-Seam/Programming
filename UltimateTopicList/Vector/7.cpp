@@ -7,44 +7,63 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, q, type, x, t, last_read = 0, total = 0, v_size = 0, i;
+    int n, q, i, j, k, type, x, t, total = 0, unread = 0;
 
     cin >> n >> q;
 
-    map <int, int> mp;
-    vector <int> v;
+    vector <int> v(n + 1, 0);
+    list <pair <int, int> > time;
+    vector <list <list <pair <int, int> > :: iterator > > nodes(n + 1);
+    list <pair <int, int> > :: iterator l_it;
 
-    while (q--) {
+    for (i = 0, k = 0; i < q; i++) {
         cin >> type;
 
         if (type == 1) {
             cin >> x;
 
-            v.push_back(x);
-            v_size++;
-            mp[x]++;
+            time.push_back({k++, x});
+
+            l_it = time.end();
+
+            l_it--;
+
+            nodes[x].push_back(l_it);
+
+            v[x]++;
+
+            unread++;
             total++;
         }
         else if (type == 2) {
             cin >> x;
 
-            total -= mp[x];
-            mp[x] = 0;
+            unread -= v[x];
+
+            v[x] = 0;
+
+            for (auto it : nodes[x]) {
+                time.erase(it);
+            }
+
+            nodes[x].clear();
         }
         else {
             cin >> t;
 
-            for (i = 0; i < t; i++) {
-                mp[v[i]] = 0;
-            }
+            while ((!time.empty()) && ((*time.begin()).first < t)) {
+                v[(*time.begin()).second]--;
 
-            total = v_size - t;
+                nodes[(*time.begin()).second].pop_front();
+
+                time.erase(time.begin());
+
+                unread--;
+            }
         }
 
-        cout << total << "\n";
+        cout << unread << "\n";
     }
 
     return 0;
 }
-
-// doesn't work
