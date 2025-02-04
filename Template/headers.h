@@ -7,6 +7,7 @@
 // #include "binary_exponentiation.h"
 // #include "get_divisors.h"
 // #include "sieve_phi.h"
-#include "phi.h"
+// #include "phi.h"
+#include "dfs.h"
 
 using namespace std;

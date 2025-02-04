@@ -5,23 +5,21 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    // sieve();
-    // get_divisors();
-    // sieve_phi();
+    int e, u, v;
 
-    // cout << count_divisor(24) << "\n";
-    
-    // vector <int> d = get_factors(24);
+    cin >> n >> e;
 
-    // for (auto it : d) {
-    //     cout << it << " ";
-    // }
+    adj_list.assign(n + 1, vector <int> ());
+    visited.assign(n + 1, false);
 
-    // cout << binary_exponentiation(15879, 123);
+    while (e--) {
+        cin >> u >> v;
 
-    for (int i = 1; i <= 10; i++) {
-        cout << phi(i) << "\n";
+        adj_list[u].push_back(v);
+        adj_list[v].push_back(u);
     }
+
+    dfs(1);
 
     return 0;
 }
