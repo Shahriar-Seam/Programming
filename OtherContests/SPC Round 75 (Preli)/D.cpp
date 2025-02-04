@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void solve()
+{
+    int n, i, t = 0, f = 0, temp;
+
+    cin >> n;
+
+    vector <int> v(n);
+
+    for (auto &it : v) {
+        cin >> it;
+    }
+
+    for (auto it : v) {
+        temp = it;
+
+        while (temp % 2 == 0) {
+            temp /= 2;
+
+            t++;
+        }
+
+        while (temp % 5 == 0) {
+            temp /= 5;
+
+            f++;
+        }
+    }
+
+    cout << min(f, t) << "\n";
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int32_t t, i;
+
+    cin >> t;
+
+    for (i = 1; i <= t; i++) {
+        // cout << "Case " << i << ": ";
+
+        solve();
+    }
+
+    return 0;
+}
