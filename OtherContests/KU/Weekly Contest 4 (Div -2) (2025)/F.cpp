@@ -5,8 +5,8 @@ using namespace std;
 #define sz int(1e6 + 5)
 vector <bool> marked(sz, true);
 vector <int> primes;
-vector <vector <int> > factors(sz);
-vector <pair <int, int> > counter(sz);
+vector <pair <int, int> > f_counter;
+vector <int> counter(sz, 0);
 
 void sieve()
 {
@@ -29,83 +29,67 @@ void sieve()
     }
 }
 
-void fill_factors()
-{
-    int i, j;
-
-    for (i = 0; primes[i] * primes[i] < sz; i++) {
-        for (j = primes[i]; j < sz; j += primes[i]) {
-            factors[j].push_back(primes[i]);
-        }
-    }
-}
-
-void fill_counter(vector <int> &v)
-{
-    int i;
-
-    for (i = 0; i < counter.size(); i++) {
-        counter[i].first = 0;
-        counter[i].second = -i;
-    }
-
-    counter[0].second = counter[1].second = -2;
-
-    for (i = 0; i < v.size(); i++) {
-        for (auto it : factors[v[i]]) {
-            counter[it].first++;
-        }
-    }
-}
-
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
     sieve();
-    fill_factors();
 
-    int n, i, f_max = 0, s_max = 0;
+    int n, i, j, count, max_sz = 0, a = 2, b = 3;
 
     cin >> n;
 
-    vector <int> v(n), temp;
+    vector <int> v(n);
 
     for (auto &it : v) {
         cin >> it;
     }
-    
-    fill_counter(v);
-
-    sort(counter.begin(), counter.end(), greater <pair <int, int> > ());
-
-    int a = -(counter[0].second);
 
     for (i = 0; i < n; i++) {
-        if (v[i] % a != 0) {
-            temp.push_back(v[i]);
+        for (j = 1; j * j <= v[i]; j++) {
+            if (v[i] % j == 0) {
+                counter[j]++;
+
+                if (j * j < v[i]) {
+                    counter[v[i] / j]++;
+                }
+            }
         }
     }
 
-    v = temp;
-    temp.clear();
+    for (i = 0; i < primes.size(); i++) {
+        f_counter.push_back({counter[primes[i]], primes[i]});
+    }
 
-    counter.assign(sz, {});
+    sort(f_counter.begin(), f_counter.end(), greater <pair <int, int> > ());
 
-    fill_counter(v);
+    for (i = 0; i < f_counter.size(); i++) {
+        if (f_counter[i].first == 0) {
+            break;
+        }
 
-    sort(counter.begin(), counter.end(), greater <pair <int, int> > ());
+        for (j = i + 1; j < f_counter.size(); j++) {
+            count = f_counter[i].first + f_counter[j].first;
 
-    int b = max(2, -counter[0].second);
+            if (count < max_sz) {
+                break;
+            }
 
-    for (i = 0; i < v.size(); i++) {
-        if (v[i] % b != 0) {
-            temp.push_back(v[i]);
+            if (1LL * f_counter[i].second * f_counter[j].second <= 1e6) {
+                count -= counter[f_counter[i].second * f_counter[j].second];
+            }
+
+            if (count > max_sz) {
+                max_sz = count;
+
+                a = f_counter[i].second;
+                b = f_counter[j].second;
+            }
         }
     }
 
-    cout << temp.size() << "\n";
+    cout << n - max_sz << "\n";
     cout << a << " " << b << "\n";
 
     return 0;
