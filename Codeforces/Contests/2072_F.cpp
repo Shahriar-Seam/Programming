@@ -2,20 +2,38 @@
 
 using namespace std;
 
+map <pair <int, int>, int> mp;
+
+int t(int i, int j, int k)
+{
+    if (mp.find({i, j}) == mp.end()) {
+        if (i == 1) {
+            mp[{i, j}] = k;
+        }
+        else if (j == 1) {
+            mp[{i, j}] = t(i - 1, j, k);
+        }
+        else if (j == i) {
+            mp[{i, j}] = t(i - 1, j - 1, k);
+        }
+        else {
+            mp[{i, j}] = t(i - 1, j - 1, k) ^ t(i - 1, j, k);
+        }
+    }
+
+    return mp[{i, j}];
+}
+
 void solve()
 {
     int n, k, j;
 
+    mp.clear();
+
     cin >> n >> k;
 
-    cout << k << " ";
-
-    for (j = 1; j < n - 1; j++) {
-        cout << "0 ";
-    }
-
-    if (n > 1) {
-        cout << k;
+    for (j = 1; j <= n; j++) {
+        cout << t(n, j, k) << " ";
     }
 
     cout << "\n";
