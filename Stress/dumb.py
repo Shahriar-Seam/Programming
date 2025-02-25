@@ -1,21 +1,33 @@
-from math import gcd
+import io, os, sys, math
 
-for _ in range(int(input())):
-    l, r, g = map(int, input().split())
-    
-    a, b = -1, -1
-    max_dist = 0
-    
-    for i in range(l, r + 1):
-        for j in range(r, l - 1, -1):
-            if (gcd(i, j) == g):
-                if a == -1:
-                    a, b = i, j
-                    max_dist = j - i
-                elif j - i == max_dist and i < a:
-                    a, b = i, j
-                elif j - i > max_dist:
-                    a, b = i, j
-                    max_dist = j - i
-    
-    print(a, b)
+input = io.BytesIO(os.read(0, os.fstat(0).st_size)).readline
+
+def binary_exponentiation(b, p):
+    result = 1;
+
+    while (p > 0):
+        if (p & 1):
+            result = result * b
+
+        b = b * b
+
+        p >>= 1
+
+    return result
+
+n, x = map(int, input().split())
+a = list(map(int, input().split()))
+
+num = 0
+d = max(a)
+s = sum(a)
+r = s - d
+
+for i in a:
+    num += binary_exponentiation(x, d - i)
+
+num *= binary_exponentiation(x, r)
+
+denom = binary_exponentiation(x, s)
+
+sys.stdout.write(str(math.gcd(num, denom) % int(1e9 + 7)) + "\n")
