@@ -1,5 +1,2 @@
-1
 4
-izzi
-izzz
-ziiz
+20 11 9 24
