@@ -1,6 +1,5 @@
-aaaaaa
-aabbaa
-..bb..
-..bb..
-ccbbcc
-cccccc
+YES
+NO
+YES
+NO
+YES
