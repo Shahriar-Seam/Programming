@@ -1,2 +1,4 @@
--1 1 2
-0 1 17
+Case 1: 1 2 3 4 6 12
+Case 2: 11
+Case 3: 101 202
+Case 4: impossible
