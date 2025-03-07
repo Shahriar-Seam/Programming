@@ -2,28 +2,38 @@
 
 using namespace std;
 
-#define mod int(1e9 + 7)
+#define int long long
+const int mod = 1e9 + 7;
 
-int main()
+int num_ways(int n)
+{
+    int i, j;
+
+    vector <int> dp = {1};
+    // stores the last 6 states
+    // dp[n] = sum _i = n - 1 to n - 6
+
+    for (i = 1; i <= n; i++) {
+        dp.push_back(accumulate(dp.begin(), dp.end(), 0LL) % mod);
+
+        if (dp.size() > 6) {
+            dp.erase(dp.begin());
+        }
+    }
+
+    return dp.back();
+}
+
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    long long n, i, j;
+    int n;
 
     cin >> n;
 
-    vector <long long> v(n + 10, 0);
-
-    v[0] = 1;
-
-    for (i = 0; i < n; i++) {
-        for (j = 1; j <= 6; j++) {
-            v[i + j] = (v[i + j] + v[i]) % mod;
-        }
-    }
-
-    cout << v[n] << "\n";
+    cout << num_ways(n) << "\n";
 
     return 0;
 }

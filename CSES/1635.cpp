@@ -2,24 +2,25 @@
 
 using namespace std;
 
-const int inf = 1e9 + 7;
+#define int long long
+const int mod = 1e9 + 7;
 
-int min_coins(int x, vector <int> &v, vector <int> &dp)
+int num_ways(int x, vector <int> &v, vector <int> &dp)
 {
     int i, j;
 
     for (i = 1; i <= x; i++) {
         for (j = 0; j < v.size(); j++) {
             if (i >= v[j]) {
-                dp[i] = min(dp[i], dp[i - v[j]] + 1);
+                dp[i] = (dp[i] + dp[i - v[j]]) % mod;
             }
         }
     }
 
-    return dp[x] == inf ? -1 : dp[x];
+    return dp[x];
 }
 
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -29,16 +30,16 @@ int main()
     cin >> n >> x;
 
     vector <int> v(n);
-    vector <int> dp(x + 1, inf);
-    // dp[i] = minimum number of coins needed to produce sum i
+    vector <int> dp(x + 1, 0);
+    // dp[i] = number of ways sum i can be constructed
 
-    dp[0] = 0;
+    dp[0] = 1;
 
     for (auto &it : v) {
         cin >> it;
     }
 
-    cout << min_coins(x, v, dp) << "\n";
+    cout << num_ways(x, v, dp) << "\n";
 
     return 0;
 }
