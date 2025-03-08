@@ -9,22 +9,22 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, i, j;
+    int n, m, i, j;
 
-    cin >> n;
+    cin >> n >> m;
 
     vector <string> v(n);
-    vector <vector <int> > dp(n, vector <int> (n, 0));
+    vector <vector <int> > dp(n, vector <int> (m, 0));
 
     for (auto &it : v) {
         cin >> it;
     }
 
-    dp[0][0] = (v[0][0] == '*') ? 0 : 1;
+    dp[0][0] = (v[0][0] == '#') ? 0 : 1;
 
     for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            if (v[i][j] == '*') {
+        for (j = 0; j < m; j++) {
+            if (v[i][j] == '#') {
                 dp[i][j] = 0;
 
                 continue;
@@ -45,7 +45,7 @@ int main()
         }
     }
 
-    cout << dp[n - 1][n - 1] << "\n";
+    cout << dp[n - 1][m - 1] << "\n";
 
     return 0;
 }
