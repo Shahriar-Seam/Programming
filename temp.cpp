@@ -2,67 +2,41 @@
 using namespace  std;
  
 #define ll long long
-
-const int N=1e7;
-bitset<N+1> is_prime;
-vector<int> primes;
-
-void set_sieve(int n) {
-
-    is_prime.set();
-    is_prime[0]=is_prime[1]=0;
-
-    for(int i = 2; i*i <= n; i++) {
-        if(is_prime[i]) {
-           // primes.push_back(i);
-            for(ll j = 1LL * i * i; j <= n; j += i ) {
-                is_prime[j] = 0;
-            }
-        }
-    }
+#define int long long
 
 
-}
-
-void set_prime_vec() {
-    for(int i = 2; i <= N; i++){
-        if(is_prime[i]) primes.push_back(i);
-    }
-}
-
-void factorize(int n) {
-    if(n == 1) cout << 1;
-    else{
-        cout << 1 << " x ";
-        for(int x: primes) {
-            if(x * x > n) break;
-            while(n % x == 0) {
-                cout << x;
-                n /= x;
-                if(n != 1) cout << " x " ;
-            }
-        }
-        if(n > 1) cout << n;
-    }
-}
-
-
-int main(){
+int32_t main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);  
-
-    set_sieve(N);
-    set_prime_vec();
  
-    // int n;
+    ll n;
 
-    // while(cin >> n){
+    while(cin >> n) {
+        if(n == 0) break;
+        
+        int cnt = 0;
+        while((n & 1) == 0) {
+            cnt++;
+            n >>= 1;
+         //   cout << "yo\n";
+        }
+     //   cout << cnt <<'\n';
+        if(cnt > 0) cout << 2 << '^' << cnt <<' ';
 
-    //     factorize(n);
-    //     cout << '\n';
-    
-    // }
+        int lim = 1e7 + 50;
 
-    cout << primes.size();
+        for(int i = 3; i <= lim; i+=2) {
+            if(n % i == 0) {
+                int cnt = 0;
+                while(n % i == 0) {
+                    cnt++;
+                    n /= i;
+                }
+                cout << i << '^' << cnt <<' ';
+            }
+        }
+        if(n > 1) cout << n << '^' << 1;
+        cout << '\n';
+    }
     
 }

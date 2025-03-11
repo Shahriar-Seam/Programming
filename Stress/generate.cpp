@@ -32,23 +32,23 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    sieve();
+    // sieve();
 
     srand(time(0));
 
-    int t = 1;
+    int t = 10;
 
     // cout << t << "\n";
 
     for (int i = 0; i < t; i++) {
         int n = rand() % 500 + 2;
-        int x = primes[rand() % 500 + 2];
+        // int x = primes[rand() % 500 + 2];
 
-        cout << n << " " << x << "\n";
+        cout << (long long) (1LL * rand() * 213456) % (long long) 1e15;
 
-        for (int j = 0; j < n; j++) {
-            cout << rand() % 1000 + 1 << " ";
-        }
+        // for (int j = 0; j < n; j++) {
+        //     cout << rand() % 1000 + 1 << " ";
+        // }
 
         cout << "\n";
     }
