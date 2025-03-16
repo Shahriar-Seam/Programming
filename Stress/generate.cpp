@@ -36,23 +36,27 @@ int main()
 
     srand(time(0));
 
-    int t = 20;
+    // int t = 20;
 
-    cout << t << "\n";
+    // cout << t << "\n";
 
-    for (int i = 0; i < t; i++) {
-        int n = rand() %  int(1e5) + 1;
+    // for (int i = 0; i < t; i++) {
+        int n = 1e5;
         // int x = primes[rand() % 500 + 2];
 
         // cout << (long long) (1LL * rand() * 213456) % (long long) 1e15;
         cout << n << "\n";
 
         for (int j = 0; j < n; j++) {
-            cout << rand() % int(1e6) + 1 << " ";
+            cout << (int) 1e6 << " ";
         }
-
+        
         cout << "\n";
-    }
+        for (int j = 0; j < n; j++) {
+            cout << (int) 1e6 << " ";
+        }
+        cout << "\n";
+    // }
 
     return 0;
 }

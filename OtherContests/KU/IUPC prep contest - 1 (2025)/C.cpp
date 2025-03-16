@@ -4,13 +4,19 @@ using namespace std;
 
 #define int long long
 
+int max(int a, int b)
+{
+    return a > b ? a : b;
+}
+
 void solve()
 {
-    int n, i, g = 0, max_element = 0, count = 0, x, y = 1e15, z, temp;
+    int n, i, j, g = 0, max_element = 0, x, y = 1e15, z;
+    int l, r, cost;
 
     cin >> n;
 
-    vector <int> v(n);
+    vector <int> v(n), pref(n + 1, 0), indices;
 
     for (auto &it : v) {
         cin >> it;
@@ -25,20 +31,39 @@ void solve()
         return;
     }
 
-    for (i = 2; i <= max_element; i++) {
-        g = i;
-        temp = 0;
+    sort(v.begin(), v.end());
 
-        for (auto it : v) {
-            if (it % g != 0) {
-                x = it + g - (it % g);
+    indices.resize(2 * max_element + 1, -1);
 
-                temp += abs(it + x) * abs(it - x);
-            }
+    for (i = 0; i < n; i++) {
+        indices[v[i]] = i + 1;
+    }
+
+    for (i = 1; i <= 2 * max_element; i++) {
+        if (indices[i] == -1) {
+            indices[i] = max(0, indices[i - 1]);
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        pref[i + 1] = pref[i] + v[i] * v[i];
+    }
+
+    for (g = 2; g <= max_element; g++) {
+        cost = 0;
+
+        l = 0;
+
+        for (j = 1; j * g <= max_element + g; j++) {
+            r = indices[j * g];
+            
+            cost += (r - l) * j * g * j * g - (pref[r] - pref[l]);
+            
+            l = r;
         }
 
-        if (temp <= y) {
-            y = temp;
+        if (cost <= y) {
+            y = cost;
             z = g;
         }
     }
