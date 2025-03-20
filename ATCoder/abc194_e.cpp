@@ -27,17 +27,23 @@ int get_mex(ordered_set &s)
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+
+    clock_t start, end; // To store clock ticks, clock tick is the smallest unit of time that can be measured by the clock
+    start = clock(); // Start the clock
     
     int n, k, i, min_mex = int(1e9);
     ordered_set s;
 
-    cin >> n >> k;
+    // cin >> n >> k;
+    n = 7;
+    k = 3;
 
-    vector <int> v(n);
+    // vector <int> v(n);
+    vector <int> v = {0, 0, 1, 2, 0, 1, 0};
 
-    for (auto &it : v) {
-        cin >> it;
-    }
+    // for (auto &it : v) {
+    //     cin >> it;
+    // }
 
     for (i = 0; i < k; i++) {
         s.insert({v[i], i});
@@ -53,6 +59,10 @@ int main() {
     min_mex = min(min_mex, get_mex(s));
 
     cout << min_mex << "\n";
+
+    end = clock(); // End the clock
+  double time_taken = (double)(end - start) / CLOCKS_PER_SEC; // Calculate the time taken, CLOCKS_PER_SEC is the number of clock ticks per second
+  cout << "Time taken by program is : " << fixed << setprecision(5) << time_taken << " sec" << endl;
 
     return 0;
 }
