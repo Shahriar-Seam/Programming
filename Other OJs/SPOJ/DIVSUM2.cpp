@@ -91,21 +91,18 @@ vector <ull> factor(ull n) {
     return l;
 }
 
-void solve()
+ull sum_of_divisors(ull n)
 {
-    long long n;
-    long long sum = 1, temp;
+    ull sum = 1, temp;
 
-    cin >> n;
-
-    vector <ull> factors = factor(n);
-    map <ull, ull> facts;
-
-    for (auto it : factors) {
-        facts[it]++;
-    }
+    vector <ull> facts = factor(n);
+    map <ull, ull> factors;
 
     for (auto it : facts) {
+        factors[it]++;
+    }
+
+    for (auto it : factors) {
         temp = 1;
 
         while (it.second > 0) {
@@ -119,19 +116,30 @@ void solve()
 
     sum -= n;
 
-    cout << sum << "\n";
+    return sum;
 }
 
-int main()
+void solve()
+{
+    ull n;
+
+    cin >> n;
+
+    cout << sum_of_divisors(n) << "\n";
+}
+
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int t;
+    int32_t t, i;
 
     cin >> t;
 
-    while (t--) {
+    for (i = 1; i <= t; i++) {
+        // cout << "Case " << i << ": ";
+
         solve();
     }
 
