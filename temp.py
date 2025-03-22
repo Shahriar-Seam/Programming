@@ -1,7 +1,12 @@
-t = int(input())
+from itertools import permutations
 
-for n in range(1, t + 1):
-    a = [i for i in range(1, n + 1) if (i % 3 == 0) or (i % 5 == 0) or (i % 7 == 0)]
+s, d = input().split()
 
-    if len(a) == (n // 3 + n // 5 + n // 7 - n // 15 - n // 35 - n // 21 + n // 105):
-        print(n, a, len(a))
+d = int(d)
+
+for i in permutations(s, d):
+    t = ''.join(i)
+    
+    if t[0] != '0':
+        print(t)
+        

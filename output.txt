@@ -1,4 +1,8 @@
-5
-0
-1
-50000000
+NO
+YES
+NO
+YES
+YES
+NO
+YES
+NO
