@@ -2,45 +2,64 @@
 
 using namespace std;
 
-void to_bin(int n)
+#define int long long
+
+int bleh(int a, int b)
 {
-    stringstream ss;
+    int i;
 
-    ss << bitset<32>(n);
+    for (i = 32; i >= 0; i--) {
+        if ((a & (1LL << i)) && !(b & (1LL << i))) {
+            return 1LL << i;
+        }
+    }
 
-    cout << ss.str() << "\n";
+    return 0;
+}
+
+int bleh2(int k, int count)
+{
+    return 1LL << (31 - __popcount(k) - count);
 }
 
 void solve()
 {
-    int n, i, x;
+    int n, k = 0, i, temp;
+    set <int> count;
 
     cin >> n;
 
-    vector <int> v(n), temp;
+    vector <int> v(n);
 
     for (auto &it : v) {
         cin >> it;
     }
 
-    for (x = 0; x < 20; x++) {
-        temp = v;
-
-        for (i = 0; i < n; i++) {
-            temp[i] ^= x;
+    for (i = 1; i < n; i++) {
+        if (v[i] < v[i - 1]) {
+            k |= bleh(v[i - 1], v[i]);
         }
+    }
 
-        if (is_sorted(temp.begin(), temp.end())) {
-            // to_bin(x);
+    for (i = 1; i < n; i++) {
+        if (v[i] > v[i - 1]) {
+            temp = bleh(v[i], v[i - 1]);
 
-            cout << x << ": ";
-
-            for (i = 0; i < n; i++) {
-                cout << temp[i] << " ";
+            if (!(temp & k)) {
+                count.insert(temp);
             }
-
-            cout << "\n";
         }
+    }
+
+    for (i = 0; i < n; i++) {
+        v[i] ^= k;
+    }
+
+    if (is_sorted(v.begin(), v.end())) {
+        cout << k << " " << bleh2(k, count.size()) << "\n";
+    }
+    else {
+        cout << "-1\n";
     }
 }
 
@@ -54,7 +73,7 @@ int32_t main()
     cin >> t;
 
     for (i = 1; i <= t; i++) {
-        cout << "Case " << i << ":\n";
+        // cout << "Case " << i << ": ";
 
         solve();
     }

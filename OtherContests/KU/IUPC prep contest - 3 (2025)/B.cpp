@@ -2,30 +2,66 @@
 
 using namespace std;
 
+#define int long long
+
+const int mod = 1e9 + 7;
+
+int AND(vector <int> &counter, int x)
+{
+    int sum = 0, i;
+
+    for (i = 0; i < counter.size(); i++) {
+        if (counter[i] > 0) {
+            sum = (sum + (counter[i] * ((x & (1LL << i)) % mod)) % mod) % mod;
+        }
+    }
+
+    return sum;
+}
+
+int OR(vector <int> &counter, int x, int n)
+{
+    int sum = 0, i;
+
+    for (i = 0; i < counter.size(); i++) {
+        if (counter[i] > 0) {
+            if (x & (1LL << i)) {
+                sum = (sum + (n * ((1LL << i) % mod)) % mod) % mod;
+            }
+            else {
+                sum = (sum + ((counter[i] * ((1LL << i) % mod)) % mod)) % mod;
+            }
+        }
+    }
+
+    return sum;
+}
+
 void solve()
 {
     int n, i, j, k, sum = 0;
 
     cin >> n;
 
-    vector <int> v(n);
+    vector <int> v(n), counter(62, 0);
 
     for (auto &it : v) {
         cin >> it;
     }
 
-    for (i = 0; i < n; i++) {
+    for (i = 60; i >= 0; i--) {
         for (j = 0; j < n; j++) {
-            for (k = 0; k < n; k++) {
-                cout << i << " " << j << " " << k << " ";
-                cout << (v[i] & v[j]) * (v[j] | v[k]) << "\n";
-
-                sum += (v[i] & v[j]) * (v[j] | v[k]);
+            if ((1LL << i) & v[j]) {
+                counter[i]++;
             }
         }
     }
 
-    cout << "Sum = " << sum << "\n";
+    for (i = 0; i < n; i++) {
+        sum = (sum + (AND(counter, v[i]) * OR(counter, v[i], n)) % mod) % mod;
+    }
+
+    cout << sum << "\n";
 }
 
 int32_t main()

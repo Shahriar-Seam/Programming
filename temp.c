@@ -2,21 +2,22 @@
 
 int main()
 {
-    long long n, sum = 0, i;
+    long long n;
 
     scanf("%lld", &n);
 
-    long long arr[n];
+    printf("%lld ", n);
 
-    for (i = 0; i < n; i++) {
-        scanf("%lld", &arr[i]);
+    while (n != 1) {
+        if (n % 2 == 1) {
+            n = 3 * n + 1;
+        }
+        else {
+            n /= 2;
+        }
+
+        printf("%lld ", n);
     }
-
-    for (i = 0; i < n; i++) {
-        sum += arr[i];
-    }
-
-    printf("%lld\n", sum < 0 ? -sum : sum);
 
     return 0;
 }

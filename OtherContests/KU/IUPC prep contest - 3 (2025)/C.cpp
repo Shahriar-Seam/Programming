@@ -1,32 +1,48 @@
-#include <stdio.h>
+#include <bits/stdc++.h>
 
-int bin_exp(int b, int p, int m)
+using namespace std;
+
+const int mod = 1e9 + 7;
+
+int binary_exponentiation(int b, int p)
 {
     int result = 1;
 
     while (p > 0) {
         if (p & 1) {
-            result = (1LL * result * b) % m;
+            result = (1LL * result * b) % mod;
         }
 
-        b = (1LL * b * b) % m;
+        b = (1LL * b * b) % mod;
 
         p >>= 1;
     }
 
-    return result % m;
+    return result % mod;
 }
 
-int main()
+void solve()
 {
-    int n, a, b;
+    int a, b;
 
-    scanf("%d", &n);
+    cin >> a >> b;
 
-    while (n--) {
-        scanf("%d %d", &a, &b);
+    cout << binary_exponentiation(a, b) << "\n";
+}
 
-        printf("%d\n", bin_exp(a, b, (int) 1e9 + 7));
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int32_t t, i;
+
+    cin >> t;
+
+    for (i = 1; i <= t; i++) {
+        // cout << "Case " << i << ": ";
+
+        solve();
     }
 
     return 0;
