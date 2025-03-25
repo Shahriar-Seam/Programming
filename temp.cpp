@@ -1,67 +1,40 @@
 #include <bits/stdc++.h>
-using namespace  std;
- 
-#define ll long long
 
+using namespace std;
 
-void solve() {
-    int m, n; cin >> m >> n;
-    char arr[m][n];
-
-    bool pre_possible = true;
-
-    for(int i = 0; i < m; i++) {
-        for(int j = 0 ; j < n ; j++) {
-            cin >> arr[i][j];
-        }
-    }
-
-    int mat[m][n];
-
-    for(int i = 0; i < m; i++) {
-        for(int j = 0; j < n; j++) {
-            mat[i][j] = arr[i][j] - '0';
-        }
-    }
-
-    bool possible = true;
-
-    for(int i = 0  ; i < m; i++) {
-        for(int j = 0; j < n; j++) {
-          
-            if(mat[i][j] == 1) {
-                //cout << "yo\n";
-            //    cout << i << ' ' << j << '\n';
-                int val1 = 1, val2 = 1;
-                for(int p = 0; p <= i; p++) {
-                    val1 *= mat[p][j];
-                }
-                //cout << val1 << '\n';
-                for(int p = 0; p <= j; p++) {
-                    val2 *= mat[i][p];
-                }
-
-             //   cout << val2 << '\n';
-
-                if(val1+val2 == 0) possible = false;
-
-            }
-         }
-   
-    }
-
-    if(possible) cout << "YES";
-    else cout << "NO";
-
-}
-int main(){
+int32_t main()
+{
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);  
- 
-    int t; cin >> t;
+    cin.tie(NULL);
 
-    while(t--) {
-        solve();
-        cout << '\n';
+    clock_t start, end;
+
+    start = clock();
+
+    freopen("bleh.txt", "w", stdout);
+
+    int n, i, j, x;
+
+    cin >> n;
+
+    vector <int> v(n + 1);
+
+    for (i = 1; i <= n; i++) {
+        x = 0;
+
+        for (j = 1; j <= i; j++) {
+            x ^= i % j;
+        }
+
+        v[i] = x;
     }
+
+    for (i = 1; i <= n; i++) {
+        cout << v[i] << ", ";
+    }
+
+    end = clock();
+    cerr << "Time taken: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds" << endl;
+
+    return 0;
 }

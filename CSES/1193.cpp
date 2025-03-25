@@ -2,41 +2,124 @@
 
 using namespace std;
 
-#define valid(i, j, n, m) (i >= 0 && i < n && j >= 0 && j < m)
+#define valid(i, j, n, m, labyrinth, visited) (i >= 0 && i < n && j >= 0 && j < m && (labyrinth[i][j] != '#') && (!visited[i][j]))
 
-// * todo: use bfs
+typedef struct node {
+    int r, c;
 
-void dfs(vector <string> &v, vector <vector <bool> > &visited, int i, int j, int n, int m, string &s, string &path)
-{
-    if (!valid(i, j, n, m) || v[i][j] == '#') {
-        return;
+    node() {
+        this->r = -1;
+        this->c = -1;
     }
 
-    visited[i][j] = true;
+    node (int r, int c) {
+        this->r = r;
+        this->c = c;
+    }
 
-    if (v[i][j] == 'B') {
-        if (path.size() > s.size()) {
-            path = s;
+} node;
+
+string bfs(int n, int m, node root, vector <string> &labyrinth)
+{
+    node u, v;
+    int i, j;
+    queue <node> q;
+    vector <vector <bool > > visited(n, vector <bool> (m, false));
+    vector <vector <char> > moved(n, vector <char> (m));
+
+    q.push(root);
+    visited[root.r][root.c] = true;
+
+    while (!q.empty()) {
+        u = q.front();
+        q.pop();
+
+        i = u.r, j = u.c;
+
+        if (labyrinth[i][j] != '#') {
+            if (valid(i + 1, j, n, m, labyrinth, visited)) {
+                visited[i + 1][j] = true;
+
+                moved[i + 1][j] = 'D';
+
+                if (labyrinth[i + 1][j] == 'B') {
+                    i++;
+
+                    break;
+                }
+
+                q.push({i + 1, j});
+            }
+            if (valid(i - 1, j, n, m, labyrinth, visited)) {
+                visited[i - 1][j] = true;
+
+                moved[i - 1][j] = 'U';
+
+                if (labyrinth[i - 1][j] == 'B') {
+                    i--;
+
+                    break;
+                }
+
+                q.push({i - 1, j});
+            }
+            if (valid(i, j + 1, n, m, labyrinth, visited)) {
+                visited[i][j + 1] = true;
+
+                moved[i][j + 1] = 'R';
+
+                if (labyrinth[i][j + 1] == 'B') {
+                    j++;
+
+                    break;
+                }
+
+                q.push({i, j + 1});
+            }
+            if (valid(i, j - 1, n, m, labyrinth, visited)) {
+                visited[i][j - 1] = true;
+
+                moved[i][j - 1] = 'L';
+
+                if (labyrinth[i][j - 1] == 'B') {
+                    j--;
+
+                    break;
+                }
+
+                q.push({i, j - 1});
+            }
+        }
+    }
+
+    if ((i >= 0 && i < n && j >= 0 && j < m) && labyrinth[i][j] == 'B') {
+        string s;
+
+        while (labyrinth[i][j] != 'A') {
+            s += moved[i][j];
+
+            if (moved[i][j] == 'U') {
+                i++;
+            }
+            else if (moved[i][j] == 'D') {
+                i--;
+            }
+            else if (moved[i][j] == 'L') {
+                j++;
+            }
+            else if (moved[i][j] == 'R') {
+                j--;
+            }
         }
 
-        return;
+        reverse(s.begin(), s.end());
+
+        return s;
+    }
+    else {
+        return "";
     }
 
-    s += 'D';
-    dfs(v, visited, i + 1, j, n, m, s, path);
-    s.pop_back();
-
-    s += 'U';
-    dfs(v, visited, i - 1, j, n, m, s, path);
-    s.pop_back();
-
-    s += 'R';
-    dfs(v, visited, i, j + 1, n, m, s, path);
-    s.pop_back();
-
-    s += 'L';
-    dfs(v, visited, i, j - 1, n, m, s, path);
-    s.pop_back();
 }
 
 int32_t main()
@@ -48,23 +131,27 @@ int32_t main()
 
     cin >> n >> m;
 
-    vector <string> v(n);
-    vector <vector <bool> > visited(n, vector <bool > (m, false));
-    string s = "", path(1000009, 'S');
+    vector <string> labyrinth(n);
+    string path;
+    node root;
 
-    for (auto &it : v) {
+    for (auto &it : labyrinth) {
         cin >> it;
     }
 
     for (i = 0; i < n; i++) {
         for (j = 0; j < m; j++) {
-            if (v[i][j] == 'A') {
-                dfs(v, visited, i, j, n, m, s, path);
+            if (labyrinth[i][j] == 'A') {
+                root = {i, j};
+
+                break;
             }
         }
     }
 
-    if (path.size() != 1000009) {
+    path = bfs(n, m, root, labyrinth);
+
+    if (path.size() > 0) {
         cout << "YES" << "\n";
         cout << path.size() << "\n";
         cout << path << "\n";
