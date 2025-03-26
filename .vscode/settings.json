@@ -112,7 +112,8 @@
     "winuser.h": "c",
     "limits.h": "c",
     "rope": "cpp",
-    "slist": "cpp"
+    "slist": "cpp",
+    "ctype.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\gcc.exe"

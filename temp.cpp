@@ -1,40 +1,70 @@
 #include <bits/stdc++.h>
+using namespace  std;
+ 
+#define ll long long
 
-using namespace std;
 
-int32_t main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+void solve() {
+    int n(500); //cin >> n;
+    char c('r'); //cin >> c;
 
-    clock_t start, end;
+    string s; //cin >> s;
 
-    start = clock();
-
-    freopen("bleh.txt", "w", stdout);
-
-    int n, i, j, x;
-
-    cin >> n;
-
-    vector <int> v(n + 1);
-
-    for (i = 1; i <= n; i++) {
-        x = 0;
-
-        for (j = 1; j <= i; j++) {
-            x ^= i % j;
+    for (int i = 0; i < n; i++) {
+        if (i % 2 == 0) {
+            s += 'y';
         }
-
-        v[i] = x;
+        else {
+            s += 'r';
+        }
     }
 
-    for (i = 1; i <= n; i++) {
-        cout << v[i] << ", ";
+    s[499] = 'g';
+
+    s = s + s;  
+
+    int i = 0, j = 0;
+    int max_dis = INT_MIN;
+
+    if(n == 1) {
+        cout << 0;
+        return;
+    }
+    int cnt = 0;
+    while(i < n and j < 2 * n) {
+        if(s[i] != c) {
+            i++;
+            j = i;
+            cnt++;
+        }
+        else{
+            if(s[j] != 'g') {
+                j++;
+                cnt++;
+            }
+            else{
+                max_dis = max(max_dis, j-i);
+                i++;
+                cnt++;
+            }
+        }
     }
 
-    end = clock();
-    cerr << "Time taken: " << (double)(end - start) / CLOCKS_PER_SEC << " seconds" << endl;
+    cout << max_dis << '\n';
+    cout << cnt ;
 
-    return 0;
+    //cout << s.size();
+}
+
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);  
+ 
+    int t; cin >> t;
+
+    while(t--) {
+        solve();
+        cout << '\n';
+    }
 }
