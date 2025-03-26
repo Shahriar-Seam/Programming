@@ -1,0 +1,25 @@
+main =>
+    S = read_line(),
+    T = read_line(),
+    LenS = length(S) + 1,
+    LenT = length(T) + 1,
+    DP = new_array(LenS, LenT),
+    foreach(I in 1..LenS, J in 1..LenT)
+        DP[I, J] = 0
+    end,
+    foreach(I in 2..LenS)
+        DP[I, 1] := DP[I - 1, 1] + ord(S[I - 1]) - 96
+    end,    
+    foreach(J in 2..LenT)
+        DP[1, J] := DP[1, J - 1] + ord(T[J - 1]) - 96
+    end,
+    foreach(I in 2..LenS, J in 2..LenT)
+        if (S[I - 1] = T[J - 1]) then
+            DP[I, J] := DP[I - 1, J - 1]
+        else
+            DP[I, J] := DP[I - 1, J - 1] + abs(ord(S[I - 1]) - ord(T[J - 1])),
+            DP[I, J] := min(DP[I, J], DP[I - 1, J] + ord(S[I - 1]) - 96),
+            DP[I, J] := min(DP[I, J], DP[I, J - 1] + ord(T[J - 1]) - 96)
+        end
+    end,
+    write(DP[LenS, LenT]).
