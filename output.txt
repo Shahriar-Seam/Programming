@@ -1,1 +1,5 @@
-WA
+NO
+YES
+YES
+NO
+YES
