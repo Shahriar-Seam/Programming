@@ -18,7 +18,7 @@ void get_divisors()
 
 void solve()
 {
-    int n, count = 1, i, g;
+    int n, count = 0, i, g;
 
     cin >> n;
 
@@ -29,18 +29,13 @@ void solve()
     }
 
     for (auto &k : divisors[n]) {
-        set <int> s;
         g = 0;
 
         for (i = 0; i + k < n; i++) {
-            s.insert(abs(v[i] - v[i + k]));
+            g = gcd(g, abs(v[i] - v[i + k]));
         }
 
-        for (auto it : s) {
-            g = gcd(g, it);
-        }
-
-        count += ((g > 1) || (g == 0 && !s.empty()));
+        count += ((g > 1) || (g == 0));
     }
 
     cout << count << "\n";
