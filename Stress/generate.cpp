@@ -32,33 +32,40 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    freopen("C:/Users/Anonymous_HF/Desktop/Programming/input.txt", "w", stdout);
+    // freopen("C:/Users/Anonymous_HF/Desktop/Programming/input.txt", "w", stdout);
 
     // sieve();
 
     srand(time(0));
 
-    int t = 100;
+    int t = 10;
 
     cout << t << "\n";
 
     for (int i = 0; i < t; i++) {
-        int n = rand() % int(2e5) + 1;
-        int s = rand() % 5000000 + 2, m = rand() % 1000000 + 2;
+        int n = rand() % 10 + 1;
+        int q = rand() % 10 + 1;
         // int x = primes[rand() % 500 + 2];
 
-        cout << n << " " << s << " " << m << "\n";
+        cout << n << " " << q << "\n";
 
         // cout << (long long) (1LL * rand() * 213456) % (long long) 1e15;
         // cout << n << "\n";
+        
+        string s;
 
         for (int j = 0; j < n; j++) {
-            int l, r;
-            l = rand() % (m + 1);
-            r = rand() % (m + 1);
+            s += 'a' + rand() % 26;
+        }
+
+        cout << s << "\n";
+
+        while (q--) {
+            int l = rand() % (n - 2) + 1, r = rand() % n + 1;
+
             cout << min(l, r) << " " << max(l, r) << "\n";
         }
-        
+
         cout << "\n";
     }
 
