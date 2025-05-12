@@ -43,27 +43,16 @@ int main()
     cout << t << "\n";
 
     for (int i = 0; i < t; i++) {
-        int n = rand() % 10 + 1;
-        int q = rand() % 10 + 1;
+        int n = rand() % 100 + 1;
+        // int q = rand() % 10 + 1;
         // int x = primes[rand() % 500 + 2];
 
-        cout << n << " " << q << "\n";
+        cout << n << "\n";
 
         // cout << (long long) (1LL * rand() * 213456) % (long long) 1e15;
         // cout << n << "\n";
-        
-        string s;
-
-        for (int j = 0; j < n; j++) {
-            s += 'a' + rand() % 26;
-        }
-
-        cout << s << "\n";
-
-        while (q--) {
-            int l = rand() % (n - 2) + 1, r = rand() % n + 1;
-
-            cout << min(l, r) << " " << max(l, r) << "\n";
+        while (n--) {
+            cout << rand() % 10 << " ";
         }
 
         cout << "\n";

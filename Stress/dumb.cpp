@@ -2,60 +2,12 @@
 
 using namespace std;
 
-int count(string s)
+int max(int a, int b)
 {
-    vector <int> counter(26, 0);
-
-    for (auto c : s) {
-        counter[c - 'a']++;
-    }
-
-    for (auto it : counter) {
-        if (it > (s.size() / 2)) {
-            return 1;
-        }
-    }
-
-    return 0;
+    return a > b ? a : b;
 }
 
-int substrings(string s)
-{
-    int n = s.size(), i, j;
-
-    for (i = 0; i < n; i++) {
-        for (j = 3; i + j < n; j++) {
-            if (count(s.substr(i, j))) {
-                return 1;
-            }
-        }
-    }
-
-    return 0;
-}
-
-void solve()
-{
-    int n, q;
-    string s;
-
-    cin >> n >> q >> s;
-
-    while (q--) {
-        int l, r;
-
-        cin >> l >> r;
-
-        if (substrings(s.substr(l - 1, r - l + 1))) {
-            cout << "YES\n";
-        }
-        else {
-            cout << "NO\n";
-        }
-    }
-}
-
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -65,8 +17,33 @@ int main()
     cin >> t;
 
     while (t--) {
-        solve();
+
+    int n, i, j, len = 1;
+
+    cin >> n;
+
+    vector <int> v(n);
+
+    for (auto &it : v) {
+        cin >> it;
     }
+
+    for (i = 0; i < n; i++) {
+        set <int> s;
+
+        for (j = i; j < n; j++) {
+            s.insert(v[j]);
+
+            len = max(len, s.size());
+
+            if (s.size() < j - i + 1) {
+                break;
+            }
+        }
+    }
+
+    cout << len << "\n";
+}
 
     return 0;
 }
