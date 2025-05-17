@@ -1,8 +1,10 @@
-2
-4
-4
-3
-6
-8
-6
-10
+mul 9
+digit
+digit
+add 91
+!
+mul 9
+digit
+digit
+add -8
+!

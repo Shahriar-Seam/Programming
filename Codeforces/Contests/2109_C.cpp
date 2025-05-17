@@ -8,32 +8,35 @@ void solve()
 
     cin >> n;
 
-    cout << "digit" << "\n";
+    cout << "mul 9\n";
 
     cout.flush();
 
     cin >> res;
 
-    cout << "digit" << "\n";
+    cout << "digit\n";
 
     cout.flush();
 
     cin >> res;
 
-    cout << "digit" << "\n";
+    cout << "digit\n";
 
     cout.flush();
 
     cin >> res;
 
-    cout << "add -5" << "\n";
+    cout << "add " << n - 9 << "\n";
 
     cout.flush();
 
     cin >> res;
 
-    // x -> 1 - 5
-    
+    cout << "!\n";
+
+    cout.flush();
+
+    cin >> res;
 }
 
 int32_t main()
