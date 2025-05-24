@@ -1,10 +1,4 @@
-mul 9
-digit
-digit
-add 91
-!
-mul 9
-digit
-digit
-add -8
-!
+1
+4
+-1
+10
