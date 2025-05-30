@@ -1,2 +1,1 @@
-1.32118e+11
-LEFT
+Never Intersect
