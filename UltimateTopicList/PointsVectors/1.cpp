@@ -42,6 +42,11 @@ double abs(pt p) {
     return sqrt(sq(p));
 }
 
+// Stream input for points
+istream& operator >> (istream& is, pt &p) {
+    return is >> p.x >> p.y;
+}
+
 // Stream output for points
 ostream& operator << (ostream& os, pt p) {
     return os << "(" << p.x << ", " << p.y << ")";
@@ -166,15 +171,40 @@ void polar_sort(vector <pt> &p) {
     });
 }
 
+void solve()
+{
+    pt x, y, z;
+    T o;
+
+    cin >> x >> y >> z;
+
+    o = orient(x, y, z);
+
+    if (o > 0) {
+        cout << "LEFT\n";
+    }
+    else if (o < 0) {
+        cout << "RIGHT\n";
+    }
+    else {
+        cout << "TOUCH\n";
+    }
+}
+
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    pt a{3, 4}, b{2, -1};
+    int32_t t, i;
 
-    cout << a + b << " " << a - b << "\n";
-    cout << a * - 1 << " " << b / 2 << "\n";
+    cin >> t;
+
+    for (i = 1; i <= t; i++) {
+        // cout << "Case " << i << ": ";
+
+        solve();
+    }
 
     return 0;
 }
