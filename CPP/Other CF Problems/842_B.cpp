@@ -176,30 +176,24 @@ int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    cout << fixed << setprecision(10);
 
-    int n;
-    pt a{2e9, 0}, b{-2e9, 0}, c{0, 2e9}, d{0, -2e9}, temp;
-    // a = min_x, b = max_x
-    // c = min_y, d = max_y
-    
-    cin >> n;
-    
-    while (n--) {
-        cin >> temp;
-        
-        a = pt{min(a.x, temp.x), 0};
-        b = pt{max(b.x, temp.x), 0};
-        c = pt{0, min(c.y, temp.y)};
-        d = pt{0, max(d.y, temp.y)};
+    int r, d, n, count = 0;
+
+    cin >> r >> d >> n;
+
+    vector <pair <pt, int> > v(n);
+
+    for (auto &it : v) {
+        cin >> it.first >> it.second;
     }
-    
-    cout << (max({
-        abs(a - b), abs(a - c), abs(a - d),
-        abs(b - c), abs(b - d),
-        abs(c - d)
-    })) << "\n";
+
+    for (auto &it : v) {
+        if ((abs(it.first) + it.second <= r) && (abs(it.first) - it.second >= r - d)) {
+            count++;
+        }
+    }
+
+    cout << count << "\n";
 
     return 0;
 }

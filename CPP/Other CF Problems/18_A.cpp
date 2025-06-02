@@ -172,34 +172,42 @@ void polar_sort(vector <pt> &p) {
     });
 }
 
+bool not_equal(pt x, pt y, pt z)
+{
+    return x != y && x != z && y != z;
+}
+
+bool is_right(pt x, pt y, pt z)
+{    
+    return not_equal(x, y, z) && (!dot(y - x, z - y) || !dot(y - x, x - z) || !dot(z - y, x - z));
+}
+
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    cout << fixed << setprecision(10);
 
-    int n;
-    pt a{2e9, 0}, b{-2e9, 0}, c{0, 2e9}, d{0, -2e9}, temp;
-    // a = min_x, b = max_x
-    // c = min_y, d = max_y
-    
-    cin >> n;
-    
-    while (n--) {
-        cin >> temp;
-        
-        a = pt{min(a.x, temp.x), 0};
-        b = pt{max(b.x, temp.x), 0};
-        c = pt{0, min(c.y, temp.y)};
-        d = pt{0, max(d.y, temp.y)};
+    pt x, y, z;
+    pt p{1, 0}, q{0, 1};
+    int i, j, k, f = 0;
+
+    cin >> x >> y >> z;
+
+    if (is_right(x, y, z)) {
+        cout << "RIGHT\n";
     }
-    
-    cout << (max({
-        abs(a - b), abs(a - c), abs(a - d),
-        abs(b - c), abs(b - d),
-        abs(c - d)
-    })) << "\n";
+    else {
+        f = (
+            is_right(x, y, z + p) | is_right(x, y, z + q) |
+            is_right(x, y, z - p) | is_right(x, y, z - q) |
+            is_right(x, y + p, z) | is_right(x, y + q, z) |
+            is_right(x, y - p, z) | is_right(x, y - q, z) |
+            is_right(x + p, y, z) | is_right(x + q, y, z) |
+            is_right(x - p, y, z) | is_right(x - q, y, z)
+        );
+
+        cout << (f ? "ALMOST" : "NEITHER") << "\n";
+    }
 
     return 0;
 }

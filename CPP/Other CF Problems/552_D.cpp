@@ -2,8 +2,87 @@
 
 using namespace std;
 
+#define int long long
 typedef double T;
 const double PI = acos(-1);
+
+struct custom_hash {
+    static uint64_t splitmix64(uint64_t x) {
+        x += 0x9e3779b97f4a7c15;
+        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+        return x ^ (x >> 31);
+    }
+
+    template <typename T>
+    size_t operator()(const T& x) const {
+        return hash_combine(x);
+    }
+
+private:
+    static const uint64_t FIXED_RANDOM;
+
+    // Arithmetic types (int, long long, etc.)
+    template <typename T>
+    static typename enable_if<is_integral<T>::value, size_t>::type
+    hash_combine(const T& x) {
+        return splitmix64(x + FIXED_RANDOM);
+    }
+
+    // string specialization
+    static size_t hash_combine(const string& s) {
+        size_t h = 0;
+        for (char c : s) {
+            h = h * 31 + c;
+        }
+        return splitmix64(h + FIXED_RANDOM);
+    }
+
+    // pair
+    template <typename T1, typename T2>
+    static size_t hash_combine(const pair<T1, T2>& p) {
+        size_t h1 = custom_hash{}(p.first);
+        size_t h2 = custom_hash{}(p.second);
+        return h1 ^ (h2 << 1);
+    }
+
+    // tuple
+    template <typename Tuple, size_t Index = 0>
+    static typename enable_if<Index == tuple_size<Tuple>::value, size_t>::type
+    hash_tuple(const Tuple&) {
+        return 0;
+    }
+
+    template <typename Tuple, size_t Index = 0>
+    static typename enable_if<Index < tuple_size<Tuple>::value, size_t>::type
+    hash_tuple(const Tuple& t) {
+        size_t h1 = custom_hash{}(get<Index>(t));
+        size_t h2 = hash_tuple<Tuple, Index + 1>(t);
+        return h1 ^ (h2 << 1);
+    }
+
+    template <typename... Ts>
+    static size_t hash_combine(const tuple<Ts...>& t) {
+        return hash_tuple(t);
+    }
+
+    // Iterable containers (e.g., vector, set, unordered_set)
+    template <typename T>
+    static typename enable_if<!is_integral<T>::value &&
+                              !is_same<T, string>::value &&
+                              !is_same<T, tuple<typename T::value_type>>::value &&
+                              !is_same<T, pair<typename T::first_type, typename T::second_type>>::value,
+                              size_t>::type
+    hash_combine(const T& container) {
+        size_t h = 0;
+        for (const auto& x : container) {
+            h ^= custom_hash{}(x) + 0x9e3779b9 + (h << 6) + (h >> 2);
+        }
+        return h;
+    }
+};
+
+const uint64_t custom_hash::FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
 
 struct pt {
     T x, y;
@@ -176,30 +255,45 @@ int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    cout << fixed << setprecision(10);
 
-    int n;
-    pt a{2e9, 0}, b{-2e9, 0}, c{0, 2e9}, d{0, -2e9}, temp;
-    // a = min_x, b = max_x
-    // c = min_y, d = max_y
-    
+    int n, i, j, x, y, g, count = 0;
+
     cin >> n;
-    
-    while (n--) {
-        cin >> temp;
-        
-        a = pt{min(a.x, temp.x), 0};
-        b = pt{max(b.x, temp.x), 0};
-        c = pt{0, min(c.y, temp.y)};
-        d = pt{0, max(d.y, temp.y)};
+
+    vector <pt> p(n);
+
+    for (auto &it : p) {
+        cin >> it;
     }
-    
-    cout << (max({
-        abs(a - b), abs(a - c), abs(a - d),
-        abs(b - c), abs(b - d),
-        abs(c - d)
-    })) << "\n";
+
+    count = (n * (n - 1) * (n - 2)) / 6;
+
+    for (i = 0; i < n; i++) {
+        unordered_map <pair <int, int>, int, custom_hash> mp;
+
+        for (j = i + 1; j < n; j++) {
+            x = p[i].x - p[j].x;
+            y = p[i].y - p[j].y;
+
+            g = gcd(x, y);
+
+            x /= g;
+            y /= g;
+
+            if (y < 0 || (y == 0 && x < 0)) {
+                x = -x;
+                y = -y;
+            }
+
+            mp[{x, y}]++;
+        }
+
+        for (auto &it : mp) {
+            count -= (it.second * (it.second - 1)) / 2;
+        }
+    }
+
+    cout << count << "\n";
 
     return 0;
 }

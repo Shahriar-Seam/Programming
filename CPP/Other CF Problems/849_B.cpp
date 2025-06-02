@@ -2,6 +2,7 @@
 
 using namespace std;
 
+#define int long long
 typedef double T;
 const double PI = acos(-1);
 
@@ -172,34 +173,102 @@ void polar_sort(vector <pt> &p) {
     });
 }
 
+vector <pt> linear(vector <pt> &v, int i, int j)
+{
+    pt p = v[i];
+    pt q = v[j];
+
+    vector <pt> temp;
+
+    for (auto &it : v) {
+        if ((it.x - p.x) * (p.y - q.y) - (it.y - p.y) * (p.x - q.x) != 0) {
+            temp.push_back(it);
+        }
+    }
+
+    return temp;
+}
+
+double slope(pt p, pt q)
+{
+    return (p.y - q.y) / (p.x - q.x);
+}
+
+bool colinear(vector <pt> &v)
+{
+    int f = 1, i;
+    pt p = v[1] - v[0];
+
+    for (i = 2; i < v.size(); i++) {
+        if (cross(p, v[i] - v[0])) {
+            f = 0;
+        }
+    }
+
+    return f;
+}
+
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    cout << fixed << setprecision(10);
 
-    int n;
-    pt a{2e9, 0}, b{-2e9, 0}, c{0, 2e9}, d{0, -2e9}, temp;
-    // a = min_x, b = max_x
-    // c = min_y, d = max_y
-    
+    int n, i, f = 0;
+    double m1, m2;
+
     cin >> n;
-    
-    while (n--) {
-        cin >> temp;
-        
-        a = pt{min(a.x, temp.x), 0};
-        b = pt{max(b.x, temp.x), 0};
-        c = pt{0, min(c.y, temp.y)};
-        d = pt{0, max(d.y, temp.y)};
+
+    vector <pt> v(n), temp;
+
+    for (i = 1; i <= n; i++) {
+        cin >> v[i - 1].y;
+
+        v[i - 1].x = i;
     }
-    
-    cout << (max({
-        abs(a - b), abs(a - c), abs(a - d),
-        abs(b - c), abs(b - d),
-        abs(c - d)
-    })) << "\n";
+
+    // p1p2
+    temp = linear(v, 0, 1);
+    m1 = slope(v[0], v[1]);
+    if (temp.size() == 1) {
+        f = 1;
+    }
+    else if (temp.size() > 1) {
+        m2 = slope(temp[0], temp[1]);
+
+        if (m1 == m2 && colinear(temp)) {
+            f = 1;
+        }
+    }
+
+    // p2p3
+    temp = linear(v, 1, 2);
+    m1 = slope(v[1], v[2]);
+    if (temp.size() == 1) {
+        f = 1;
+    }
+    else if (temp.size() > 1) {
+        m2 = slope(temp[0], temp[1]);
+
+        if (m1 == m2 && colinear(temp)) {
+            f = 1;
+        }
+    }
+
+    // p3p1
+    temp = linear(v, 2, 0);
+    m1 = slope(v[2], v[0]);
+    if (temp.size() == 1) {
+        f = 1;
+    }
+    else if (temp.size() > 1) {
+        m2 = slope(temp[0], temp[1]);
+
+        if (m1 == m2 && colinear(temp)) {
+            f = 1;
+        }
+    }
+
+    cout << (f ? "YES" : "NO") << "\n";
 
     return 0;
 }

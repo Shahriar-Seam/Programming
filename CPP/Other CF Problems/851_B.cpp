@@ -2,7 +2,7 @@
 
 using namespace std;
 
-typedef double T;
+typedef long long T;
 const double PI = acos(-1);
 
 struct pt {
@@ -176,30 +176,19 @@ int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    cout << fixed << setprecision(10);
 
-    int n;
-    pt a{2e9, 0}, b{-2e9, 0}, c{0, 2e9}, d{0, -2e9}, temp;
-    // a = min_x, b = max_x
-    // c = min_y, d = max_y
-    
-    cin >> n;
-    
-    while (n--) {
-        cin >> temp;
-        
-        a = pt{min(a.x, temp.x), 0};
-        b = pt{max(b.x, temp.x), 0};
-        c = pt{0, min(c.y, temp.y)};
-        d = pt{0, max(d.y, temp.y)};
+    cout << fixed << setprecision(20);
+
+    pt a, b, c;
+
+    cin >> a >> b >> c;
+
+    if (cross(b - a, c - b) && sq(b - a) == sq(c - b)) {
+        cout << "YES\n";
     }
-    
-    cout << (max({
-        abs(a - b), abs(a - c), abs(a - d),
-        abs(b - c), abs(b - d),
-        abs(c - d)
-    })) << "\n";
+    else {
+        cout << "NO\n";
+    }
 
     return 0;
 }
