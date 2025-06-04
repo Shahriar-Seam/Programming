@@ -2,6 +2,8 @@
 
 using namespace std;
 
+#define int long long
+
 typedef long long T;
 const double PI = acos(-1);
 
@@ -24,23 +26,21 @@ struct pt {
         return {x / d, y / d};
     }
 
+    // Returns -1 if in lower half-plane, 0 if on positive x-axis, 1 otherwise
     int pos() const {
-        if (y < 0) {
-            return -1;
-        }
-        if (y == 0 && 0 <= x) {
-            return 0;
-        }
-
+        if (y < 0) return -1;
+        if (y == 0 && x >= 0) return 0;
         return 1;
     }
 
+    /*
+    Use stable_sort to maintain relative order of points
+    with the same polar angle (e.g., collinear points).
+    */
+    // Sort points by polar angle around origin (counter-clockwise)
     bool operator < (pt r) const {
-        if (pos() != r.pos()) {
-            return pos() < r.pos();
-        }
-
-        return 0 < this->x * r.y - this->y * r.x;
+        if (pos() != r.pos()) return pos() < r.pos();
+        return x * r.y - y * r.x > 0; // cross product > 0 ⇒ this comes before r
     }
 };
 
@@ -58,7 +58,7 @@ T sq(pt p) {
 }
 
 // Magnitude (length) of a vector
-double abs(pt p) {
+long double abs(pt p) {
     return sqrt(sq(p));
 }
 
@@ -108,11 +108,11 @@ bool is_perp(pt v, pt w) {
 }
 
 // Angle between two vectors (in radians)
-double angle(pt v, pt w) {
-    double cos_theta = dot(v, w) / abs(v) / abs(w);
+long double angle(pt v, pt w) {
+    long double cos_theta = dot(v, w) / abs(v) / abs(w);
 
     // Clamp cos_theta to [-1, 1] to avoid numeric issues with acos
-    return acos(max(-1.0, min(1.0, cos_theta)));
+    return acos(max(-1.0L, min(1.0L, cos_theta)));
 }
 
 // Cross product (2D vector "pseudo cross product" scalar)
@@ -146,7 +146,7 @@ bool is_in_angle(pt a, pt b, pt c, pt p) {
 }
 
 // Oriented angle at a formed by points b and c (in radians, [0, 2π])
-double oriented_angle(pt a, pt b, pt c) {
+long double oriented_angle(pt a, pt b, pt c) {
     if (orient(a, b, c) >= 0) {
         return angle(b - a, c - a);
     }
@@ -175,12 +175,45 @@ bool is_convex(vector <pt> p) {
     return !(pos && neg);
 }
 
+// return true if angle between a, b is less than angle between c, d
+bool min_angle(pt a, pt b, pt c, pt d)
+{
+    pt p{dot(a, b), abs(cross(a, b))};
+    pt q{dot(c, d), abs(cross(c, d))};
+
+    return cross(p, q) > 0;
+}
+
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    
+    int n, i;
+    int a = 0, b = 1;
+
+    cin >> n;
+
+    vector <pair <pt, int> > v(n);
+
+    for (i = 0; i < n; i++) {
+        cin >> v[i].first;
+
+        v[i].second = i + 1;
+    }
+
+    stable_sort(v.begin(), v.end());
+
+    v.push_back(v[0]);
+
+    for (i = 2; i <= n; i++) {
+        if (min_angle(v[i - 1].first, v[i].first, v[a].first, v[b].first)) {
+            a = i - 1;
+            b = i;
+        }
+    }
+
+    cout << v[a].second << " " << v[b].second << "\n";
 
     return 0;
 }
