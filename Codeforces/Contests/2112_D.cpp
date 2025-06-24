@@ -2,6 +2,27 @@
 
 using namespace std;
 
+#define in 0
+#define out 1
+
+void dfs(int u, int d, vector <vector <int> > &adj_list, vector <bool> &visited)
+{
+    visited[u] = true;
+
+    for (int v : adj_list[u]) {
+        if (!visited[v]) {
+            if (d == in) {
+                cout << v << " " << u << "\n";
+            }
+            else {
+                cout << u << " " << v << "\n";
+            }
+
+            dfs(v, d ^ 1, adj_list, visited);
+        }
+    }
+}
+
 void solve()
 {
     int n, i, u, v;
@@ -9,8 +30,7 @@ void solve()
     cin >> n;
 
     vector <vector <int> > adj_list(n + 1);
-    set <pair <int, int> > edges;
-    vector <int> degree(n + 1, 0), out(n + 1, 0), in(n + 1, 0);
+    vector <bool> visited(n + 1, false);
 
     for (i = 1; i < n; i++) {
         cin >> u >> v;
@@ -20,58 +40,22 @@ void solve()
     }
 
     for (i = 1; i <= n; i++) {
-        degree[i] = adj_list[i].size();
-    }
+        if (adj_list[i].size() == 2) {
+            cout << "YES\n";
 
-    for (i = 1; i <= n; i++) {
-        if (degree[i] == 2) {
-            edges.insert({i, adj_list[i][0]});
-            edges.insert({adj_list[i][1], i});
+            cout << i << " " << adj_list[i][0] << "\n";
+            cout << adj_list[i][1] << " " << i << "\n";
 
-            out[adj_list[i][1]] = 1;
-            out[i] = 1;
+            visited[i] = 1;
 
-            in[i] = 1;
-            in[adj_list[i][0]] = 1;
+            dfs(adj_list[i][0], in, adj_list, visited);
+            dfs(adj_list[i][1], out, adj_list, visited);
 
-            auto node = adj_list[i][0];
-            for (auto it : adj_list[node]) {
-                if (edges.find({node, it}) == edges.end() && edges.find({it, node}) == edges.end()) {
-                    edges.insert({it, node});
-
-                    in[node] = 1;
-                    out[it] = 1;
-                }
-            }
-
-            break;
+            return;
         }
     }
 
-    if (edges.size() == 0) {
-        cout << "NO\n";
-
-        return;
-    }
-
-    for (i = 1; i <= n; i++) {
-        for (auto it : adj_list[i]) {
-            if (edges.find({i, it}) == edges.end() && edges.find({it, i}) == edges.end()) {
-                if (out[it] == 1 && in[it] == 0) {
-                    edges.insert({it, i});
-                }
-                else {
-                    edges.insert({i, it});
-                }
-            }
-        }
-    }
-
-    cout << "YES\n";
-
-    for (auto it : edges) {
-        cout << it.first << " " << it.second << "\n";
-    }
+    cout << "NO\n";
 }
 
 int32_t main()
