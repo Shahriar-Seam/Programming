@@ -1,70 +1,60 @@
 #include <bits/stdc++.h>
-using namespace  std;
- 
-#define ll long long
 
+using namespace std;
 
-void solve() {
-    int n(500); //cin >> n;
-    char c('r'); //cin >> c;
+void solve()
+{
+    int n, count = 0;
+    map <int, int> mp;
+    set <int> s;
 
-    string s; //cin >> s;
+    cin >> n;
 
-    for (int i = 0; i < n; i++) {
-        if (i % 2 == 0) {
-            s += 'y';
-        }
-        else {
-            s += 'r';
-        }
+    vector <int> dq(n);
+
+    for (auto &it : dq) {
+        cin >> it;
+
+        mp[it]++;
     }
 
-    s[499] = 'g';
+    while (!dq.empty()) {
+        auto temp = dq.back();
+        dq.pop_back();
 
-    s = s + s;  
+        s.insert(temp);
+        mp[temp]--;
 
-    int i = 0, j = 0;
-    int max_dis = INT_MIN;
+        if (s.size() == mp.size()) {
+            count++;
 
-    if(n == 1) {
-        cout << 0;
-        return;
-    }
-    int cnt = 0;
-    while(i < n and j < 2 * n) {
-        if(s[i] != c) {
-            i++;
-            j = i;
-            cnt++;
-        }
-        else{
-            if(s[j] != 'g') {
-                j++;
-                cnt++;
+            for (auto &it : s) {
+                if (mp[it] == 0) {
+                    mp.erase(it);
+                }
             }
-            else{
-                max_dis = max(max_dis, j-i);
-                i++;
-                cnt++;
-            }
+
+            s.clear();
         }
     }
 
-    cout << max_dis << '\n';
-    cout << cnt ;
-
-    //cout << s.size();
+    cout << count << "\n";
 }
 
-
-int main(){
+int32_t main()
+{
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);  
- 
-    int t; cin >> t;
+    cin.tie(NULL);
 
-    while(t--) {
+    int32_t t, i;
+
+    cin >> t;
+
+    for (i = 1; i <= t; i++) {
+        // cout << "Case " << i << ": ";
+
         solve();
-        cout << '\n';
     }
+
+    return 0;
 }
