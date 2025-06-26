@@ -52,7 +52,7 @@ int main()
         // cout << (long long) (1LL * rand() * 213456) % (long long) 1e15;
         // cout << n << "\n";
         while (n--) {
-            cout << rand() % 100 + 1 << " ";
+            cout << rand() % 5 << " ";
         }
 
         cout << "\n";

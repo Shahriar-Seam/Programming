@@ -1,49 +1,45 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
 
-using namespace std;
-
-int max(int a, int b)
+void solve()
 {
-    return a > b ? a : b;
-}
+    int n, i, f = 1, count = 0;
 
-int32_t main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    scanf("%d", &n);
 
-    int t;
-
-    cin >> t;
-
-    while (t--) {
-
-    int n, i, j, len = 1;
-
-    cin >> n;
-
-    vector <int> v(n);
-
-    for (auto &it : v) {
-        cin >> it;
-    }
+    int arr[n];
 
     for (i = 0; i < n; i++) {
-        set <int> s;
+        scanf("%d", arr + i);
+    }
 
-        for (j = i; j < n; j++) {
-            s.insert(v[j]);
+    for (i = n - 2; i >= 0; i--) {
+        while (arr[i] > 0 && arr[i] >= arr[i + 1]) {
+            arr[i] /= 2;
 
-            len = max(len, s.size());
-
-            if (s.size() < j - i + 1) {
-                break;
-            }
+            count++;
         }
     }
 
-    cout << len << "\n";
+    for (i = 1; i < n; i++) {
+        if (arr[i] <= arr[i - 1]) {
+            f = 0;
+
+            break;
+        }
+    }
+
+    printf("%d\n", (f == 1 ? count : -1));
 }
+
+int main()
+{
+    int t;
+
+    scanf("%d", &t);
+
+    while (t--) {
+        solve();
+    }
 
     return 0;
 }
