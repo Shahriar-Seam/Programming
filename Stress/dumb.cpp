@@ -1,43 +1,63 @@
-#include <stdio.h>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+
+bool compare(int a, int b)
+{
+    return abs(a) > abs(b);
+}
 
 void solve()
 {
-    int n, i, f = 1, count = 0;
+    int n, i;
 
-    scanf("%d", &n);
+    cin >> n;
 
-    int arr[n];
+    vector <int> v(n);
 
-    for (i = 0; i < n; i++) {
-        scanf("%d", arr + i);
+    for (auto &it : v) {
+        cin >> it;
     }
 
-    for (i = n - 2; i >= 0; i--) {
-        while (arr[i] > 0 && arr[i] >= arr[i + 1]) {
-            arr[i] /= 2;
+    sort(v.begin(), v.end());
 
-            count++;
+    do {
+        double r = v[1] * 1.0 / v[0];
+        int f = 1;
+
+        for (i = 1; i < n; i++) {
+            if (abs(r - (v[i] * 1.0 / v[i - 1])) > 1e-6) {
+                f = 0;
+
+                break;
+            }
         }
-    }
 
-    for (i = 1; i < n; i++) {
-        if (arr[i] <= arr[i - 1]) {
-            f = 0;
+        if (f) {
+            cout << "Yes\n";
 
-            break;
+            return;
         }
-    }
 
-    printf("%d\n", (f == 1 ? count : -1));
+    } while(next_permutation(v.begin(), v.end()));
+
+    cout << "No\n";
 }
 
-int main()
+int32_t main()
 {
-    int t;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
-    scanf("%d", &t);
+    int32_t t, i;
 
-    while (t--) {
+    cin >> t;
+
+    for (i = 1; i <= t; i++) {
+        // cout << "Case " << i << ": ";
+
         solve();
     }
 
