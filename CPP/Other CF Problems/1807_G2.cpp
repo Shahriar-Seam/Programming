@@ -4,14 +4,9 @@ using namespace std;
 
 #define int long long
 
-bool compare(int a, int b)
-{
-    return abs(a) > abs(b);
-}
-
 void solve()
 {
-    int n, i;
+    int n, i, sum = 1;
 
     cin >> n;
 
@@ -23,27 +18,23 @@ void solve()
 
     sort(v.begin(), v.end());
 
-    do {
-        double r = v[1] * 1.0 / v[0];
-        int f = 1;
+    if (v[0] != 1) {
+        cout << "NO\n";
 
-        for (i = 1; i < n; i++) {
-            if (abs(r - (v[i] * 1.0 / v[i - 1])) > 1e-6) {
-                f = 0;
+        return;
+    }
 
-                break;
-            }
-        }
-
-        if (f) {
-            cout << "Yes\n";
+    for (i = 1; i < n; i++) {
+        if (sum < v[i]) {
+            cout << "NO\n";
 
             return;
         }
 
-    } while(next_permutation(v.begin(), v.end()));
+        sum += v[i];
+    }
 
-    cout << "No\n";
+    cout << "YES\n";
 }
 
 int32_t main()

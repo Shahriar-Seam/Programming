@@ -2,53 +2,49 @@
 
 using namespace std;
 
+#define int long long
+
 void solve()
 {
-    int n, i;
-    long long temp, j, m;
-    vector <long long> arr;
-    set <long long> s;
+    int n, k;
 
     cin >> n;
 
-    for (i = 0; i < n; i++) {
-        cin >> temp;
+    vector <int> v(n);
 
-        arr.push_back(temp);
-
-        s.insert(temp % 2);
+    for (auto &it : v) {
+        cin >> it;
     }
 
-    if (s.size() == 2) {
-        cout << "2\n";
-    }
-    else {
-        j = *min_element(arr.begin(), arr.end());
-        m = *max_element(arr.begin(), arr.end());
+    for (k = 1; k <= 60; k++) {
+        set <int> s;
 
-        while (s.size() != 2 && j <= m) {
-            s.clear();
-            j++;
-
-            for (i = 0; i < n; i++) {
-                s.insert(arr[i] % j);
-            }
+        for (auto &it : v) {
+            s.insert(it % (1LL << k));
         }
 
-        cout << j << "\n";
+        if (s.size() == 2) {
+            cout << (1LL << k) << "\n";
+
+            return;
+        }
     }
+
+    cout << "-1\n";
 }
 
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int t;
+    int32_t t, i;
 
     cin >> t;
 
-    while (t--) {
+    for (i = 1; i <= t; i++) {
+        // cout << "Case " << i << ": ";
+
         solve();
     }
 
