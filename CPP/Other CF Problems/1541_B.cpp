@@ -10,31 +10,32 @@ void solve()
 
     cin >> n;
 
-    vector <pair <int, int> > v(n + 1);
+    vector <pair <int, int> > v(n);
+    set <pair <pair <int, int>, pair <int, int> > > s;
 
-    for (i = 1; i <= n; i++) {
+    for (i = 0; i < n; i++) {
         cin >> v[i].first;
 
-        v[i].second = i;
+        v[i].second = i + 1;
     }
-
-    v[0] = {0, 0};
 
     sort(v.begin(), v.end());
 
-    for (i = 1; i <= n; i++) {
-        for (j = v[i]; j <= 2 * n; j += v[i]) {
-            if (v[i].first * v[j].first == v[i].second + v[j].second) {
-                count++;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n && v[j].first * v[i].first < 2 * n; j++) {
+            if (i == j) {
+                continue;
             }
-
-            if (v[i].first + v[j].first > 2 * n) {
-                break;
+            
+            if (v[i].first * v[j].first == v[i].second + v[j].second) {
+                if (s.find({v[j], v[i]}) == s.end()) {
+                    s.insert({v[i], v[j]});
+                }
             }
         }
     }
 
-    cout << count << "\n";
+    cout << s.size() << "\n";
 }
 
 int32_t main()
