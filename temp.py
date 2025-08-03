@@ -1,34 +1,16 @@
-def solve() :
-    n = int(input())
-    lst = list(map(int, input().split()))
-
-    pointer = len(lst) - 2
-    cnt = 0
+def read_and_rotate_matrix():
+    # Read 8x8 matrix
+    matrix = []
+    for _ in range(8):
+        row = input().strip()
+        matrix.append(list(row))
     
-    # print(pointer)
-
-    while(pointer >= 0) :
-        
-        if(lst[pointer] == 0 and pointer > 0) :
-            print(-1)
-            return
-        while(lst[pointer + 1] <= lst[pointer]) :
-
-            lst[pointer] = lst[pointer] // 2
-            cnt += 1
-
-            if(lst[pointer] == 0 and pointer > 0) :
-                print(-1)
-                return
-                    
-        # print("yo")
-
-        pointer -= 1
+    # Rotate 90 degrees counterclockwise
+    rotated = [[matrix[j][7-i] for j in range(8)] for i in range(8)]
     
-    print(cnt)
+    # Print rotated matrix
+    for row in rotated:
+        print(''.join(row))
 
-
-t = int(input())
-
-for _ in range(t) :
-    solve()
+# Read and rotate the matrix
+read_and_rotate_matrix()
