@@ -91,7 +91,7 @@ int32_t main()
         cin >> it.p >> it.a >> it.b;
     }
 
-    for (mood = 0; mood <= 505; mood++) {
+    for (mood = 0; mood <= 1005; mood++) {
         chains.push_back(create_chain(v, n, mood));
     }
 
