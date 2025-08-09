@@ -30,21 +30,7 @@ void solve()
         return;
     }
 
-    if (l == -1 || r == n) {
-        cout << "1\n";
-
-        return;
-    }
-
-    if (s[x - 2] == '#' || s[x] == '#') {
-        cout << min(x, n - x + 1) << "\n";
-    }
-    else if (l + 1 > n - r) {
-        cout << min(l + 2, n - x + 1) << "\n";
-    }
-    else {
-        cout << min(x, n - r + 1) << "\n";
-    }
+    cout << max(min(x, n - r + 1), min(l + 2, n - x + 1)) << "\n";
 }
 
 int32_t main()
