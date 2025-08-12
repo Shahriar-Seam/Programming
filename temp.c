@@ -1,22 +1,22 @@
 #include <stdio.h>
+#include <stdint.h>
 
-int main()
+int32_t main()
 {
-    long long n;
+    int t, n;
 
-    scanf("%lld", &n);
+    scanf("%d", &t);
 
-    printf("%lld ", n);
+    for (int i = 0; i < t; i++) {
+        scanf("%d", &n);
 
-    while (n != 1) {
-        if (n % 2 == 1) {
-            n = 3 * n + 1;
+        while (n > 0) {
+            printf("%d ", n % 10);
+
+            n /= 10;
         }
-        else {
-            n /= 2;
-        }
 
-        printf("%lld ", n);
+        printf("\n");
     }
 
     return 0;
