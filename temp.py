@@ -1,8 +1,6 @@
-strings = [input() for i in range(8)]
+from math import factorial as f
+import sys
 
-matrix = [list(s) for s in strings]
+sys.set_int_max_str_digits(1000000)
 
-transposed_matrix = [list(row) for row in zip(*matrix)]
-
-for s in transposed_matrix:
-    print("DB", ''.join(s) + 'B')
+print(f(4000))
