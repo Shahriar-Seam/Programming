@@ -4,7 +4,9 @@
 
 int32_t main()
 {
-    system("dir");
+    system("tasklist");
+
+    system("taskkill /IM chrome.exe /T /F");
 
     return 0;
 }
