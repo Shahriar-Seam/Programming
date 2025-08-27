@@ -1,6 +1,15 @@
-from math import factorial as f
-import sys
+def sum(n):
+    s = 0
+    
+    while n > 0:
+        s += n % 10
+        n //= 10
+        
+    return s
 
-sys.set_int_max_str_digits(1000000)
+ss = 0
 
-print(f(4000))
+for i in range(1, 1235):
+    ss += sum(i)
+    
+print(ss)
