@@ -2,32 +2,16 @@
 
 using namespace std;
 
-struct item {
-    string n;
-    int y;
-
-    bool operator < (item it) {
-        return y > it.y;
-    }
-};
-
-void solve()
+int sum_of_digits(int x)
 {
-    int n;
+    int s = 0;
 
-    cin >> n;
-
-    vector <item> v(n);
-
-    for (auto &it : v) {
-        cin >> it.n >> it.y;
+    while (x != 0) {
+        s += x % 10;
+        x /= 10;
     }
 
-    sort(v.begin(), v.end());
-
-    for (auto &it : v) {
-        cout << it.n << "\n";
-    }
+    return s;
 }
 
 int32_t main()
@@ -35,15 +19,15 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int32_t t, i;
+    int t, s = 0, j;
 
     cin >> t;
 
-    for (i = 1; i <= t; i++) {
-        // cout << "Case " << i << ": ";
-
-        solve();
+    for (j = 1; j <= t; j++) {
+        s += sum_of_digits(j);
     }
+
+    cout << "Sum of digits from 1 to " << t << " is: " << s << endl;
 
     return 0;
 }
