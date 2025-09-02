@@ -1,1 +1,1 @@
-Found quadruple: (2, 12, 20, 24, 30)
+7
