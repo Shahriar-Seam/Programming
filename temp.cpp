@@ -1,33 +1,49 @@
-#include <bits/stdc++.h>
-
+#include<bits/stdc++.h>
 using namespace std;
+#define endl '\n' 
+typedef long long ll;
 
-int sum_of_digits(int x)
-{
-    int s = 0;
+ll check_gcd(ll a, ll b){
+    if(b == 0)return a;
+    return check_gcd(b,a%b);
+}
+ 
+void solve(){
+    ll n;
+    cin>>n;
 
-    while (x != 0) {
-        s += x % 10;
-        x /= 10;
+    vector<ll>v(n);
+
+    for(int i=0;i<n;i++)cin>>v[i];
+
+    sort(v.begin(),v.end());
+
+    vector<ll>v1;
+
+    for(int i=1;i<n;i++)if(v[i] % v[0] == 0)v1.push_back(v[i]);
+
+    for(int i=0;i<v1.size();i++){
+        for(int j=i;j<v1.size();j++){
+            if(check_gcd(v1[i],v1[j]) == v[0]){
+                cout<<"Yes"<<endl;
+                return;
+            }
+        }
     }
 
-    return s;
+    cout<<"No"<<endl;
+    
 }
 
-int32_t main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+int main(){
+    ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+ 
+    int t;
+    cin>>t;
 
-    int t, s = 0, j;
-
-    cin >> t;
-
-    for (j = 1; j <= t; j++) {
-        s += sum_of_digits(j);
+    while(t--){
+        solve();
     }
-
-    cout << "Sum of digits from 1 to " << t << " is: " << s << endl;
-
+ 
     return 0;
 }
