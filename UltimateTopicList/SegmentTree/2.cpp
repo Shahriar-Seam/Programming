@@ -2,13 +2,28 @@
 
 using namespace std;
 
-typedef long long T;
+typedef struct T {
+    long long mn;
+    long long cnt;
+} T;
 
 struct Tree {
-    static constexpr T unit = 0;
+    static constexpr T unit = {LONG_LONG_MAX, 1};
 
     T f(T a, T b) {
-        return a + b;
+        if (a.mn < b.mn) {
+            return a;
+        }
+        else if (a.mn > b.mn) {
+            return b;
+        }
+        else {
+            auto c = a;
+
+            c.cnt += b.cnt;
+
+            return c;
+        }
     }
 
     vector <T> s;
@@ -60,7 +75,9 @@ int32_t main()
     vector <T> a(n);
 
     for (auto &it : a) {
-        cin >> it;
+        cin >> it.mn;
+
+        it.cnt = 1;
     }
 
     Tree t(n);
