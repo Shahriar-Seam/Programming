@@ -2,21 +2,38 @@
 
 using namespace std;
 
-typedef long long T;
+typedef struct item {
+    long long mn;
+    long long cnt;
+} item;
+
+typedef int T;
 
 struct Tree {
-    static constexpr T unit = 0;
+    static constexpr item unit = {LONG_LONG_MAX, 1};
 
-    T f(T a, T b) {
-        return a + b;
+    item f(item a, item b) {
+        if (a.mn < b.mn) {
+            return a;
+        }
+        else if (a.mn > b.mn) {
+            return b;
+        }
+        else {
+            auto c = a;
+
+            c.cnt += b.cnt;
+
+            return c;
+        }
     }
 
-    vector <T> s;
+    vector <item> s;
     int n;
 
-    Tree(int n = 0, T def = unit) : n(n), s(2 * n, def) {}
+    Tree(int n = 0, item def = unit) : n(n), s(2 * n, def) {}
 
-    void build(vector <T> &a) {
+    void build(vector <item> &a) {
         for (int i = 0; i < n; i++) {
             s[n + i] = a[i];
         }
@@ -26,14 +43,14 @@ struct Tree {
         }
     }
 
-    void update(int pos, T val) {
+    void update(int pos, item val) {
         for (s[pos += n] = val; pos /= 2; ) {
             s[pos] = f(s[pos * 2], s[pos * 2 + 1]);
         }
     }
 
-    T query(int b, int e) {
-        T ra = unit, rb = unit;
+    item query(int b, int e) {
+        item ra = unit, rb = unit;
 
         for (b += n, e += n; b < e; b /= 2, e /= 2) {
             if (b % 2) {
@@ -53,14 +70,16 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    T n, m, type, i, v, l, r;
+    int n, m, type, i, v, l, r;
 
     cin >> n >> m;
 
-    vector <T> a(n);
+    vector <item> a(n);
 
     for (auto &it : a) {
-        cin >> it;
+        cin >> it.mn;
+
+        it.cnt = 1;
     }
 
     Tree t(n);
@@ -72,12 +91,14 @@ int32_t main()
         if (type == 1) {
             cin >> i >> v;
 
-            t.update(i, v);
+            t.update(i, {v, 1});
         }
         else {
             cin >> l >> r;
 
-            cout << t.query(l, r) << "\n";
+            auto mn = t.query(l, r);
+
+            cout << mn.mn << " " << mn.cnt << "\n";
         }
     }
 

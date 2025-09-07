@@ -1,0 +1,24 @@
+Processes:
+p1 0 7
+p2 2 4
+p3 4 1
+p4 5 4
+
+Process flow:
+Time : Process
+0 - 7 : p1
+7 - 11 : p2
+11 - 12 : p3
+12 - 16 : p4
+
+Waiting and Turnaround time:
+p1 0 7
+p2 5 9
+p3 7 8
+p4 7 11
+
+Average waiting time = 4.75 unit
+Average turnaround time = 8.75 unit
+Total time taken = 16 unit
+Throughput = 0.25 processes per unit time
+

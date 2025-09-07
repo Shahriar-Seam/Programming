@@ -2,126 +2,111 @@
 
 using namespace std;
 
-struct item {
-    int data;
-    int index;
+#define int long long
+
+const int sz = 2e6 + 5;
+
+struct node {
+	int mn, mx;
 };
 
-struct segment_tree {
-    int size;
-    vector <item> hotels;
+int arr[sz];
+node tree[sz * 4];
+int n;
+int p2;
 
-    item NEUTRAL_ELEMENT = {0, -1};
+// node def = {1e12, -1};
 
-    item operation(item a, item b) {
-        if (a.data > b.data) {
-            return a;
-        }
-        else if (b.data > a.data) {
-            return b;
-        }
-        else {
-            if (a.index < b.index) {
-                return a;
-            }
-            else {
-                return b;
-            }
-        }
-    }
-
-    void init(int n) {
-        size = 1;
-
-        while (size < n) {
-            size *= 2;
-        }
-
-        hotels.resize(size * 2, NEUTRAL_ELEMENT);
-    }
-
-    void build(vector <int> &v, int x, int lx, int rx) {
-        if (rx - lx == 1) {
-            if (lx < v.size()) {
-                hotels[x] = {v[lx], lx};
-            }
-            
-            return;
-        }
-        
-        int mid = (lx + rx) / 2;
-
-        build(v, 2 * x + 1, lx, mid);
-        build(v, 2 * x + 2, mid, rx);
-
-        hotels[x] = operation(hotels[2 * x + 1], hotels[2 * x + 2]);
-    }
-
-    void build(vector <int> &v) {
-        init(v.size());
-
-        build(v, 0, 0, size);
-    }
-
-    int get(int r, int x, int lx, int rx) {
-        if (hotels[x].data < r) {
-            return -1;
-        }
-
-        if (rx - lx == 1) {
-            hotels[x].data -= r;
-
-            return hotels[x].index;
-        }
-
-        int mid = (lx + rx) / 2;
-
-        item left = hotels[2 * x + 1];
-        item right = hotels[2 * x + 2];
-        int index = 0;
-
-        if (left.data >= r) {
-            index = get(r, 2 * x + 1, lx, mid);
-        }
-        else {
-            index = get(r, 2 * x + 2, mid, rx);
-        }
-
-        hotels[x] = operation(hotels[2 * x + 1], hotels[2 * x + 2]);
-
-        return index;
-    }
-
-    int get(int r) {
-        return get(r, 0, 0, size);
-    }
-};
-
-int main()
+void calc_p2()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    p2 = 1;
 
-    int n, m;
-    segment_tree st;
-
-    cin >> n >> m;
-
-    vector <int> v(n);
-
-    for (auto &it : v) {
-        cin >> it;
+    while (p2 < n) {
+        p2 *= 2;
     }
+}
 
-    st.build(v);
+node f(node a, node b)
+{
+	return {min(a.mn, b.mn), max(a.mx, b.mx)};
+}
 
-    while (m--) {
-        int r;
+void build()
+{
+	int i;
 
-        cin >> r;
+	for (i = 0; i < sz * 4; i++) {
+		tree[i] = {1000000000000, -1};
+	}
 
-        cout << st.get(r) + 1 << " ";
-    }
+	for (i = 0; i < p2; i++) {
+		tree[i + p2] = {arr[i], arr[i]};
+	}
 
-    return 0;
+	for (i = p2 - 1; i > 0; i--) {
+		tree[i] = f(tree[i * 2], tree[i * 2 + 1]);
+	}
+}
+
+void get(int v, int &ind, int i)
+{
+	if (i >= 4 * n) {
+		return;
+	}
+
+	node t = tree[i];
+
+	if (v <= t.mx) {
+		if (i < p2) {
+			t = tree[i * 2];
+
+			if (v <= t.mx) {
+				get(v, ind, i * 2);
+			}
+			else if (v <= tree[i * 2 + 1].mx) {
+				get(v, ind, i * 2 + 1);
+			}
+		}
+		else {
+			ind = i - p2 + 1;
+
+			tree[i].mn -= v;
+			tree[i].mx -= v;
+		}
+	}
+
+	if (i < p2) {
+		tree[i] = f(tree[i * 2], tree[i * 2 + 1]);
+	}
+}
+
+int32_t main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+    
+	int m;
+    
+	cin >> n >> m;
+    
+	for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+	}
+    
+    calc_p2();
+	build();
+
+	while (m--) {
+		int x, ind = 0;
+
+		cin >> x;
+
+		get(x, ind, 1);
+
+		cout << ind << " ";
+	}
+
+	return 0;
 }

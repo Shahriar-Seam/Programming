@@ -5,10 +5,10 @@ using namespace std;
 typedef long long T;
 
 struct Tree {
-    static constexpr T unit = 0;
+    static constexpr T unit = LONG_LONG_MAX;
 
     T f(T a, T b) {
-        return a + b;
+        return min(a, b);
     }
 
     vector <T> s;
