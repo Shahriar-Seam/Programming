@@ -25,6 +25,13 @@ struct proc {
     }
 };
 
+struct proc_flow {
+    string p;
+    int b, e, l;
+
+    proc_flow(string p, int b, int e) : p(p), b(b), e(e), l(e - b) {}
+};
+
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
@@ -43,6 +50,7 @@ int32_t main()
 
     deque <proc> q, temp, p_ord;
     set <proc> s;
+    vector <proc_flow> p_f;
 
     for (i = 0; i < n; i++) {
         cin >> at >> bt;
@@ -101,6 +109,8 @@ int32_t main()
 
             cout << b << " - " << e << " : " << c_p.p << "\n";
 
+            p_f.push_back({c_p.p, b, e});
+
             s.erase(s.find(c_p));
 
             p_ord.push_back(c_p);
@@ -143,6 +153,40 @@ int32_t main()
     cout << "Average turnaround time = " << a_tat << " unit\n";
     cout << "Total time taken = " << total_time << " unit\n";
     cout << "Throughput = " << thr << " processes per unit time\n";
+
+    cout << "\n";
+
+    cout << "Gantt Chart:\n";
+
+    for (i = 0; i < p_f.size(); i++) {
+        auto t = to_string(p_f[i].b);
+
+        if (t.length() < 2) {
+            t = "0" + t;
+        }
+
+        cout << t << string(p_f[i].l * 4 - 2, ' ');
+    }
+
+    cout << p_f.back().e << "\n";
+
+    for (i = 0; i <= 4 * total_time; i++) {
+        cout << "-";
+    }
+
+    cout << "\n";
+
+    for (i = 0; i < p_f.size(); i++) {
+        cout << "|" << string(p_f[i].l * 2 - 1, ' ') << p_f[i].p << string(p_f[i].l * 2 - 2, ' ');
+    }
+
+    cout << "|\n";
+
+    for (i = 0; i <= 4 * total_time; i++) {
+        cout << "-";
+    }
+
+    cout << "\n";
 
     return 0;
 }

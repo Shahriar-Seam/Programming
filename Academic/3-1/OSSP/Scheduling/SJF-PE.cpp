@@ -44,6 +44,13 @@ struct times {
     times(int wt, int tat, int exec) : wt(wt), tat(tat), exec(exec) {}
 };
 
+struct proc_flow {
+    string p;
+    int b, e, l;
+
+    proc_flow(string p, int b, int e) : p(p), b(b), e(e), l(e - b) {}
+};
+
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
@@ -65,6 +72,7 @@ int32_t main()
     deque <p_time> p_ord;
     map <string, proc> mp;
     map <string, times> mp_t;
+    vector <proc_flow> p_f;
 
     for (i = 0; i < n; i++) {
         cin >> at >> bt;
@@ -147,10 +155,14 @@ int32_t main()
         if (mp[p_ord[i].p].at > c_t) {
             cout << c_t << " - " << mp[p_ord[i].p].at << " : none\n";
 
+            p_f.push_back({"none", c_t, mp[p_ord[i].p].at});
+
             c_t = mp[p_ord[i].p].at;
         }
         
         cout << c_t << " - " << c_t + p_ord[i].t << " : " << p_ord[i].p << "\n";
+
+        p_f.push_back({p_ord[i].p, c_t, c_t + p_ord[i].t});
 
         c_t += p_ord[i].t;
     }
@@ -192,6 +204,51 @@ int32_t main()
     cout << "Average turnaround time = " << a_tat << " unit\n";
     cout << "Total time taken = " << total_time << " unit\n";
     cout << "Throughput = " << thr << " processes per unit time\n";
+
+    cout << "\n";
+
+    cout << "Gantt Chart:\n";
+
+    bitset <1005> bar;
+
+    for (i = 0; i < p_f.size(); i++) {
+        auto t = to_string(p_f[i].b);
+
+        bar[p_f[i].b * 4] = 1;
+        bar[p_f[i].e * 4] = 1;
+
+        if (t.length() < 2) {
+            t = "0" + t;
+        }
+
+        cout << t << string(p_f[i].l * 4 - 2, ' ');
+    }
+
+    cout << p_f.back().e << "\n";
+
+    for (i = 0; i <= 4 * total_time; i++) {
+        if (bar[i]) {
+            // cout << "|";
+
+            // continue;
+        }
+        
+        cout << "-";
+    }
+
+    cout << "\n";
+
+    for (i = 0; i < p_f.size(); i++) {
+        cout << "|" << string(p_f[i].l * 2 - 1, ' ') << p_f[i].p << string(p_f[i].l * 2 - 2, ' ');
+    }
+
+    cout << "|\n";
+
+    for (i = 0; i <= 4 * total_time; i++) {
+        cout << "-";
+    }
+
+    cout << "\n";
 
     return 0;
 }
