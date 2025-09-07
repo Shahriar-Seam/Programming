@@ -29,14 +29,23 @@ void sieve()
 
 int32_t main()
 {
+    auto start = chrono::high_resolution_clock::now();
+
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
+
     sieve();
 
-    for (int i = 0; i < primes.size(); i += 100) {
-        cout << primes[i] << "\n";
-    }
+    // for (int i = 0; i < primes.size(); i += 100) {
+    //     cout << primes[i] << "\n";
+    // }
+
+    auto end = chrono::high_resolution_clock::now();
+
+    chrono::duration <double> duration = end - start;
+
+    cerr << "Time = " << duration.count() << "s\n";
 
     return 0;
 }
