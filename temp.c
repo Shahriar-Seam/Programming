@@ -1,27 +1,28 @@
 #include <stdio.h>
+#include <stdint.h>
 #include <string.h>
-int main()
+
+int32_t main()
 {
-    char pla[101];
-    scanf("%s", pla);
-    int len = strlen(pla);
+    char s[101];
 
-    for (int i = 0; i < len - 6; i++)
-    {
+    scanf("%s", s);
 
-        if (pla[i] == '1' && pla[i + 1] == '1' && pla[i + 2] == '1' && pla[i + 3] == '1' &&
-            pla[i + 4] == '1' && pla[i + 5] == '1' && pla[i + 6] == '1')
-        {
-            printf("YES\n");
-            return 0;
-        }
-        if (pla[i] == '0' && pla[i + 1] == '0' && pla[i + 2] == '0' && pla[i + 3] == '0' &&
-            pla[i + 4] == '0' && pla[i + 5] == '0' && pla[i + 6] == '0')
-        {
-            printf("YES\n");
-            return 0;
+    char f[256] = {};
+
+    int count = 0;
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        unsigned char d = s[i];
+
+        if (f[d] == 0) {
+            f[d] = 1;
+
+            count++;
         }
     }
-    printf("NO\n");
+
+    printf("%d", count);
+
     return 0;
 }
