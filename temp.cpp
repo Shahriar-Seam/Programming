@@ -2,71 +2,20 @@
 
 using namespace std;
 
-#define int long long
-
-const int mod = 1e9 + 7;
-const int sz = 1e4 + 5;
-int fact[sz];
-
-void factorial()
-{
-    int i;
-
-    fact[0] = fact[1] = 1;
-
-    for (i = 2; i < sz; i++) {
-        fact[i] = (fact[i - 1] * i) % mod;
-    }
-}
-
-int bin_exp(int b, int p, int m = mod)
-{
-    int result = 1;
-
-    while (p > 0) {
-        if (p & 1) {
-            result = (result * b) % m;
-        }
-
-        b = (b * b) % m;
-
-        p >>= 1;
-    }
-
-    return result % m;
-}
-
-// x = a^-1 (mod m)
-int inv(int a, int m = mod)
-{
-    return bin_exp(a, m - 2);
-}
-
-void solve()
-{
-    int n, m;
-
-    cin >> n >> m;
-
-    cout << (((fact[n + m - 1] * inv(fact[n])) % mod) * inv(fact[m - 1])) % mod << "\n";
-}
-
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    factorial();
+    string s;
 
-    int32_t t, i;
+    getline(cin, s, '\0');
 
-    cin >> t;
-
-    for (i = 1; i <= t; i++) {
-        // cout << "Case " << i << ": ";
-
-        solve();
+    for (auto &it : s) {
+        it ^= 20;
     }
+
+    cout << s << "\n";
 
     return 0;
 }
