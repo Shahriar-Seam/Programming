@@ -5,7 +5,7 @@ using namespace std;
 #define int long long
 
 const int mod = 1e9 + 7;
-const int sz = 1e4 + 5;
+const int sz = 1e3 + 5;
 int fact[sz];
 
 void factorial()
@@ -42,13 +42,36 @@ int inv(int a, int m = mod)
     return bin_exp(a, m - 2);
 }
 
+int nCr(int n, int r)
+{
+    return (((fact[n] * inv(fact[r])) % mod) * inv(fact[n - r])) % mod;
+}
+
 void solve()
 {
-    int n, m;
+    int n, k;
+    map <int, int, greater <> > mp;
 
-    cin >> n >> m;
+    cin >> n >> k;
 
-    cout << (((fact[n + m - 1] * inv(fact[n])) % mod) * inv(fact[m - 1])) % mod << "\n";
+    vector <int> v(n);
+
+    for (auto &it : v) {
+        cin >> it;
+
+        mp[it]++;
+    }
+
+    for (auto &it : mp) {
+        if (it.second < k) {
+            k -= it.second;
+        }
+        else {
+            cout << nCr(it.second, k) << "\n";
+
+            return;
+        }
+    }
 }
 
 int32_t main()
