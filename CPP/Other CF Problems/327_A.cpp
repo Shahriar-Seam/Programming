@@ -7,28 +7,34 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, i, t, cnt = 0, ans = 0;
-    vector <int> arr;
+    int n, i, j, k, cnt = 0;
 
     cin >> n;
 
-    for (i = 0; i < n; i++) {
-        cin >> t;
+    vector <int> v(n), t;
 
-        arr.push_back(t);
+    for (auto &it : v) {
+        cin >> it;
     }
 
     for (i = 0; i < n; i++) {
-        if (arr[i] == 0) {
-            cnt++;
-        }
-        if (arr[i] == 1) {
-            ans = max(ans, cnt);
-            cnt = 0;
+        for (j = i; j < n; j++) {
+            t = v;
+
+            for (k = i; k <= j; k++) {
+                if (t[k]) {
+                    t[k] = 0;
+                }
+                else {
+                    t[k] = 1;
+                }
+            }
+
+            cnt = max(cnt, (int) count(t.begin(), t.end(), 1));
         }
     }
 
-    cout << (n > 1 ? (ans + count(arr.begin(), arr.end(), 1)) : arr[0] == 1 ? 0 : 1);
+    cout << cnt << "\n";
 
     return 0;
 }
