@@ -4,7 +4,7 @@ using namespace std;
 
 struct proc {
     string p;
-    int at, bt, pr; // arrival time, burst time and priority
+    int at, bt, pr;
 
     proc() {}
 
@@ -173,19 +173,15 @@ int32_t main()
     cout << "\n";
 
     for (i = 0, c_t = 0; i < p_ord.size(); i++) {
-        if (mp[p_ord[i].p].at > c_t) {
-            c_t = mp[p_ord[i].p].at;
-        }
-        else {
-            mp_t[p_ord[i].p].wt += c_t - mp[p_ord[i].p].at - mp_t[p_ord[i].p].exec;
-        }
+        mp_t[p_ord[i].p].exec += p_ord[i].t;
 
         c_t += p_ord[i].t;
-        mp_t[p_ord[i].p].exec += p_ord[i].t;
+
+        mp_t[p_ord[i].p].tat = c_t - mp[p_ord[i].p].at;
     }
 
     for (auto &it : mp_t) {
-        it.second.tat = it.second.exec + it.second.wt;
+        it.second.wt = it.second.tat - it.second.exec;
     }
 
     cout << "Waiting and Turnaround time:\n";

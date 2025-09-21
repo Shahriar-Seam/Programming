@@ -4,7 +4,7 @@ using namespace std;
 
 struct proc {
     string p;
-    int at, bt; // arrival time, burst time
+    int at, bt;
 
     proc() {}
 
@@ -159,19 +159,15 @@ int32_t main()
     cout << "\n";
 
     for (i = 0, c_t = 0; i < p_ord.size(); i++) {
-        if (mp[p_ord[i].p].at > c_t) {
-            c_t = mp[p_ord[i].p].at;
-        }
-        else {
-            mp_t[p_ord[i].p].wt += c_t - mp[p_ord[i].p].at - mp_t[p_ord[i].p].exec;
-        }
+        mp_t[p_ord[i].p].exec += p_ord[i].t;
 
         c_t += p_ord[i].t;
-        mp_t[p_ord[i].p].exec += p_ord[i].t;
+
+        mp_t[p_ord[i].p].tat = c_t - mp[p_ord[i].p].at;
     }
 
     for (auto &it : mp_t) {
-        it.second.tat = it.second.exec + it.second.wt;
+        it.second.wt = it.second.tat - it.second.exec;
     }
 
     cout << "Waiting and Turnaround time:\n";
@@ -210,17 +206,12 @@ int32_t main()
             t = "0" + t;
         }
 
-        if (t.length() == 2) {
-            cout << t << string(p_f[i].l - 2, ' ');
-        }
-        else {
-            cout << t << string(p_f[i].l - 3, ' ');
-        }
+        cout << t << string(p_f[i].l * 4 - 2, ' ');
     }
 
     cout << p_f.back().e << "\n";
 
-    for (i = 0; i <= total_time; i++) {
+    for (i = 0; i <= 4 * total_time; i++) {
         if (bar[i]) {
             // cout << "|";
 
@@ -233,16 +224,12 @@ int32_t main()
     cout << "\n";
 
     for (i = 0; i < p_f.size(); i++) {
-        cout << "|" << string(p_f[i].l / 2 - 1, ' ') << p_f[i].p << string(p_f[i].l / 2 - 2, ' ');
-
-        if (p_f[i].l & 1) {
-            cout << " ";
-        }
+        cout << "|" << string(p_f[i].l * 2 - 1, ' ') << p_f[i].p << string(p_f[i].l * 2 - 2, ' ');
     }
 
     cout << "|\n";
 
-    for (i = 0; i <= total_time; i++) {
+    for (i = 0; i <= 4 * total_time; i++) {
         cout << "-";
     }
 
