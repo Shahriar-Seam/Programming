@@ -1,33 +1,9 @@
-Processes:
-p1 0 5
-p2 0 1
-p3 0 6
-p4 0 2
-
-Process flow:
-Time : Process
-0 - 2 : p1
-2 - 3 : p2
-3 - 5 : p3
-5 - 7 : p4
-7 - 9 : p1
-9 - 11 : p3
-11 - 12 : p1
-12 - 14 : p3
-
-Waiting and Turnaround time:
-p1 7 12
-p2 2 3
-p3 8 14
-p4 5 7
-
-Average waiting time = 5.50 unit
-Average turnaround time = 9.00 unit
-Total time taken = 14 unit
-Throughput = 0.29 processes per unit time
-
-Gantt Chart:
-00      02  03      05      07      09      11  12      14
----------------------------------------------------------
-|   p1  | p2|   p3  |   p4  |   p1  |   p3  | p1|   p3  |
----------------------------------------------------------
+NO
+NO
+NO
+NO
+2 YES
+2 YES
+2 YES
+2 YES
+3 YES
