@@ -1,17 +1,32 @@
-def s(n):
-    ss = 0
+from itertools import permutations
+input()
+l, r = map(int, input().split())
+
+n = [i for i in range(l, r + 1)]
+m = n.copy()
+
+max_o = 0
+
+print(*n)
+
+for i in permutations(n):
+    o = 0
     
-    while n:
-        ss += n % 10
-        n //= 10
+    for j in range(r - l + 1):
+        o += (i[j] | m[j])
         
-    return ss
-
-n = int(input())
-
-N = 0
-
-for i in range(1, n + 1):
-    N = N + int("9" * i)
+    max_o = max(max_o, o)
     
-    print(s(N))
+    # print(o)
+    
+print("max =", max_o)
+
+for i in permutations(n):
+    o = 0
+    
+    for j in range(r - l + 1):
+        o += (i[j] | m[j])
+    
+    if o == max_o:
+        print(o)
+        print(*i)
