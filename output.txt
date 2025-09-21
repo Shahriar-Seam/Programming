@@ -1,3 +1,3 @@
-3 1
-10 9
-20 16
+Physical Address: 4353 for Logical Address: (2, 53)
+Physical Address: 4052 for Logical Address: (3, 852)
+Invalid offset: 1222 for segment number: 0
