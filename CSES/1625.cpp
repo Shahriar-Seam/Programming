@@ -1,3 +1,5 @@
+#pragma GCC optimize("O3")
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -43,28 +45,28 @@ void recurse(string &path, int i, int j)
     visited[i][j] = true;
 
     if (valid(i, j - 1) && !visited[i][j - 1]) {
-        path += "L";
+        path += 'L';
 
         recurse(path, i, j - 1);
 
         path.pop_back();
     }
     if (valid(i, j + 1) && !visited[i][j + 1]) {
-        path += "R";
+        path += 'R';
 
         recurse(path, i, j + 1);
 
         path.pop_back();
     }
     if (valid(i - 1, j) && !visited[i - 1][j]) {
-        path += "U";
+        path += 'U';
 
         recurse(path, i - 1, j);
 
         path.pop_back();
     }
     if (valid(i + 1, j) && !visited[i + 1][j]) {
-        path += "D";
+        path += 'D';
 
         recurse(path, i + 1, j);
 
@@ -80,6 +82,8 @@ int32_t main()
     cin.tie(NULL);
 
     string path;
+
+    path.reserve(50);
 
     // cin >> s;
     s = "???????????????????????????????????????????????L";
