@@ -4,38 +4,27 @@ using namespace std;
 
 void solve()
 {
-    int n, k, i;
+    int n, k, i, l, r;
     string s;
 
     cin >> n >> k >> s;
 
-    deque <int> dq(n);
     string v(n, '+');
+
+    l = 0, r = n - 1;
 
     sort(s.begin(), s.end());
 
-    iota(dq.begin(), dq.end(), 1);
-
-    for (i = 0; i < k && !dq.empty(); i++) {
+    for (i = 0; i < k && l <= r; i++) {
         if (s[i] == '0') {
-            v[dq.front() - 1] = '-';
-
-            dq.pop_front();
+            v[l++] = '-';
         }
         else if (s[i] == '1') {
-            v[dq.back() - 1] = '-';
-
-            dq.pop_back();
+            v[r--] = '-';
         }
         else {
-            v[dq.front() - 1] = '?';
-            v[dq.back() - 1] = '?';
-
-            dq.pop_front();
-
-            if (!dq.empty()) {
-                dq.pop_back();
-            }
+            v[l++] = '?';
+            v[r--] = '?';
         }
     }
 
