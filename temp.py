@@ -1,12 +1,13 @@
-def f(n):
-    if n == 1:
-        print(n, 1)
-        
-        return 1
-    
-    v = f(n - 1) + n
-    print(n, v)
-    
-    return v
+def f(a):
+    return len(set(a))
 
-f(int(input()))
+a = list(map(int, input().split()))
+b = [0] * len(a)
+
+for i in range(len(a)):
+    for j in range(i + 1):
+        b[i] += f(a[j : i + 1])
+    
+print(1)
+print(len(b))
+print(*b)
