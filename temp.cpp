@@ -2,20 +2,40 @@
 
 using namespace std;
 
+vector <int> create(int n)
+{
+	vector <int> v(n);
+
+	for (auto &it : v) {
+		cin >> it;
+	}
+
+	return v;
+}
+
+void solve()
+{
+	int n, m;
+
+	cin >> n >> m;
+
+	vector <int> v = create(n), u = create(m);
+}
+
 int32_t main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
 
-    string s;
+	int32_t t, i;
 
-    getline(cin, s, '\0');
+	cin >> t;
 
-    for (auto &it : s) {
-        it ^= 20;
-    }
+	for (i = 1; i <= t; i++) {
+		// cout << "Case " << i << ": ";
 
-    cout << s << "\n";
+		solve();
+	}
 
-    return 0;
+	return 0;
 }
