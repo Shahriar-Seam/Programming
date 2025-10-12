@@ -1,11 +1,11 @@
-num_pages = int(input())
-ref_string = input()
-mod_bits = input()
-num_frames = int(input())
+num_pages = int(input("Number of pages:\n"))
+ref_string = list(map(int, input("Reference string:\n").split()))
+num_frames = int(input("Number of frames:\n"))
 
 memo = [' '] * num_frames
-reference = [0] * (num_pages + 1)
-modification = [0] * (num_pages + 1)
+reference = [0] * num_frames
+modification = [0] * num_frames
+ref_mod = []
 table = []
 total_page_fails = 0
 pointer = 0
@@ -15,42 +15,35 @@ for i in range(len(ref_string)):
     page = ref_string[i]
     pf = 0
     pointer += 1
-    mod_bit = int(mod_bits[i])
     page_int = int(page)
-
+    
+    if ' ' in memo:
+        memo[memo.index(' ')] = page
+    else:
+        ref_mod = list(map(str, input("ref mod:\n").split()))
+        
+        reference = [int(c[0]) for c in ref_mod]
+        modification = [int(c[1]) for c in ref_mod]
+        
     if page in memo:
         index = memo.index(page)
-        reference[page_int] = 1
-        modification[page_int] = mod_bit
     else:
         pf = 1
         total_page_fails += 1
+        
+        classes = {0: [], 1: [], 2: [], 3: []}
 
-        if ' ' in memo:
-            index = memo.index(' ')
-            memo[index] = page
-            reference[page_int] = 1
-            modification[page_int] = mod_bit
-        else:
-            classes = {0: [], 1: [], 2: [], 3: []}
+        for j in range(num_frames):
+            frame_page = memo[j]
+            cls = (reference[j] << 1) | modification[j]
+            classes[cls].append(j)
 
-            for j in range(num_frames):
-                frame_page = memo[j]
-                frame_page_int = int(frame_page)
-                cls = (reference[frame_page_int] << 1) | modification[frame_page_int]
-                classes[cls].append(j)
+        for cls in range(4):
+            if classes[cls]:
+                victim = classes[cls][0]
+                break
 
-            for cls in range(4):
-                if classes[cls]:
-                    victim = classes[cls][0]
-                    break
-
-            memo[victim] = page
-            reference[page_int] = 1
-            modification[page_int] = mod_bit
-
-    if pointer % reset_interval == 0:
-        reference = [0] * (num_pages + 1)
+        memo[victim] = page
 
     if pf:
         pf_str = "PF|"
@@ -63,7 +56,7 @@ for i in range(len(ref_string)):
     
     print()
 
-    table.append([page + ' |'] + ["- |"] + [c + " |" for c in memo] + ["- |"] + [pf_str])
+    table.append([str(page) + ' |'] + ["- |"] + [str(c) + " |" for c in memo] + ["- |"] + [pf_str])
 
 table.insert(0, ['|' for _ in range(num_frames + 4)])
 table.insert(0, ["Frame/Page"] + ["-" * 10] + [(str(i) + " " * (10 - len(str(i)))) for i in range(1, num_frames + 1)] + ["-" * 10] + ["Page Fail "])

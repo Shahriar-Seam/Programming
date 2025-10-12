@@ -1,9 +1,9 @@
-num_pages = int(input())
-ref_string = input()
-num_frames = int(input())
+num_pages = int(input("Number of pages:\n"))
+ref_string = list(map(int, input("Reference string:\n").split()))
+num_frames = int(input("Number of frames:\n"))
 
 memo = [' '] * num_frames
-reference = [0] * (num_pages + 1)
+reference = [0] * (num_frames)
 pointer = 0
 ref = []
 
@@ -13,12 +13,15 @@ total_page_fails = 0
 for page in ref_string:
     pf = 0
     
+    if ' ' not in memo:
+        reference = list(map(int, input(f"Reference for inserting {page}:\n").split()))
+    
     if page not in memo:
         pf = 1
         total_page_fails += 1
         
-        if memo[pointer] == ' ':
-            memo[pointer] = page
+        if memo[pointer % num_frames] == ' ':
+            memo[pointer % num_frames] = page
             
             pointer += 1
             
@@ -27,8 +30,8 @@ for page in ref_string:
             pointer = 0
             
             while True:
-                if reference[int(memo[pointer % num_frames])]:
-                    reference[int(memo[pointer % num_frames])] = 0
+                if reference[pointer % num_frames]:
+                    reference[pointer % num_frames] = 0
                 else:
                     break
                 
@@ -46,15 +49,18 @@ for page in ref_string:
                 
             memo.pop(0)
             memo.append(page)
-    else:
-        reference[int(page)] = 1
         
     if pf:
         pf = "PF|"
     else:
         pf = "  |"
 
-    table.append([page + ' |'] + ["- |"] + [c + " |" for c in memo] + ["- |"] + [pf])
+    table.append([str(page) + ' |'] + ["- |"] + [str(c) + " |" for c in memo] + ["- |"] + [pf])
+    
+    print("Frames:\t\t\t  ", memo)
+    print("Reference Bits:   ", reference)
+    
+    print()
     
     ref.append(reference.copy())
 
@@ -72,20 +78,5 @@ for row in table:
 print('-' * (len(''.join(table[0])) + len(table[0])))
 
 ref = [list(row) for row in zip(*ref)]
-
-print()
-print("Reference Bits:")
-
-print('-' * (len(''.join(table[0])) + len(table[0])))
-
-for i in range(0, num_pages + 1):
-    print(i, ' ' * 8, '|', end=' ');
-    
-    for j in ref[i]:
-        print(j, '|', end=' ')
-    
-    print()
-    
-print('-' * (len(''.join(table[0])) + len(table[0])))
 
 print("Total page fails =", total_page_fails)

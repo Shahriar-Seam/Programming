@@ -1,5 +1,5 @@
 num_pages = int(input())
-ref_string = input()
+ref_string = list(map(int, input().split()))
 num_frames = int(input())
 
 memo = [' '] * num_frames
@@ -27,7 +27,7 @@ for page in ref_string:
     else:
         pf = "  |"
 
-    table.append([page + ' |'] + ["- |"] + [c + " |" for c in memo] + ["- |"] + [pf])
+    table.append([str(page) + ' |'] + ["- |"] + [str(c) + " |" for c in memo] + ["- |"] + [pf])
 
 table.insert(0, ['|' for i in range(num_frames + 4)])
 
