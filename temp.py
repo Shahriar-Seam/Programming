@@ -1,13 +1,7 @@
-def f(a):
-    return len(set(a))
+n = int(1e6)
+sum = 0
 
-a = list(map(int, input().split()))
-b = [0] * len(a)
-
-for i in range(len(a)):
-    for j in range(i + 1):
-        b[i] += f(a[j : i + 1])
+for i in range(1, n + 1):
+    sum += (n // i) + i - 1
     
-print(1)
-print(len(b))
-print(*b)
+print(len(str(sum)))
