@@ -1,3 +1,14 @@
-7
-7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0 1 7 0 1
-3
+13 13
+R A
+A S
+C S
+F S
+W F
+D S
+U D
+G U
+D T
+B T
+T E
+E V
+V G

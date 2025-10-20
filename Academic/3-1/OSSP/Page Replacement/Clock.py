@@ -1,3 +1,9 @@
+"""
+7
+7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0 1 7 0 1
+3
+"""
+
 num_pages = int(input("Number of pages:\n"))
 ref_string = list(map(int, input("Reference string:\n").split()))
 num_frames = int(input("Number of frames:\n"))
@@ -19,6 +25,10 @@ for page in ref_string:
         
         if ' ' in memo:
             memo[memo.index(' ')] = page
+            
+            reference[pointer] = 1
+            
+            pointer = (pointer + 1) % num_frames
         else:
             reference = list(map(int, input(f"Reference bits for inserting {page}:\n").split()))
             
