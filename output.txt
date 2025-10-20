@@ -1,13 +1,6 @@
-Number of pages:
-Reference string:
-Number of frames:
-Frames:			   [7, ' ', ' ']
-Reference Bits:    [0, 0, 0]
-
-Frames:			   [7, 0, ' ']
-Reference Bits:    [0, 0, 0]
-
-Frames:			   [7, 0, 1]
-Reference Bits:    [0, 0, 0]
-
-Reference bits for inserting 2:
+2
+1000000000000050 1000000000000050
+4
+3 1000000000000050
+3
+3 1000000000000050
