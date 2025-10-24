@@ -127,6 +127,16 @@ int32_t main()
         }
 
         cout << "\n";
+
+        cout << "Processes in deadlock: ";
+
+        for (i = 0; i < processes; i++) {
+            if (!marked[i]) {
+                cout << "P" << i << " ";
+            }
+        }
+
+        cout << "\n";
     }
     else {
         cout << "No Deadlock detected\n";
