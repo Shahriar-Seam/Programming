@@ -4,9 +4,10 @@ using namespace std;
 
 #define int long long
 
-const int sz = 1e6 + 5;
+const int sz = 1e4 + 5;
 vector <int> phi(sz);
 vector <bool> marked(sz, false);
+vector <int> H(sz, 0);
 
 void sieve_phi()
 {
@@ -28,21 +29,25 @@ void sieve_phi()
             }
         }
     }
+
+    for (i = 1; i < sz; i++) {
+        H[i] += H[i - 1];
+
+        for (j = 1; j < i; j++) {
+            H[i] += 2LL * phi[i] * phi[j];
+        }
+
+        H[i] += phi[i] * phi[i];
+    }
 }
 
 void solve()
 {
-    int n, h = 0, i, j;
+    int n;
 
     cin >> n;
 
-    for (i = 1; i <= n; i++) {
-        for (j = 1; j <= n; j++) {
-            h += phi[i] * phi[j];
-        }
-    }
-
-    cout << h << "\n";
+    cout << H[n] << "\n";
 }
 
 int32_t main()
