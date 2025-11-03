@@ -1,14 +1,2 @@
-13 13
-R A
-A S
-C S
-F S
-W F
-D S
-U D
-G U
-D T
-B T
-T E
-E V
-V G
+3 4
+-10 0 20

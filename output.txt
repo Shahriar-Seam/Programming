@@ -1,12 +1,1 @@
-Enter Banglish words separated by commas: 
-Testing with Banglish words: ['13 13']
-
-[DEBUG] Input Banglish words: ['13 13']
-[DEBUG] Sending request to Groq API...
-[DEBUG] Response received
-[DEBUG] Successfully parsed 3 sentences
-[DEBUG] Output written to sentences.txt
-
-============================================================
-Output written to sentences.txt
-============================================================
+-1

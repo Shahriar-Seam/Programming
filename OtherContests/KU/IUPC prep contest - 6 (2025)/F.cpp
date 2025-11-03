@@ -2,47 +2,45 @@
 
 using namespace std;
 
-#define int long long
-
-const int sz = 1e6 + 5;
-vector <int> phi(sz);
-vector <bool> marked(sz, false);
+const int sz = 2.5e8 + 5;
+int phi[sz], inv_phi[sz];
+bitset <sz> marked;
 
 void sieve_phi()
 {
     int i, j;
 
-    for (i = 1; i < sz; i++) {
+    for (i = 0; i < sz; i++) {
         phi[i] = i;
+
+        inv_phi[i] = -1;
     }
 
     phi[1] = 1;
-    marked[1] = true;
+    marked[1] = 1;
 
     for (i = 2; i < sz; i++) {
         if (!marked[i]) {
             for (j = i; j < sz; j += i) {
-                marked[j] = true;
+                marked[j] = 1;
 
                 phi[j] = phi[j] / i * (i - 1);
             }
         }
     }
+
+    for (i = sz - 1; i >= 0; i--) {
+        inv_phi[phi[i]] = i;
+    }
 }
 
 void solve()
 {
-    int n, h = 0, i, j;
+    int n;
 
     cin >> n;
 
-    for (i = 1; i <= n; i++) {
-        for (j = 1; j <= n; j++) {
-            h += phi[i] * phi[j];
-        }
-    }
-
-    cout << h << "\n";
+    cout << inv_phi[n] << "\n";
 }
 
 int32_t main()
