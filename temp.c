@@ -1,28 +1,28 @@
 #include <stdio.h>
-#include <stdint.h>
-#include <string.h>
 
-int32_t main()
+int main()
 {
-    char s[101];
+    int n;
 
-    scanf("%s", s);
-
-    char f[256] = {};
-
-    int count = 0;
-
-    for (int i = 0; s[i] != '\0'; i++) {
-        unsigned char d = s[i];
-
-        if (f[d] == 0) {
-            f[d] = 1;
-
-            count++;
+    scanf("%d", &n);
+    int x = 9;
+    for (int i = n; i >= 1; i--) {
+        for (int j = n; j >= i; j--) {
+            printf("  ");
         }
-    }
 
-    printf("%d", count);
+        for (int k = i; k <= x; k++) {
+            printf("%d ", k);
+        }
+
+        for (int m = x - 1; m >= i; m--) {
+            printf("%d ", m);
+        }
+
+        printf("\n");
+
+        x -= 2;
+    }
 
     return 0;
 }
