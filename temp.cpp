@@ -2,24 +2,22 @@
 
 using namespace std;
 
-vector <int> create(int n)
-{
-	vector <int> v(n);
-
-	for (auto &it : v) {
-		cin >> it;
-	}
-
-	return v;
-}
-
 void solve()
 {
-	int n, m;
+	int n, r, i, j;
+	double c = 1;
 
-	cin >> n >> m;
+	cin >> n >> r;
 
-	vector <int> v = create(n), u = create(m);
+	for (i = n; i > r; i--) {
+		c = c * i;
+	}
+
+	for (i = 1; i <= n - r; i++) {
+		c = c / i;
+	}
+
+	cout << (long long) (c + 0.0001) << "\n";
 }
 
 int32_t main()
