@@ -1,4 +1,3 @@
-print(500)
-
-for i in range(10000, 10000 - 500, -1):
-    print(i)
+for i in range(50):
+    if (i % 5) % 2 == 0:
+        print(i)
