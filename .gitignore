@@ -1,3 +1,38 @@
 input.txt
 output.txt
 NHSPC/
+
+# Build artifacts
+*.exe
+*.out
+*.o
+*.obj
+build/
+cmake-build-debug/
+cmake-build-release/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+temp
+temp.*
+tempCodeRunnerFile*
+*.tmp
+
+# Test files
+test_input.txt
+test_output.txt
