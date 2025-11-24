@@ -6,21 +6,15 @@ using namespace std;
 
 const int sz = 20;
 vector <int> f(sz, 0);
+map <int, int> sums;
 
 void fill()
 {
-    int i;
+    int i, mask, sum;
 
     for (i = 1, f[0] = 1; i < sz; i++) {
         f[i] = f[i - 1] * i;
     }
-}
-
-void solve()
-{
-    int n, i, mask, sum;
-
-    cin >> n;
 
     for (mask = 1; mask < (1LL << sz); mask++) {
         for (i = 0, sum = 0; i < sz; i++) {
@@ -28,13 +22,20 @@ void solve()
                 sum += f[i];
             }
         }
-
-        if (sum == n) {
-            break;
-        }
+        
+        sums[sum] = mask;
     }
+}
 
-    if (mask == (1LL << sz)) {
+void solve()
+{
+    int n, i, mask;
+
+    cin >> n;
+
+    mask = sums[n];
+
+    if (mask == 0) {
         cout << "impossible\n";
     }
     else {
