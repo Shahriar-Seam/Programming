@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/Seam/Desktop/Programming/Manim/baklava_tray/media/videos/Module6_Outro/1080p60/partial_movie_files/Module6_Outro/2379574572_292040990_2721922543.mp4'
+file 'file:C:/Users/Seam/Desktop/Programming/Manim/baklava_tray/media/videos/Module6_Outro/1080p60/partial_movie_files/Module6_Outro/2640366331_1100327773_2063353648.mp4'
+file 'file:C:/Users/Seam/Desktop/Programming/Manim/baklava_tray/media/videos/Module6_Outro/1080p60/partial_movie_files/Module6_Outro/2640366331_1646335681_1828871403.mp4'
+file 'file:C:/Users/Seam/Desktop/Programming/Manim/baklava_tray/media/videos/Module6_Outro/1080p60/partial_movie_files/Module6_Outro/2640366331_2497861415_694760221.mp4'
+file 'file:C:/Users/Seam/Desktop/Programming/Manim/baklava_tray/media/videos/Module6_Outro/1080p60/partial_movie_files/Module6_Outro/2640366331_3666002503_3159715502.mp4'
+file 'file:C:/Users/Seam/Desktop/Programming/Manim/baklava_tray/media/videos/Module6_Outro/1080p60/partial_movie_files/Module6_Outro/2640366331_1610380323_1815337755.mp4'
+file 'file:C:/Users/Seam/Desktop/Programming/Manim/baklava_tray/media/videos/Module6_Outro/1080p60/partial_movie_files/Module6_Outro/2640366331_2724132546_4208244136.mp4'
+file 'file:C:/Users/Seam/Desktop/Programming/Manim/baklava_tray/media/videos/Module6_Outro/1080p60/partial_movie_files/Module6_Outro/2640366331_1839128356_3278671325.mp4'
