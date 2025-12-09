@@ -18,6 +18,7 @@ void push_back(vector *v, type data);
 void pop_back(vector *v);
 void resize(vector *v, int t);
 type at(vector *v, int index);
+int store(vector *v, int index, type data);
 
 int max(int a, int b)
 {
@@ -104,6 +105,18 @@ type at(vector *v, int index)
     }
 
     return 0; // garbage
+}
+
+int store(vector *v, int index, type data)
+{
+    if (index < 0 || index >= v->size) {
+        return -1;
+    }
+    else {
+        v->arr[index] = data;
+
+        return 1;
+    }
 }
 
 int main()
