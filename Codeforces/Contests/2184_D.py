@@ -1,3 +1,8 @@
+fact = [1]
+
+for i in range(1, 60):
+    fact.append(i * fact[-1])
+
 def bit_len(n):
     l = 0
     
@@ -8,15 +13,7 @@ def bit_len(n):
     return l
 
 def C(n, k):
-    c = 1
-    
-    for i in range(n - k + 1, n + 1):
-        c *= i
-    
-    for i in range(2, k + 1):
-        c //= i
-        
-    return c
+    return fact[n] // (fact[k] * fact[n - k])
 
 for _ in range(1, int(input()) + 1):
     n, k = map(int, input().split())
@@ -37,4 +34,3 @@ for _ in range(1, int(input()) + 1):
         print(0)
     else:
         print((1 << (n - 1)) - count)
-    
