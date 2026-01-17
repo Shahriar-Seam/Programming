@@ -43,16 +43,17 @@ int main()
     cout << t << "\n";
 
     for (int i = 0; i < t; i++) {
-        int n = rand() % 8 + 1;
+        int n = rand() % 10000 + 1;
+        int w = rand() % 10000 + 1;
         // int q = rand() % 10 + 1;
         // int x = primes[rand() % 500 + 2];
 
-        cout << n << "\n";
+        cout << n << " " << w << "\n";
 
         // cout << (long long) (1LL * rand() * 213456) % (long long) 1e15;
         // cout << n << "\n";
         while (n--) {
-            cout << int(pow(-1, rand())) * rand() % 10 + 1 << " ";
+            cout << rand() % 100000 + 1 << " ";
         }
 
         cout << "\n";
