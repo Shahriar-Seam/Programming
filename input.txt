@@ -1,7 +1,2 @@
-3
-dcbe
-bedbaecfc
-babadab
-abacabadabacaba
-babaisyou
-flagiswin
+3 3
+5 10

@@ -1,3 +1,2 @@
-abcdcbeef
-aaaaabababccdab
-Impossible
+15 40 
+258200160 1100098 60800104 385867226 
