@@ -7,12 +7,20 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    srand(time(0));
+    for (int m = 0; m < 1000; m++) {
+        int f = 0;
 
-    int n = 10000;
+        for (int x = 0; x < 1000; x++) {
+            for (int y = 0; y < 1000; y++) {
+                if (100 * x + 3 * y == m) {
+                    f = 1;
+                }
+            }
+        }
 
-    for (int i = 0; i < n; i++) {
-        cout << char('a' + (rand() % 26));
+        if (!f) {
+            cout << m << "\n";
+        }
     }
 
     return 0;
