@@ -2,11 +2,8 @@
 
 using namespace std;
 
-#define int long long
-
 typedef double T;
 const double PI = acos(-1);
-const double eps = 1e-9;
 
 struct pt {
     T x, y;
@@ -181,7 +178,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, q, a, b, i, j;
+    int n, q;
 
     cin >> n >> q;
 
@@ -195,65 +192,13 @@ int32_t main()
 
     stable_sort(v.begin(), v.end());
 
-    // reverse(v.begin(), v.end());
-
-    // for (i = 0; i < n; i++) {
-    //     v.push_back(v[i]);
-    // }
-
     while (q--) {
         cin >> a >> b;
 
-        pt p = temp[a - 1], q = temp[b - 1];
+        pt p = temp[a - 1];
+        pt q = temp[b - 1];
 
-        int l = 0, r = lower_bound(v.begin(), v.end(), p) - v.begin(), m;
-        i = r;
-
-        while (l <= r) {
-            m = (l + r) / 2;
-
-            if (angle(v[m], p) < eps) {
-                i = m;
-
-                r = m - 1;
-            }
-            else {
-                l = m + 1;
-            }
-        }
-
-        l = lower_bound(v.begin(), v.end(), q) - v.begin();
-        r = v.size() - 1;
-        j = l;
-
-        while (l <= r) {
-            m = (l + r) / 2;
-
-            if (angle(v[m], q) < eps) {
-                j = m;
-
-                l = m + 1;
-            }
-            else {
-                r = m - 1;
-            }
-        }
-
-        p = v[i];
-        q = v[j];
-
-        cout << p << " " << q << "\n";
-
-        if (angle(v[i], v[j]) < eps) {
-            cout << i - j + 1 << "\n";
-        }
-        else {
-            cout << n - j - 1 + i + 1 << "\n";
-        }
-    }
-
-    for (auto &it : v) {
-        cout << it << "\n";
+        
     }
 
     return 0;
