@@ -1,3 +1,3 @@
-for i in range(50):
-    if (i % 5) % 2 == 0:
-        print(i)
+l = [i for i in range(10)]
+
+print(l[0 : 9])
