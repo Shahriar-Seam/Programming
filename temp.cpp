@@ -1,27 +1,70 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
-int32_t main()
+struct Query
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+     int l, r, idx;
+};
+int main()
+{
+     int n;
+     cin >> n;
+     vector<int> v(n);
+     for (int i = 0; i < n; i++) {
+          cin >> v[i];
+     }
+     int q;
+     cin >> q;
+     vector<Query> queries;
+     for (int i = 0; i < q; i++) {
+          int x, y;
+          cin >> x >> y;
+          queries.push_back({--x, --y, i});
+     }
+     int block_size = (int)sqrt(n);
+     auto mo_cmp = [&](Query a, Query b) {
+          int block_a = a.l / block_size;
+          int block_b = b.l / block_size;
+          if (block_a == block_b) {
+               return a.r < b.r;
+          }
+          return block_a < block_b;
+     };
+     sort(queries.begin(), queries.end(), mo_cmp);
+     int different_values = 0;
+     vector<int> values(INT64_MAX);
+     auto remove = [&](int idx) {
+          values[v[idx]]--;
+          if (values[v[idx]] == 0) {
+               different_values--;
+          }
+     };
+     auto add = [&](int idx) {
+          values[v[idx]]++;
+          if (values[v[idx]] == 1) {
+               different_values++;
+          }
+     };
+     int mo_left = -1;
+     int mo_right = -1;
+     vector<int> ans(q);
+     for (int i = 0; i < q; i++) {
+          int left = queries[i].l;
+          int right = queries[i].r;
 
-    for (int m = 0; m < 1000; m++) {
-        int f = 0;
+          while (mo_left < left) {
+               remove(mo_left++);
+          }
+          while (mo_left > left) {
+               add(--mo_left);
+          }
+          while (mo_right < right) {
+               add(++mo_right);
+          }
+          while (mo_right > right) {
+               remove(mo_right--);
+          }
 
-        for (int x = 0; x < 1000; x++) {
-            for (int y = 0; y < 1000; y++) {
-                if (100 * x + 3 * y == m) {
-                    f = 1;
-                }
-            }
-        }
-
-        if (!f) {
-            cout << m << "\n";
-        }
-    }
-
-    return 0;
+          ans[queries[i].idx] = different_values;
+     }
+     for (int i = 0; i < q; i++) {
+          cout << ans[i] << '\n';
+     }
 }
