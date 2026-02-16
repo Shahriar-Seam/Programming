@@ -18,6 +18,12 @@ void solve()
         m += i;
     }
 
+    if (m == n) {
+        cout << -1 << "\n";
+
+        return;
+    }
+
     for (i = 2; i * i < m; i++) {
         if (m % i == 0) {
             n -= (i + m / i);

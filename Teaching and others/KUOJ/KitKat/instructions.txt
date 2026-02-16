@@ -1,0 +1,4 @@
+1s time limit
+
+use sample.in/out for sample test case
+and input/output.in/out for actual test case

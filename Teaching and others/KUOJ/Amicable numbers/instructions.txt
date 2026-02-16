@@ -1,0 +1,9 @@
+2s time limit
+
+amicable_numbers is sub-optimal solution
+optimal solution is named as optimal
+
+2tar e performance diye disi
+
+use sample.in/out for sample test case
+and input/output.in/out for actual test case

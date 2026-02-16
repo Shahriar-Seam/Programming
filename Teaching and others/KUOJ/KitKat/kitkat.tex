@@ -1,0 +1,60 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+% Page Geometry
+\geometry{left=0.75in, right=0.75in, top=0.75in, bottom=0.75in}
+
+% Section Formatting
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+
+\begin{document}
+
+\begin{center}
+    {\Huge \textbf{Organizer er Taka Nai}} \\
+    \vspace{0.2cm}
+    Time Limit: 1s \quad Memory Limit: 128MB
+\end{center}
+
+\section*{Description}
+Seam has officially locked the contest repository. He sits in a state of permanent ``Break,'' refusing to push any new problems to the judge. The organizers are desperate and have started offering him various food items to lure him back to work.
+
+However, Seam is a purist. His taste buds only respond to one specific frequency of chocolate-covered wafer. He will ignore any item, be it \texttt{kacchi}, \texttt{ilish}, or \texttt{burger}; unless it is a \textbf{KitKat}. 
+
+Because Seam's hunger has made his vision blurry, he accepts the word \texttt{kitkat} in any combination of uppercase and lowercase letters (e.g., \texttt{KiTkAt}, \texttt{KITKAT}, and \texttt{kitkat} are all valid). Any other string, even if it contains underscores or different letters, is met with the same fierce ultimatum.
+
+\section*{Input}
+The first line contains $t$ ($1 \le t \le 10000$), the number of food items offered to Seam.
+The next $t$ lines each contain a string $S$ ($1 \le |S| \le 30$), consisting of uppercase letters, lowercase letters, and underscores (\_).
+
+\section*{Output}
+For each food item:
+\begin{itemize}
+    \item If the string is a case-insensitive match for \texttt{kitkat}, output: \texttt{Problem peye gesi!}
+    \item Otherwise, output Seam's ultimatum: \texttt{KITKAT NA KHAWAILE, PROBLEM BANAYE DIMU NA!}
+\end{itemize}
+
+\section*{Sample Input / Output}
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+\hline
+\textbf{Sample Input} & \textbf{Sample Output} \\ \hline
+\texttt{4} \newline \texttt{kacchi\_biryani} \newline \texttt{KiTkAt} \newline \texttt{burger} \newline \texttt{KITKAT} & 
+\texttt{KITKAT NA KHAWAILE, PROBLEM BANAYE DIMU NA!} \newline 
+\texttt{Problem peye gesi!} \newline 
+\texttt{KITKAT NA KHAWAILE, PROBLEM BANAYE DIMU NA!} \newline 
+\texttt{Problem peye gesi!} \\ \hline
+\end{tabular}
+\end{table}
+
+\section*{Formal Editorial: The Case-Insensitive Wafer Theorem}
+\textbf{Theorem.} \textit{A setter's acceptance function $A(S)$ is a binary classifier where the positive class is defined by the set $\{s \mid \text{lower}(s) = \text{``kitkat''}\}$.} \\
+When the input string $S$ does not belong to the KitKat set, the brain remains in an idle loop. The presence of underscores or non-wafer characters triggers an immediate exception, forcing the setter to broadcast his ultimatum across the network.
+
+\end{document}
