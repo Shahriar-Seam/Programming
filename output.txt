@@ -1,10 +1,4 @@
-YES
-YES
-NO
-NO
-YES
-NO
-NO
-NO
-YES
-NO
+Case 1: https://lightoj.com
+Case 2: https://lightoj.com
+Case 3: https://example.com
+Case 4: https://example.com
