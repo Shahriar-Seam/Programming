@@ -1,5 +1,8 @@
+2
+3 10 20 30
+4 10 10 10 30
 4
-http://lightoj.com
-https://lightoj.com
-http://example.com
-https://example.com
+1 2 18 2 2
+2 1 17 4 1
+1 2 1 1 1
+1 2 30 3 1
