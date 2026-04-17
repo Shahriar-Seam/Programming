@@ -1,26 +1,33 @@
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,popcnt")
+
 #include <bits/stdc++.h>
 
 using namespace std;
 
-void solve()
-{
-	
-}
+#define int long long
 
 int32_t main()
 {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	int32_t t, i;
+	int n, f, i;
 
-	cin >> t;
+	cin >> n;
 
-	for (i = 1; i <= t; i++) {
-		// cout << "Case " << i << ": ";
+	f = n > 1;
 
-		solve();
+	if (n > 2) {
+		for (i = 2; i < n; i++) {
+			if (n % i == 0) {
+				f = 0;
+				break;
+			}
+		}
 	}
+
+	cout << (f ? "YES" : "NO") << "\n";
 
 	return 0;
 }

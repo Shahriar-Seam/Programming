@@ -1,12 +1,11 @@
-import math
+n = int(input())
 
-for _ in range(1, int(input()) + 1):
-    n = int(input())
-    a = list(map(int, input().split()))
-    v = 0
-    
-    for i in a:
-        for j in a:
-            v = max(v, i ^ j)
-    
-    print(v)
+f = n > 1
+
+if n > 2:
+    for i in range(2, int(n ** .5 + 1)):
+        if n % i == 0:
+            f = 0
+            break
+
+print("YES" if f else "NO")
