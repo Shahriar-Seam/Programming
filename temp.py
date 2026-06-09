@@ -1,11 +1,28 @@
-n = int(input())
-a = list(map(int, input().split()))
-k = list(map(int, input().split()))
+def f(n):
+    s = 0
 
-for i in k:
-    for j in range(i):
-        a[j] = -a[j]
+    while n:
+        s += (n % 10) ** 2
+        n //= 10
         
-print(a)
+    return s
 
-print(sum(a))
+for n in range(1001):
+    s = set()
+    m = n
+    
+    while (m not in s) and (m != 1):
+        s.add(m)
+
+        m = f(m)
+        
+    if m == 1:
+        print(n, "ok")
+    # else:
+    #     print(n, "not ok")
+    
+# m = 19
+# for _ in range(50):
+#     print(m)
+    
+#     m = f(m)
