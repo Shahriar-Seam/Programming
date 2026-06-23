@@ -7,38 +7,45 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, k, i, count = 0;
-    priority_queue <pair <int, int>, vector <pair <int, int> >, greater <> > pq;
+    int n, k, i, count = 0, inf = 1e9 + 5;
+    set <pair <int, int> > s;
 
     cin >> n >> k;
 
     vector <pair <int, int> > v(n);
 
     for (i = 1; i <= k; i++) {
-        pq.push({0, i});
+        s.insert({0, i});
     }
 
     for (auto &it : v) {
         cin >> it.first >> it.second;
     }
 
-    sort(v.begin(), v.end());
+    sort(v.begin(), v.end(), [&] (pair <int, int> &a, pair <int, int> &b) {
+        if (a.second == b.second) {
+            return a.first < b.first;
+        }
+        else {
+            return a.second < b.second;
+        }
+    });
 
     for (auto &it : v) {
-        cout << it.first << " " << it.second << "\n";
-    }
+        auto jt = s.upper_bound({it.first, inf});
 
-    for (auto &it : v) {
-        auto top = pq.top();
+        if (jt == s.begin()) {
+            continue;
+        }
 
-        if (top.first < it.first) {
-            cout << it.first << " " << it.second << "\n";
+        auto top = *--jt;
 
+        if (top.first <= it.first) {
             top.first = it.second;
 
-            pq.pop();
+            s.erase(jt);
 
-            pq.push(top);
+            s.insert(top);
 
             count++;
         }
