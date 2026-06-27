@@ -4,6 +4,8 @@ using namespace std;
 
 #define int long long
 
+const int inf = 1e18;
+
 struct edge {
     int a, b, c;
 
@@ -12,13 +14,20 @@ struct edge {
     edge(int a, int b, int c) : a(a), b(b), c(c) {}
 };
 
-void bellman_ford(vector <edge> &v, vector <vector <int> > &cost, int n)
+void bellman_ford(vector <edge> &v, vector <vector <int> > &cost, int n, int pass = 1)
 {
     int i;
 
     for (i = 1; i < n; i++) {
         for (auto &[a, b, c] : v) {
-            cost[1][b] = min(cost[1][b], cost[1][a] + c);
+            if (cost[1][a] != inf) {
+                if (pass == 2 && cost[1][b] > cost[1][a] + c) {
+                    cost[1][b] = -inf;
+                }
+                else {
+                    cost[1][b] = min(cost[1][b], cost[1][a] + c);
+                }
+            }
         }
     }
 }
@@ -28,7 +37,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, m, i, inf = 1e18;
+    int n, m, i;
     int a, b, c, min_cost;
 
     cin >> n >> m;
@@ -43,14 +52,16 @@ int32_t main()
     for (i = 0; i < m; i++) {
         cin >> a >> b >> c;
 
+        cost[a][b] = max(cost[a][b], c);
+
         v[i] = edge(a, b, -c);
     }
 
     bellman_ford(v, cost, n);
-    
+
     min_cost = cost[1][n];
     
-    bellman_ford(v, cost, n);
+    bellman_ford(v, cost, n, 2);
 
     if (cost[1][n] < min_cost) {
         cout << "-1\n";
