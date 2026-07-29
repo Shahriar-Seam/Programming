@@ -2,34 +2,33 @@
 
 using namespace std;
 
-#define int long long
-
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, k;
-    int x, a, b, c;
-    int X, i, it = -1, jt = -1;
+    int n, k, i;
+    int it = -1, jt = -1;
+    long long x, a, b, c;
+    int X = 0;
 
     cin >> n >> k;
     cin >> x >> a >> b >> c;
-
+    
     vector <pair <int, int> > in(k);
     vector <int> out(k);
 
     for (i = 0; i < k; i++) {
         it++;
 
-        if (i == 0) {
-            in[it] = {x, x};
-        }
-        else {
+        if (i > 0) {
             x = (a * x + b) % c;
             x = (x + c) % c;
 
-            in[it] = {x, min(x, in[it - 1].second)};
+            in[it] = {x, in[it - 1].second | x};
+        }
+        else {
+            in[it] = {x, x};
         }
     }
 
@@ -47,19 +46,32 @@ int32_t main()
                     out[jt] = in[it].first;
                 }
                 else {
-                    out[jt] = min(out[jt - 1], in[it].first);
+                    out[jt] = out[jt - 1] | in[it].first;
                 }
 
                 it--;
             }
         }
 
+        if (it >= 0) {
+            it++;
+
+            in[it] = {x, in[it - 1].second | x};
+        }
+        else {
+            it++;
+
+            in[it] = {x, x};
+        }
+
         jt--;
-        it++;
 
-        in[it] = {x, (it == 0) ? x : min(x, in[it - 1].second)};
-
-        X ^= (jt >= 0) ? min(out[jt], in[it].second) : in[it].second;
+        if (jt >= 0) {
+            X ^= out[jt] | in[it].second;
+        }
+        else {
+            X ^= in[it].second;
+        }
     }
 
     cout << X << "\n";
