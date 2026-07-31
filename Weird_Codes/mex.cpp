@@ -41,6 +41,11 @@ struct Mex {
         }
     }
 
+    void update(int old, int current) {
+        remove(old);
+        insert(current);
+    }
+
     int get_mex() {
         return *available.begin();
     }
