@@ -1,50 +1,30 @@
-#include <bits/stdc++.h>
+string s_x = "1152921504606846989";
+string s_m = "1152921504606847061";
+string s_ix = "464371161577757844";
 
-using namespace std;
+__int128_t x, mod, inv_x;
 
-const int sz = 1e6 + 5;
-vector <bool> marked(sz, true);
-vector <int> primes;
-vector <vector <int> > factors(sz, vector <int> ());
-
-void sieve()
+__int128_t strto128t(string &s)
 {
-    int i, j;
-
-    for (i = 3; i * i < sz; i += 2) {
-        if (marked[i]) {
-            for (j = i * i; j < sz; j += 2 * i) {
-                marked[j] = false;
-            }
-        }
-    }
-
-    primes.push_back(2);
-
-    for (i = 3; i < sz; i += 2) {
-        if (marked[i]) {
-            primes.push_back(i);
-        }
-    }
-}
-
-void get_factors()
-{
-    int i, j, p;
-
-    for (i = 0; i < primes.size(); i++) {
-        for (j = p = primes[i]; j < sz; j += p) {
-            factors[j].push_back(p);
-        }
-    }
-}
-
-int32_t main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
+    __int128_t n = 0;
     
+    for (auto &c : s) {
+        n = n * 10;
+        n += (c - '0');
+    }
 
-    return 0;
+    return n;
+}
+
+int _hash(string s)
+{
+    int h = 0, i, xx = 1;
+
+    for (i = 0; i < s.size(); i++) {
+        h = (h + s[i] * xx) % mod;
+
+        xx = (xx * x) % mod;
+    }
+
+    return h;
 }
