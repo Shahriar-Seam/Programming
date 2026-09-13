@@ -1,17 +1,13 @@
-from math import gcd
+from functools import lru_cache
 
-G = 0
-N = int(input())
-l = [[] for i in range(N + 1)]
+@lru_cache
+def f(n):
+    return n * (1 << (n - 1))
 
-for i in range(1, N):
-    for j in range(i + 1, N + 1):
-        g = gcd(i, j)
+for n in range(1, 15):
+    cnt = 0
+    
+    for i in range(1 << n):
+        cnt += bin(i).count('1')
         
-        l[g].append((i, j))
-        
-        G += g
-        
-print(G)
-
-print(*l, sep="\n\n")
+    print((1 << n), cnt, f(n))

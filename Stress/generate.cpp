@@ -2,32 +2,9 @@
 
 using namespace std;
 
-#define sz int(1e6 + 5)
-vector <bool> marked(sz, true);
-vector <int> primes;
+#define int long long
 
-void sieve()
-{
-    int i, j;
-
-    for (i = 3; i * i < sz; i += 2) {
-        if (marked[i]) {
-            for (j = i * i; j < sz; j += 2 * i) {
-                marked[j] = false;
-            }
-        }
-    }
-
-    primes.push_back(2);
-
-    for (i = 3; i < sz; i += 2) {
-        if (marked[i]) {
-            primes.push_back(i);
-        }
-    }
-}
-
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -38,13 +15,13 @@ int main()
 
     srand(time(0));
 
-    int t = 10;
+    int t = 1000;
 
     cout << t << "\n";
 
     for (int i = 0; i < t; i++) {
-        int n = rand() % 10000 + 1;
-        int w = rand() % 10000 + 1;
+        int n = ((rand() + 1LL) * (rand() + 1)) % ((int) 1e9);
+        int w = ((rand() + 1LL) * (rand() + 1)) % ((int) 1e9);
         // int q = rand() % 10 + 1;
         // int x = primes[rand() % 500 + 2];
 
@@ -52,11 +29,11 @@ int main()
 
         // cout << (long long) (1LL * rand() * 213456) % (long long) 1e15;
         // cout << n << "\n";
-        while (n--) {
-            cout << rand() % 100000 + 1 << " ";
-        }
+        // while (n--) {
+        //     cout << rand() % 100000 + 1 << " ";
+        // }
 
-        cout << "\n";
+        // cout << "\n";
     }
 
     return 0;

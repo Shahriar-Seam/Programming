@@ -1,34 +1,18 @@
-def solve() :
-    n = int(input())
-    lst = list(map(int, input().split()))
+import math
 
-    pointer = len(lst) - 2
-    cnt = 0
+for _ in range(1, int(input()) + 1):
+    x, y = map(int, input().split())
     
-    # print(pointer)
-
-    while(pointer >= 0) :
+    mx = 0
+    s = x + y
+    
+    for x in range(x, -1, -1):
+        mx = max(mx, x ^ y)
         
-        if(lst[pointer] == 0 and pointer > 0) :
-            print(-1)
-            return
-        while(lst[pointer + 1] <= lst[pointer]) :
-
-            lst[pointer] = lst[pointer] // 2
-            cnt += 1
-
-            if(lst[pointer] == 0 and pointer > 0) :
-                print(-1)
-                return
-                    
-        # print("yo")
-
-        pointer -= 1
-    
-    print(cnt)
-
-
-t = int(input())
-
-for _ in range(t) :
-    solve()
+        if mx == s:
+            break
+        
+        y += 1
+        
+    if mx != s:
+        print(mx)
